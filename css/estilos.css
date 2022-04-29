@@ -1,0 +1,60 @@
+/* Reglas de css */
+
+body {
+  font-family: arial;
+}
+
+h1, h2{
+  color: blue;
+  margin: 1rem;
+}
+
+h1{
+  font-size: 140%;
+  padding-bottom: 0.5em;
+}
+
+h2{
+  font-size: 120%;
+  font-style: italic;
+  padding-bottom: 0.2em;
+}
+
+#divLogin{
+  display: none;
+}
+
+/* Material Icons
+  Ref: https://developers.google.com/fonts/docs/material_icons
+*/
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url(material_icons_outlined.woff2) format('woff2');
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.2rem;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  color: grey;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}

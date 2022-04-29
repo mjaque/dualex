@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang=es>
+
+<head>
+  <meta charset=utf-8 />
+  <meta name=viewport content='width=device-width, initial-scale=1' />
+  <meta name=author content='Miguel Jaque <mjaque@migueljaque.com' />
+  <title>DUALEX</title>
+
+  <link rel=stylesheet href=css/reset.css />
+  <link rel=stylesheet href=css/estilos.css />
+  <style>
+    .vistaobjetivos {
+      max-width: 90%;
+      margin: 1rem;
+      padding: 2rem;
+    }
+
+    .vistaobjetivos>div {
+      border-bottom: 1px solid lightgrey;
+    }
+
+    .vistaobjetivos div span {
+      cursor: pointer;
+      line-height: 1.5rem;
+    }
+
+    .vistaobjetivos div span:hover {
+      color: blue;
+      text-decoration: underline;
+    }
+
+    .vistaobjetivos span.no_expand{
+      padding:0.5rem;
+      cursor: default;
+    }
+    .vistaobjetivos span.no_expand:hover{
+      text-decoration: none;
+    }
+    /* Span de iconos */
+    .vistaobjetivos div span:nth-of-type(4) {
+      float: right;
+      text-decoration: none;
+    }
+
+    .vistaobjetivos span.material-icons {
+      cursor: pointer;
+      border: 1px solid white;
+      border-radius: 0.7rem;
+    }
+
+    .vistaobjetivos span.material-icons:hover {
+      color: blue;
+      background-color: lightgrey;
+      text-decoration: none;
+      border: 1px solid lightgrey;
+    }
+
+    .vistaobjetivos span[class="nada"] {
+      border: 1px solid white;
+      border-radius: 0.7rem;
+    }
+
+    .vistaobjetivos div {
+      margin-left: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class='vistaobjetivos'>
+    <div>
+      <span class="material-icons" title="ver criterios">expand_more</span>
+      <span>Objetivo 3.1</span> - <span>30%</span>
+      <span>
+        <span class="material-icons" title="consultar">visibility</span>
+        <span class="material-icons" title="crear subobjetivo">add</span>
+        <span class="material-icons" title="editar">edit</span>
+        <span class="material-icons" title="eliminar">delete</span>
+      </span>
+    </div>
+    <div>
+      <span class="material-icons" title="ver criterios">expand_less</span>
+      <span>Objetivo 3.2</span> - <span>30%</span>
+      <span>
+        <span class="material-icons" title="consultar">visibility</span>
+        <span class="material-icons" title="crear subobjetivo">add</span>
+        <span class="material-icons" title="editar">edit</span>
+        <span class="material-icons" title="eliminar">delete</span>
+      </span>
+      <div>
+        <span class="material-icons" title="ver criterios">expand_more</span>
+        <span>Subobjetivo 3.2.1</span> - <span>30%</span>
+        <span>
+          <span class="material-icons" title="consultar">visibility</span>
+          <span class="material-icons" title="crear subobjetivo">add</span>
+          <span class="material-icons" title="editar">edit</span>
+          <span class="material-icons" title="eliminar">delete</span>
+        </span>
+      </div>
+      <div>
+        <span class="no_expand">·</span>
+        <span>Subobjetivo 3.2.2</span> - <span>30%</span>
+        <span>
+          <span class="material-icons" title="consultar">visibility</span>
+          <span class="material-icons" title="crear subobjetivo">add</span>
+          <span class="material-icons" title="editar">edit</span>
+          <span class="material-icons" title="eliminar">delete</span>
+        </span>
+      </div>
+    </div>
+    <div>
+      <span class="material-icons" title="ver criterios">expand_more</span>
+      <span>Objetivo 3.3</span> - <span>30%</span>
+      <span>
+        <span class="material-icons" title="consultar">visibility</span>
+        <span class="material-icons" title="crear subobjetivo">add</span>
+        <span class="material-icons" title="editar">edit</span>
+        <span class="material-icons" title="eliminar">delete</span>
+      </span>
+    </div>
+    <!--  <div>
+    <div>
+      <span class="material-icons" title="consultar">visibility</span>
+    </div>
+    <span class="material-icons" title="ver criterios">unfold_more</span>
+  </div>
+  <div>
+    <div>
+      <span class="material-icons" title="consultar">visibility</span>
+    </div>
+    <span class="material-icons" title="ver criterios">unfold_more</span>
+    <span>Objetivo 3.2</span> - <span>30%</span>
+  </div> -->
+  </div>
+</body>
+
+</html>
