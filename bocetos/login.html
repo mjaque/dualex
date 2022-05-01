@@ -7,9 +7,13 @@
   <meta name=author content='Miguel Jaque <mjaque@migueljaque.com' />
   <title>DUALEX</title>
 
-  <link rel=stylesheet href=css/reset.css />
-  <link rel=stylesheet href=css/estilos.css />
+  <link rel=stylesheet href=../css/reset.css />
+  <link rel=stylesheet href=../css/estilos.css />
   <style>
+#divLogin{
+	opacity: 0;
+	transition: opacity 1s;
+}
 .vistalogin{
   width: 40%;
   margin: 5rem auto;
@@ -48,6 +52,7 @@
 .vistalogin p:first-of-type:hover{
   text-decoration: underline;
 }
+/* Párrafo de Error */
 .vistalogin p:nth-of-type(2){
   display: none;
   color: red;
@@ -59,7 +64,7 @@
 
 <body>
 
-  <div class='vistalogin'>
+  <div class='vistalogin' id=divLogin>
     <label>Email:
         <input type=email value='email2@email.es' />
       </label><br />
@@ -70,6 +75,9 @@
       <p>Recuperar clave</p>
       <p>Error</p>      
   </div>
+	<script>
+		window.onload = function(){divLogin.style.opacity = '1'}
+	</script>
 </body>
 
 </html>
