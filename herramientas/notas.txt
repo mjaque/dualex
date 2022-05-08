@@ -1,0 +1,8 @@
+Generación de Documentación
+
+Desde el directorio del proyecto:
+
+	./herramientas/phpDocumentor.phar -d ./src/php/ -t docs/php
+	jsdoc -r -d docs/js src/js src/js
+	
+

@@ -1,0 +1,13 @@
+PENDIENTE											EN MARCHA							TERMINADO (programado, probado, documentado y publicado)
+
+													F1-Login
+
+F2-Gestión de Tareas
+	Alta/Baja/Modificación de tarea (alumno)
+	Evaluación de tarea (profesor)
+	Calificación de tarea (tutor)
+	
+F3-Emisión de Informe de Alumno (profesor)
+
+I-1 Capturar el evento unload.
+	Para evitar pérdida de datos.
