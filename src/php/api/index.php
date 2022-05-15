@@ -35,9 +35,10 @@
 		//Inyección de dependencias
 		Login::$clave = $config['clave_encriptacion'];
 		Login::$algoritmo_encriptacion = $config['algoritmo_encriptacion'];
-		$autorizacion = apache_request_headers()['Authorization'];
-		if ($autorizacion != "null"){
-			$usuario = json_decode(Login::desencriptar($autorizacion));
+		if(array_key_exists('Authorization', apache_request_headers())){
+			$autorizacion = apache_request_headers()['Authorization'];
+			if ($autorizacion != "null")
+				$usuario = json_decode(Login::desencriptar($autorizacion));
 		}
 
 		//Routing
@@ -47,17 +48,9 @@
 				require_once('./controladores/login.php');
 				$controlador = new Login();
 				break;
-			case 'modulo':
-				require_once('./controladores/modulo.php');
-				$controlador = new Modulo();
-				break;
 			case 'alumno':
 				require_once('./controladores/alumno.php');
 				$controlador = new Alumno();
-				break;
-			case 'objetivo':
-				require_once('./controladores/objetivo.php');
-				$controlador = new Objetivo();
 				break;
 			default:
 				header('HTTP/1.1 501 Not Implemented');

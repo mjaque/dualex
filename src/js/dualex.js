@@ -1,9 +1,14 @@
 /**
 	Controlador principal de la aplicación.
 **/
+
+//Modelos
+import {Modelo} from './modelos/modelo.js'
+
 //Vistas
 import {VistaLogin} from './vistas/vistalogin/vistalogin.js'
 import {VistaDialogo} from './vistas/vistadialogo/vistadialogo.js'
+import {VistaMensaje} from './vistas/vistamensaje/vistamensaje.js'
 
 //Vista de tareas del alumno
 import {VistaTareas} from './vistas/vistatareas/vistatareas.js'
@@ -31,8 +36,10 @@ class DualEx{
 		Se llama al cargar la página.
 	**/
 	iniciar(){
+		this.modelo = new Modelo()
 		this.vistaLogin = new VistaLogin(this, document.getElementById('divLogin'))
 		this.vistaDialogo = new VistaDialogo(this, document.getElementById('divDialogo'))
+		this.vistaMensaje = new VistaMensaje(this, document.getElementById('divMensaje'))
 		this.vistaAlumnos = new VistaAlumnos(this, document.getElementById('divAlumnos'))
 		this.vistaTarea = new VistaTarea(this, document.getElementById('divTarea'))
 		this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
@@ -91,8 +98,15 @@ class DualEx{
 		Muestra la vista de alumnos del profesor.
 	**/
 	mostrarAlumnos(){
-		this.ocultarVistas()
-		this.vistaAlumnos.mostrar(true)
+		if (this.#usuario.rol != 'profesor')
+			throw Error ('Operación no permitida.')
+		this.modelo.getAlumnosProfesor()
+			.then(alumnos => {
+				this.vistaAlumnos.cargar(alumnos)
+				this.ocultarVistas()
+				this.vistaAlumnos.mostrar(true)
+			})
+			.catch(error => this.gestionarError(error))
 	}
 }
 

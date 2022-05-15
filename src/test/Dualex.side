@@ -159,7 +159,7 @@
       "target": "css=label:nth-child(1) > input",
       "targets": [
         ["css=label:nth-child(1) > input", "css:finder"],
-        ["xpath=//input[@value='email2@email.es']", "xpath:attributes"],
+        ["xpath=//input[@value='aportero@fundacionloyola.es']", "xpath:attributes"],
         ["xpath=//div[@id='divLogin']/label/input", "xpath:idRelative"],
         ["xpath=//input", "xpath:position"]
       ],
@@ -175,7 +175,7 @@
         ["xpath=//div[@id='divLogin']/label/input", "xpath:idRelative"],
         ["xpath=//input", "xpath:position"]
       ],
-      "value": "email2@email.es"
+      "value": "aportero@fundacionloyola.es"
     }, {
       "id": "4aec0db8-63ee-4d39-8f1a-46290c10abf3",
       "comment": "",
@@ -187,7 +187,7 @@
         ["xpath=//div[@id='divLogin']/label[2]/input", "xpath:idRelative"],
         ["xpath=//label[2]/input", "xpath:position"]
       ],
-      "value": "clave 2"
+      "value": "aportero"
     }, {
       "id": "68bfae12-08e8-429d-aa35-5e5e32896f87",
       "comment": "",
@@ -273,7 +273,7 @@
         ["xpath=//div[@id='divLogin']/label/input", "xpath:idRelative"],
         ["xpath=//input", "xpath:position"]
       ],
-      "value": "email1@email.es"
+      "value": "alumno1.guadalupe@alumnado.fundacionloyola.net"
     }, {
       "id": "bba3b210-5722-4945-aa9b-bb8f8e9556d6",
       "comment": "",
@@ -285,7 +285,7 @@
         ["xpath=//div[@id='divLogin']/label[2]/input", "xpath:idRelative"],
         ["xpath=//label[2]/input", "xpath:position"]
       ],
-      "value": "clave 1"
+      "value": "alumno1"
     }, {
       "id": "20f26d0c-b788-46a6-b585-0a42e1772d95",
       "comment": "",

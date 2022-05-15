@@ -1,6 +1,6 @@
 PENDIENTE											EN MARCHA							TERMINADO (programado, probado, documentado y publicado)
 
-													F1-Login
+																						F1-Login
 
 F2-Gestión de Tareas
 	Alta/Baja/Modificación de tarea (alumno)

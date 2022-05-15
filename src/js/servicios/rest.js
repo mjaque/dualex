@@ -35,8 +35,12 @@ export class Rest {
 			.then(respuesta => {
 				//Control de Errores
 				if (!respuesta.ok) throw Error(`${respuesta.status} - ${respuesta.statusText}`)
-
-				return respuesta.json()
+				//Comprobamos si es JSON válido
+				const tipo = respuesta.headers.get("content-type");
+  				if (tipo && tipo.indexOf("application/json") !== -1)
+					return respuesta.json()
+				//No es json
+				return respuesta.text()
 			})
 	}
 	/**

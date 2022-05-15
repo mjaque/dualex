@@ -33,8 +33,41 @@ CREATE TABLE Modulo(
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	codigo VARCHAR(256),
 	titulo VARCHAR(256),
-	colorFondo VARCHAR(256) DEFAULT '#0000FF',
-	colorLetra VARCHAR(256) DEFAULT '#FFFFFF',
+	color_fondo VARCHAR(256) DEFAULT '#0000FF',
+	color_letra VARCHAR(256) DEFAULT '#FFFFFF',
 	icono VARCHAR(256) DEFAULT 'default.svg'
+);
+
+DROP TABLE IF EXISTS Modulo_Profesor;
+CREATE TABLE Modulo_Profesor(
+	id_modulo INT UNSIGNED,
+	id_profesor INT UNSIGNED,
+	PRIMARY KEY (id_modulo, id_profesor),
+	FOREIGN KEY (id_modulo) REFERENCES Modulo (id) ON DELETE CASCADE,
+	FOREIGN KEY (id_profesor) REFERENCES Profesor (id) ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS Actividad;
+CREATE TABLE Actividad(
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	titulo VARCHAR(256),
+	descripcion VARCHAR(256)
+);
+
+DROP TABLE IF EXISTS Actividad_Modulo;
+CREATE TABLE Actividad_Modulo(
+	id_actividad INT UNSIGNED,
+	id_modulo INT UNSIGNED,
+	PRIMARY KEY (id_actividad, id_modulo),
+	FOREIGN KEY (id_actividad) REFERENCES Actividad (id) ON DELETE CASCADE,
+	FOREIGN KEY (id_modulo) REFERENCES Modulo (id) ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS Alumno_Modulo;
+CREATE TABLE Alumno_Modulo(
+	id_alumno INT UNSIGNED,
+	id_modulo INT UNSIGNED,
+	FOREIGN KEY (id_alumno) REFERENCES Alumno (id) ON DELETE CASCADE,
+	FOREIGN KEY (id_modulo) REFERENCES Modulo (id) ON DELETE CASCADE
 );
 

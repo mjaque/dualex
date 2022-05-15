@@ -2,9 +2,8 @@
   width: 40%;
   margin: 5rem auto;
   padding: 2rem;
-  border: 1px solid blue;
   border-radius: 0.5rem;
-  box-shadow: 0.5rem 0.5rem grey;
+  box-shadow: 0.5rem 0.5rem 2rem grey;
 }
 .vistalogin input{
   margin: 0.3rem;

@@ -1,0 +1,33 @@
+.vistaalumnos {
+	max-width: 90%;
+	margin: 1rem;
+ 	padding: 2rem;
+}
+.vistaalumnos>div {
+	border-bottom: 1px solid lightgrey;
+	height: 2rem;
+}
+.vistaalumnos .icono_grande{
+	position: fixed;
+	top: 5%;
+	left: 80%;
+	background-color: blue;
+	border-radius: 2rem;
+	cursor: pointer;
+	transition: transform .7s ease-in-out;
+}
+.vistaalumnos .icono_grande:hover{
+	transform: rotate(360deg);
+}
+.vistaalumnos .iconos{
+	float: right;
+}
+.vistaalumnos .icono{
+	display: inline;
+	width: 1.5rem;
+	cursor: pointer;
+}
+.vistaalumnos .icono:hover{
+	background-color: lightblue;
+	border-radius: 0.7rem;
+}

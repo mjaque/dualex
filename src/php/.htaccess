@@ -1,5 +1,5 @@
 DirectoryIndex index.php index.html
-Options +FollowSymLinks
+#Options +FollowSymLinks
 RewriteEngine on
 
 # redirect all api calls to /api/index.php

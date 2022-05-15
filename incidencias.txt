@@ -1,1 +1,3 @@
+
+-------------------------------------------------
 I1. Corregir bocetos para reflejar relación 1:N entre Tarea -> Actividad. Una tarea puede "hacer referencia" a varias Actividades. (Una actividad, sigue relacionándose con varios Módulos).
