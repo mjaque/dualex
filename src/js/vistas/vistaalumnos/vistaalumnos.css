@@ -7,6 +7,17 @@
 	border-bottom: 1px solid lightgrey;
 	height: 2rem;
 }
+.vistaalumnos .modulo{
+	border-radius: 0.5rem;
+	padding: 0.1rem 0.3rem;
+	margin: 0 0.2rem;
+}
+.vistaalumnos .alumno{
+	cursor: pointer;
+}
+.vistaalumnos .alumno:hover{
+	color: blue;
+}
 .vistaalumnos .icono_grande{
 	position: fixed;
 	top: 5%;

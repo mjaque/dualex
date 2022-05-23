@@ -44,6 +44,14 @@ class DualEx{
 		this.vistaTarea = new VistaTarea(this, document.getElementById('divTarea'))
 		this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
 	}
+  /**
+    Muestra el error en la vista de mensajes.
+    @param error {Error} Error que se ha producido.
+  **/
+  gestionarError(error){
+    this.vistaMensaje.mostrar(error)
+    console.error(error)
+  }
 	/**
 		Envía los datos del login (email y clave) al servidor para obtener acceso.
 		@param email {String} Dirección de correo electrónico del ususario.
