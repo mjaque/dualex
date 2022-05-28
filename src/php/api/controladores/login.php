@@ -11,9 +11,11 @@ class Login{
   /**
     Autentifica al usuario con el email y la clave.
     Devuelve por HTTP el objeto usuario en formato JSON.
+	@param $pathParams No utilizado.
+	@param $queryParams No utilizado.
     @param $login Un objeto con los atributos email y clave.
   **/
-  function post($login){
+  function post($pathParams, $queryParams, $login){
     require_once('./daos/daousuario.php');
     $usuario = DAOUsuario::autenticar($login->email, $login->clave);
     if (!$usuario){

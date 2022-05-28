@@ -98,7 +98,7 @@ export class VistaAlumnos extends Vista{
 		@param alumno {Alumno} Datos del alumno.
 	**/
 	pulsarTareas(alumno){
-		console.log('No implementado.')
+		this.controlador.mostrarTareasAlumno(alumno)
 	}
 	/**
 		Atención a la pulsación sobre el icono de Informe de un alumno.

@@ -21,13 +21,15 @@
 
 		//Procesamos la petición para identificar el recurso solicitado
 		$metodo = $_SERVER['REQUEST_METHOD'];
-		$params = explode('/', $_SERVER['PATH_INFO']);
-		$recurso = $params[1];	//El primer elemento es la /.
-		array_splice($params, 0, 2);	//Quitamos la / y el recurso solicitado.
+		$pathParams = explode('/', $_SERVER['PATH_INFO']);
+		$queryParams = [];
+		parse_str($_SERVER['QUERY_STRING'], $queryParams);
+		$recurso = $pathParams[1];	//El primer elemento es la /.
+		array_splice($pathParams, 0, 2);	//Quitamos la / y el recurso solicitado.
 		//Procesamos los nulos
-		for($i = 0; $i < count($params); $i++)
-			if ($params[$i] == 'null')
-				$params[$i] = null;
+		for($i = 0; $i < count($pathParams); $i++)
+			if ($pathParams[$i] == 'null')
+				$pathParams[$i] = null;
 
 		//Autenticación
 		$usuario = null;
@@ -52,6 +54,10 @@
 				require_once('./controladores/alumno.php');
 				$controlador = new Alumno();
 				break;
+			case 'tarea':
+				require_once('./controladores/tarea.php');
+				$controlador = new Tarea();
+				break;
 			default:
 				header('HTTP/1.1 501 Not Implemented');
 				die();
@@ -59,18 +65,18 @@
 		if ($controlador)
 			switch($metodo){
 					case 'GET':
-						$controlador->get($params, $usuario);
+						$controlador->get($pathParams, $queryParams, $usuario);
 						die();
 					case 'POST':
-						$objeto = json_decode(file_get_contents('php://input'));
-						$controlador->post($objeto, $usuario);
+						$body = json_decode(file_get_contents('php://input'));
+						$controlador->post($pathParams, $queryParams, $body, $usuario);
 						die();
 					case 'DELETE':
-						$controlador->delete($params, $usuario);
+						$controlador->delete($pathParams, $queryParams, $usuario);
 						die();
 					case 'PUT':
-						$objeto = json_decode(file_get_contents('php://input'));
-						$controlador->put($objeto, $usuario);
+						$body = json_decode(file_get_contents('php://input'));
+						$controlador->put($pathParams, $queryParams, $body, $usuario);
 						die();
 					default:
 						header('HTTP/1.1 501 Not Implemented');

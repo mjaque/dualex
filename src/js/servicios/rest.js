@@ -22,7 +22,7 @@ export class Rest {
 		Realiza una llamada AJAX por GET
 		@param path {String} Path del recurso solicitado.
 		@param pathParams {Array} Parámetros de path que se añadirán a la llamada.
-	@param queryParams {Map} Mapa de parámetros que se añadirán después del path.
+		@param queryParams {Map} Mapa de parámetros que se añadirán después del path.
 		@return {Promise} Devuelve una promesa.
 	**/
 	static get(path, pathParams = [], queryParams) {
@@ -31,7 +31,7 @@ export class Rest {
 			headers: Rest._getHeaders()
 		}
 
-		return fetch(Rest._construirURL(path, pathParams), opciones) //Hacemos la petición
+		return fetch(Rest._construirURL(path, pathParams, queryParams), opciones) //Hacemos la petición
 			.then(respuesta => {
 				//Control de Errores
 				if (!respuesta.ok) throw Error(`${respuesta.status} - ${respuesta.statusText}`)
@@ -128,10 +128,17 @@ export class Rest {
 			'Authorization': Rest.#autorizacion
 		}
 	}
-	static _construirURL(path, pathParams = []){
-		//TODO: Procesar el mapa de queryParams para generar el query string ?nombre1=valor1&nombre2=valor2...	
+	static _construirURL(path, pathParams = [], queryParams){
 		let url = `${Rest.#URL}/${path}/${pathParams.join('/')}`
-		url = url.replace('//', '/null/') //aseguramos los parámetros nulos.
+		//TODO: Procesar el mapa de queryParams para generar el query string ?nombre1=valor1&nombre2=valor2...	
+		if (queryParams){
+			url += '?'
+			queryParams.forEach( (valor, clave, mapa) => {
+				url += `${clave}=${valor}&&`
+			});
+			url = url.substring(0, url.length - 2)
+		}
+		url = encodeURI(url.replace('//', '/null/')) //aseguramos los parámetros nulos.
 		return url;
 	 }
 }

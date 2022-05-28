@@ -69,7 +69,7 @@ class DualEx{
 				this.vistaLogin.mostrar(false)
 		switch(usuario.rol){
 			case 'alumno':
-				this.mostrarTareasAlumno()
+				this.mostrarTareasAlumno(this.#usuario)
 				break;
 			case 'profesor':
 				this.mostrarAlumnos()
@@ -97,9 +97,11 @@ class DualEx{
 	}
 	/**
 		Muestra la vista de tareas del alumno.
+		@param alumno {Alumno} Datos del alumno.
 	**/
-	mostrarTareasAlumno(){
+	mostrarTareasAlumno(alumno){
 		this.ocultarVistas()
+		this.modelo.getTareasAlumno(alumno)
 		this.vistaTareas.mostrar(true)
 	}
 	/**

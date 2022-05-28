@@ -1,31 +1,31 @@
 <?php
 /**
-	Controlador de alumnos.
+	Controlador de tareas.
 **/
-require_once('./daos/daoalumno.php');
+require_once('./daos/daotarea.php');
 
-class Alumno{
+class Tarea{
 	/**
-		Devuelve la lista de alumnos.
-		Si recibe un parámetro con el valor 'profesor', devuelve la lista de alumnos que cursan módulos impartidos por el profesor.
+		Devuelve la lista de tareas.
+		Si recibe el parámetro con el valor 'alumno', devuelve la lista de tareas del alumno.
+		No está permitido que un alumno consulte las tareas de otro alumno. Un profesor solo puede consultar las tareas de sus alumnos.
 		@param $pathParams {Array} Array de parámetros.
-		@param $queryParams {Array} No utilizado
-		@param $usuario {Usuario} Profesor del que se quieren conocer los alumnos.
+		@param $queryParams {Array} Array de parámetros. Array con el identificador del alumno.
+		@param $usuario {Usuario} Usuario que realiza la petición.
 		@return {Array[Usuario]}
 	**/
 	function get($pathParams, $queryParams, $usuario){
 	switch(count($pathParams)){
 		case 1:
-			if ($pathParams[0] == 'profesor'){
-				if ($usuario->rol != 'profesor'){
-							header('HTTP/1.1 401 Unauthorized');
-							die();
+			if ($pathParams[0] == 'alumno'){
+				if (!array_key_exists('id', $queryParams)){
+					header('HTTP/1.1 403 Forbidden');
+					die();
 				}
-				$resultado = DAOAlumno::verAlumnosPorProfesor($usuario->id);
-				if (count($resultado) > 0)
-					$resultado = $this->agruparModulos($resultado);
-				//El resultado tiene una fila por alumno y módulo. Debemos agruparlo.
-				
+				if ($usuario->rol == 'profesor')
+					$resultado = DAOTarea::verTareasDeAlumnoComoProfesor($queryParams['id'], $usuario->id);
+				if ($usuario->rol == 'alumno')
+					$resultado = DAOTarea::verTareasDeAlumno($usuario->id);
 			}
 			else{
 				$id = $pathParams[0];
@@ -44,7 +44,7 @@ class Alumno{
 	}
 	/**
 		Procesa un array de alumnos x módulo para unificar los módulos en un array.
-		@param $alumnos {[Alumnos]} Array de alumnos con una fila por módulo del alumno.
+		@params $alumnos {[Alumnos]} Array de alumnos con una fila por módulo del alumno.
 		@return {[Alumno]} Array de alumnos con un campo de array que agrupa todos sus módulos.
 	**/
 	function agruparModulos($alumnos){
@@ -63,19 +63,5 @@ class Alumno{
 			}
 		}
 		return $resultado;
-	}
-	/**
-		Devuelve el módulo de un alumno.
-		@param $alumno {Alumno} Alumno con información de módulo.
-		@return {Modulo} Módulo del alumno.
-	**/
-	function verModuloAlumno($alumno){
-		$modulo = [];
-		$modulo['codigo'] = $alumno['codigo'];
-		$modulo['titulo'] = $alumno['titulo'];
-		$modulo['color_fondo'] = $alumno['color_fondo'];
-		$modulo['color_letra'] = $alumno['color_letra'];
-		$modulo['icono'] = $alumno['icono'];
-		return $modulo;
 	}
 }

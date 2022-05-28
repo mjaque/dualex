@@ -71,3 +71,35 @@ CREATE TABLE Alumno_Modulo(
 	FOREIGN KEY (id_modulo) REFERENCES Modulo (id) ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS Calificacion;
+CREATE TABLE Calificacion(
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	titulo VARCHAR(256),
+	descripcion TEXT
+);
+
+INSERT INTO Calificacion VALUES
+(1, 'Óptimo', null), (2, 'Profesional', null), (3, 'Aceptable', null);
+
+DROP TABLE IF EXISTS Tarea;
+CREATE TABLE Tarea(
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	id_alumno INT UNSIGNED,
+	titulo VARCHAR(256),
+	descripcion TEXT,
+	fecha DATE COMMENT 'Fecha de realización de la tarea',
+	id_calificacion INT UNSIGNED COMMENT 'Calificación del tutor de empresa',
+	comentario_calificacion TEXT,
+	evaluacion TEXT COMMENT 'Evaluación del profesor',
+	FOREIGN KEY (id_alumno) REFERENCES Alumno (id) ON DELETE CASCADE,
+	FOREIGN KEY (id_calificacion) REFERENCES Calificacion (id) ON DELETE RESTRICT
+);
+
+DROP TABLE IF EXISTS Actividad_Tarea;
+CREATE TABLE Actividad_Tarea(
+	id_actividad INT UNSIGNED,
+	id_tarea INT UNSIGNED,
+	FOREIGN KEY (id_actividad) REFERENCES Actividad (id) ON DELETE CASCADE,
+	FOREIGN KEY (id_tarea) REFERENCES Alumno (id) ON DELETE CASCADE
+);
+

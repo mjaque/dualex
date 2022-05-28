@@ -2,7 +2,7 @@
   "id": "324b0bfb-084b-4973-8a9b-3c354287386b",
   "version": "2.0",
   "name": "Dualex",
-  "url": "http://localhost",
+  "url": "http://localhost/dualex/src/index.html",
   "tests": [{
     "id": "b56f75f7-55fc-446d-a4cd-9651e61abc0d",
     "name": "Login",
@@ -303,6 +303,55 @@
       "comment": "",
       "command": "assertElementPresent",
       "target": "xpath=//div[@id='divTareas' and contains(@style, 'display: block')]",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "8f5a937f-75f3-41db-a7fe-95fa9ee3eec1",
+    "name": "VistaAlumnos",
+    "commands": [{
+      "id": "7f9c00df-00d2-4f5e-a2b2-9609ac15198c",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/dualex/src/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "046dad3a-1730-40e5-8b75-e8d0454cf077",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "655x629",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b7a9efdf-91be-40a8-a1b5-7b2413589f43",
+      "comment": "",
+      "command": "click",
+      "target": "css=#divLogin > button",
+      "targets": [
+        ["css=#divLogin > button", "css:finder"],
+        ["xpath=//div[@id='divLogin']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Acceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "16beac54-41f7-4259-97ab-932cf38bc406",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=divAlumnos",
+      "targets": [
+        ["id=divAlumnos", "id"],
+        ["css=#divAlumnos", "css:finder"],
+        ["xpath=//div[@id='divAlumnos']", "xpath:attributes"],
+        ["xpath=//div[7]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6e61b663-c9b8-4d2f-ad6f-f9177168f51e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "xpath=//div[@id='divAlumnos' and contains(@style, 'display: block')]",
       "targets": [],
       "value": ""
     }]

@@ -21,4 +21,13 @@ export class Modelo{
 	getAlumnosProfesor(){
 		return Rest.get('alumno', ['profesor'])
 	}
+	/**
+		Devuelve la lista de tareas de un alumno.
+		@return {Promise} Devuelve la promesa asociada a la petición.
+	**/
+	getTareasAlumno(alumno){
+		let queryParams = new Map()
+		queryParams.set('id', alumno.id)
+		return Rest.get('tarea', ['alumno'], queryParams)
+	}
 }

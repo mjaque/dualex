@@ -1,4 +1,4 @@
 MAPA DE NEGOCIO 
 	
-	ALUMNO <--realiza--> TAREA <--se asocia--> ACTIVIDAD <--corresponde--> MÓDULO <--lo imparte--> PROFESOR
+	ALUMNO --realiza--> TAREA <--se asocia--> ACTIVIDAD <--corresponde--> MÓDULO <--lo imparte--> PROFESOR
 		|

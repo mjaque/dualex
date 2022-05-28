@@ -5,12 +5,14 @@
 }
 .vistaalumnos>div {
 	border-bottom: 1px solid lightgrey;
-	height: 2rem;
+	height: 1.3rem;
+	margin-bottom: 0.7rem;
 }
 .vistaalumnos .modulo{
 	border-radius: 0.5rem;
 	padding: 0.1rem 0.3rem;
 	margin: 0 0.2rem;
+	cursor: help;
 }
 .vistaalumnos .alumno{
 	cursor: pointer;
