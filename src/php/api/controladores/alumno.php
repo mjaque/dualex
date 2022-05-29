@@ -44,6 +44,7 @@ class Alumno{
 	}
 	/**
 		Procesa un array de alumnos x módulo para unificar los módulos en un array.
+		Espera que en el array los elementos del mismo módulo sean contiguos.
 		@param $alumnos {[Alumnos]} Array de alumnos con una fila por módulo del alumno.
 		@return {[Alumno]} Array de alumnos con un campo de array que agrupa todos sus módulos.
 	**/

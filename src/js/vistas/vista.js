@@ -108,10 +108,11 @@ export class Vista {
   /**
     Elimina todos los nodos hijos de un nodo.
     @param nodo {Node} Nodo del que se eliminarán los hijos.
+	@param desde {Number} Índice del nodo desde el que se eliminarán los hijos. Indicando desde = 1, se salva al primer hijo (nodo 0).
   **/
-  eliminarHijos(nodo) {
-    while (nodo.firstChild)
-      nodo.removeChild(nodo.firstChild)
+  eliminarHijos(nodo, desde = 0) {
+    while (nodo.childNodes.length > desde)
+      nodo.removeChild(nodo.childNodes.item(desde))
   }
   /**
     Muestra u oculta la vista.

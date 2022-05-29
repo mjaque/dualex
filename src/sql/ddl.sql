@@ -88,11 +88,12 @@ CREATE TABLE Tarea(
 	titulo VARCHAR(256),
 	descripcion TEXT,
 	fecha DATE COMMENT 'Fecha de realización de la tarea',
-	id_calificacion INT UNSIGNED COMMENT 'Calificación del tutor de empresa',
-	comentario_calificacion TEXT,
+	id_calificacion_empresa INT UNSIGNED COMMENT 'Calificación del tutor de empresa',
+	comentario_calificacion_empresa TEXT,
+	calificacion INT UNSIGNED COMMENT 'Calificación del profesor.',
 	evaluacion TEXT COMMENT 'Evaluación del profesor',
 	FOREIGN KEY (id_alumno) REFERENCES Alumno (id) ON DELETE CASCADE,
-	FOREIGN KEY (id_calificacion) REFERENCES Calificacion (id) ON DELETE RESTRICT
+	FOREIGN KEY (id_calificacion_empresa) REFERENCES Calificacion (id) ON DELETE RESTRICT
 );
 
 DROP TABLE IF EXISTS Actividad_Tarea;

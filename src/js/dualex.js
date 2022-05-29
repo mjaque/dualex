@@ -102,7 +102,12 @@ class DualEx{
 	mostrarTareasAlumno(alumno){
 		this.ocultarVistas()
 		this.modelo.getTareasAlumno(alumno)
-		this.vistaTareas.mostrar(true)
+			.then(tareas => {
+				this.vistaTareas.cargar(tareas)
+				this.ocultarVistas()
+				this.vistaTareas.mostrar(true)
+			})
+			.catch(error => this.gestionarError(error))
 	}
 	/**
 		Muestra la vista de alumnos del profesor.

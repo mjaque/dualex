@@ -26,6 +26,9 @@ class Tarea{
 					$resultado = DAOTarea::verTareasDeAlumnoComoProfesor($queryParams['id'], $usuario->id);
 				if ($usuario->rol == 'alumno')
 					$resultado = DAOTarea::verTareasDeAlumno($usuario->id);
+				if (count($resultado) > 0)
+					$resultado = $this->agruparModulos($resultado);
+				//El resultado tiene una fila por alumno y módulo. Debemos agruparlo.
 			}
 			else{
 				$id = $pathParams[0];
@@ -42,26 +45,59 @@ class Tarea{
 		echo $json;
 		die();
 	}
+//TODO: Refactorizar con controlador.alumno.
 	/**
-		Procesa un array de alumnos x módulo para unificar los módulos en un array.
-		@params $alumnos {[Alumnos]} Array de alumnos con una fila por módulo del alumno.
-		@return {[Alumno]} Array de alumnos con un campo de array que agrupa todos sus módulos.
+		Procesa un array de tareas x módulo para unificar los módulos en un array.
+		Espera que los elementos iguales sean contiguos.
+		@params $tareas {[Tareas]} Array de tareas con una fila por módulo de la tarea.
+		@return {[Tareas]} Array de tareas con un campo de array que agrupa todos sus módulos.
 	**/
-	function agruparModulos($alumnos){
-		if (count($alumnos) == 0) return [];
+	function agruparModulos($elementos){
+		if (count($elementos) == 0) return [];
 		
 		$resultado = [];
-		$alumnos[0]['modulos'] = [$this->verModuloAlumno($alumnos[0])];
-		array_push($resultado, $alumnos[0]);
-		for($i = 1; $i < count($alumnos); $i++){
-			//Si es igual que el actual, añadimos el módulo al alumno actual
-			if ($alumnos[$i]['id'] == $resultado[count($resultado) - 1]['id'])
-				array_push($resultado[count($resultado) -1]['modulos'], $this->verModuloAlumno($alumnos[$i]));
+		$elementos[0]['modulos'] = [$this->verModulo($elementos[0])];
+		array_push($resultado, $elementos[0]);
+		for($i = 1; $i < count($elementos); $i++){
+			//Si es igual que el actual, añadimos el módulo al elemento actual
+			if ($elementos[$i]['id'] == $resultado[count($resultado) - 1]['id'])
+				array_push($resultado[count($resultado) -1]['modulos'], $this->verModulo($elementos[$i]));
 			else{
-				$alumnos[$i]['modulos'] = [$this->verModuloAlumno($alumnos[$i])];
-				array_push($resultado, $alumnos[$i]);
+				$elementos[$i]['modulos'] = [$this->verModulo($elementos[$i])];
+				array_push($resultado, $elementos[$i]);
 			}
 		}
 		return $resultado;
+	}
+	function agruparModulos_old($elementos){
+		if (count($elementos) == 0) return [];
+		
+		$resultado = [];
+		$elementos[0]['modulos'] = [$this->verModulo($elementos[0])];
+		array_push($resultado, $elementos[0]);
+		for($i = 1; $i < count($elementos); $i++){
+			//Si es igual que el actual, añadimos el módulo al elemento actual
+			if ($elementos[$i]['id'] == $resultado[count($resultado) - 1]['id'])
+				array_push($resultado[count($resultado) -1]['modulos'], $this->verModulo($elementos[$i]));
+			else{
+				$elementos[$i]['modulos'] = [$this->verModulo($elementos[$i])];
+				array_push($resultado, $elementos[$i]);
+			}
+		}
+		return $resultado;
+	}
+	/**
+		Devuelve el módulo de un elemento.
+		@param $elemento {Elemento} Elemento con información de módulo.
+		@return {Modulo} Módulo del elemento.
+	**/
+	function verModulo($elemento){
+		$modulo = [];
+		$modulo['codigo'] = $elemento['codigo'];
+		$modulo['titulo'] = $elemento['titulo'];
+		$modulo['color_fondo'] = $elemento['color_fondo'];
+		$modulo['color_letra'] = $elemento['color_letra'];
+		$modulo['icono'] = $elemento['icono'];
+		return $modulo;
 	}
 }
