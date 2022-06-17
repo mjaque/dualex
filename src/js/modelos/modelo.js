@@ -44,4 +44,12 @@ export class Modelo{
 	getCalificaciones(){
 		return Rest.get('calificacion')
 	}
+	/**
+		Crea una tarea.
+		@param tarea {Tarea} Datos de la tarea.
+		@return {Promise} Devuelve la promesa asociada a la petición.
+	**/
+	crearTarea(tarea){
+		return Rest.post('tarea', [] , tarea)
+	}
 }

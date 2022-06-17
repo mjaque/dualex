@@ -45,6 +45,21 @@ class Tarea{
 		echo $json;
 		die();
 	}
+	/**
+		Inserta una nueva tarea en la base de datos
+		@param $pathParams {Array} Array de parámetros.
+		@param $queryParams {Array} Array de parámetros.
+		@param $tarea {Tarea} Datos de la tarea a insertar.
+		@param $usuario {Usuario} Usuario que realiza la petición.
+	**/
+	function post($pathParams, $queryParams, $tarea, $usuario){
+    	$id = DAOTarea::insertar($tarea, $usuario);
+    	//Respuesta a un POST
+    	header('HTTP/1.1 201 Created');
+    	$localizacion = '/tarea/'.$id; //Localización del nuevo recurso
+    	echo $localizacion;
+    	die();
+  	}
 //TODO: Refactorizar con controlador.alumno.
 	/**
 		Procesa un array de tareas x módulo para unificar los módulos en un array.
@@ -53,23 +68,6 @@ class Tarea{
 		@return {[Tareas]} Array de tareas con un campo de array que agrupa todos sus módulos.
 	**/
 	function agruparModulos($elementos){
-		if (count($elementos) == 0) return [];
-		
-		$resultado = [];
-		$elementos[0]['modulos'] = [$this->verModulo($elementos[0])];
-		array_push($resultado, $elementos[0]);
-		for($i = 1; $i < count($elementos); $i++){
-			//Si es igual que el actual, añadimos el módulo al elemento actual
-			if ($elementos[$i]['id'] == $resultado[count($resultado) - 1]['id'])
-				array_push($resultado[count($resultado) -1]['modulos'], $this->verModulo($elementos[$i]));
-			else{
-				$elementos[$i]['modulos'] = [$this->verModulo($elementos[$i])];
-				array_push($resultado, $elementos[$i]);
-			}
-		}
-		return $resultado;
-	}
-	function agruparModulos_old($elementos){
 		if (count($elementos) == 0) return [];
 		
 		$resultado = [];

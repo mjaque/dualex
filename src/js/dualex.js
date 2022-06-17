@@ -147,6 +147,19 @@ class DualEx{
 	verCalificaciones(){
 		return this.modelo.getCalificaciones()
 	}
+	/**
+		Crea una nueva tarea y vuelve a la vista de tareas del alumno.
+		@param tarea {Tarea} Datos de la nueva tarea.
+	**/
+	crearTarea(tarea){
+		this.modelo.crearTarea(tarea)
+			.then(resultado => {
+console.log(resultado)
+				this.vistaMensaje.mostrar('La tarea se creó correctamente', VistaMensaje.OK)
+				this.mostrarTareasAlumno(this.#usuario)
+			})
+			.catch(error => this.gestionarError(error))
+	}
 }
 
 new DualEx()

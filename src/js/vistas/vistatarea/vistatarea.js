@@ -20,11 +20,18 @@ export class VistaTarea extends Vista{
 	**/
 	iniciar(){
 		//Cogemos referencias a los elementos del interfaz
-		this.iTitulo = this.doc.getElementsByTagName('input')[0]
-		this.sCalificaciones = this.doc.getElementsByTagName('select')[0]
+		this.btnVolver = this.doc.getElementsByTagName('img')[0]
+		this.iTitulo = this.doc.querySelectorAll('input[type=text]')[0]
+		this.iFecha = this.doc.querySelectorAll('input[type=date]')[0]
+		this.taDescripcion = this.doc.getElementsByTagName('textarea')[0]
 		this.divActividades = this.doc.querySelector('fieldset div')
+		this.sCalificacion = this.doc.getElementsByTagName('select')[0]
+		this.taComentarioCalificacionEmpresa = this.doc.getElementsByTagName('textarea')[1]
+		this.btnAceptar = this.doc.getElementsByTagName('button')[0]
 
 		//Asociamos eventos
+		this.btnVolver.onclick = this.volver.bind(this)
+		this.btnAceptar.onclick = this.aceptar.bind(this)
 
 		super.transferir(this.base, this.doc)
 		super.cargarCSS(`${this.getNombreClase()}.css`)
@@ -72,13 +79,52 @@ export class VistaTarea extends Vista{
 	cargarCalificaciones(calificaciones){
 		this.controlador.verCalificaciones()
 		.then(calificaciones => {
-			this.eliminarHijos(this.sCalificaciones, 1)
+			this.eliminarHijos(this.sCalificacion, 2)
 			for(let calificacion of calificaciones){
 				let option = document.createElement('option')
-				this.sCalificaciones.appendChild(option)
+				this.sCalificacion.appendChild(option)
 				option.setAttribute('data-idCalificacion', calificacion.id)
 				option.setAttribute('title', calificacion.descripcion)
+				option.textContent = calificacion.titulo
 			}
 		})
+	}
+	/**
+		Vuelve a la vista de tareas del alumno.
+	**/
+	volver(){
+		this.controlador.mostrarTareasAlumno(this.controlador.getUsuario())
+	}
+	/**
+		Recoge los datos de la nueva Tarea y la envía al controlador.
+	**/
+	aceptar(){
+		try{
+			//Validación de datos.
+			if (this.iTitulo.value.length < 5)
+				throw Error('Debes especifica un título para la tarea que sea descriptivo.')
+			if (this.iFecha.value == "")
+				throw Error('Debes especifica una fecha válida para la tarea.')
+			if (new Date(this.iFecha.value) > new Date())
+				throw Error('No registres tareas que no hayas hecho todavía.')
+			if (this.taDescripcion.length < 10)
+				throw Error('Debes describir detalladamente la tarea.')
+
+			let tarea = {}
+			tarea.titulo = this.iTitulo.value
+			tarea.fecha = this.iFecha.value
+			tarea.descripcion = this.taDescripcion.value
+			tarea.actividades = []
+			for(let iActividad of document.querySelectorAll('input[data-idActividad]'))
+				if (iActividad.checked)
+					tarea.actividades.push(iActividad.getAttribute('data-idActividad'))
+			tarea.idCalificacionEmpresa = this.sCalificacion.value
+			tarea.comentarioCalificacionEmpresa = this.taComentarioCalificacionEmpresa.value
+			
+			this.controlador.crearTarea(tarea)	
+		}
+		catch(e){
+			this.controlador.gestionarError(e)
+		}
 	}
 }

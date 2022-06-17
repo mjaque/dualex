@@ -94,7 +94,7 @@
 			header('HTTP/1.1 501 Not Implemented');
 			die();
 		}
-	}catch(Exception $excepcion){
+	}catch(Throwable $excepcion){	//Throwable (interfaz) incluye Error y Exception
 		header('HTTP/1.1 500 Internal Server Error');
 		echo $excepcion;
 		die();
