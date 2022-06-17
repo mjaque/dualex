@@ -58,6 +58,14 @@
 				require_once('./controladores/tarea.php');
 				$controlador = new Tarea();
 				break;
+			case 'actividad':
+				require_once('./controladores/actividad.php');
+				$controlador = new Actividad();
+				break;
+			case 'calificacion':
+				require_once('./controladores/calificacion.php');
+				$controlador = new Calificacion();
+				break;
 			default:
 				header('HTTP/1.1 501 Not Implemented');
 				die();

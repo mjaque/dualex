@@ -1,0 +1,47 @@
+.vistatarea {
+	max-width: 90%;
+	margin: 2rem auto;
+	/* padding-bottom para que quepa el botón actualizar */
+	padding: 2rem 1rem 4rem 2rem;
+	border: 1px solid blue;
+	border-radius: 0.5rem;
+	box-shadow: 0.5rem 0.5rem grey;
+}
+.vistatarea input{
+	margin: 0.3rem;
+}
+.vistatarea .modulo{
+	padding: 0.3rem 1rem;
+	border: 1px solid grey;
+	border-radius: 0.4rem;
+}
+.vistatarea label, .vistatarea legend{
+	font-weight: bold;
+}
+	
+.vistatarea fieldset label{
+	font-weight: normal;
+}
+.vistatarea textarea{
+	margin: 0.5rem;
+	width: 80%;
+}
+.vistatarea select{
+	margin: 0.5rem;
+}
+.vistatarea button{
+	cursor: pointer;
+	background-color: blue;
+	border: none;
+	color: white;
+	margin: 1rem;
+	margin-left: 80%;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	font-size: 1.2rem;
+	float: right;
+}
+.vistatarea button:hover{
+	text-decoration: underline;
+}

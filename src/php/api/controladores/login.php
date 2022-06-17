@@ -18,6 +18,7 @@ class Login{
   function post($pathParams, $queryParams, $login){
     require_once('./daos/daousuario.php');
     $usuario = DAOUsuario::autenticar($login->email, $login->clave);
+	sleep(1);
     if (!$usuario){
       header('HTTP/1.1 401 Unauthorized');
       die();

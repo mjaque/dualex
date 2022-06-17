@@ -102,7 +102,7 @@ export class VistaTareas extends Vista{
 		Atención a la pulsación en el icono de "Nueva"
 	**/
 	pulsarNueva(){
-		console.log('No implementado')
+		this.controlador.mostrarTarea()
 	}
 	/**
 		Atención a la pulsación en el icono de "Consultar"

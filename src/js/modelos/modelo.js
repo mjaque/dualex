@@ -30,4 +30,18 @@ export class Modelo{
 		queryParams.set('id', alumno.id)
 		return Rest.get('tarea', ['alumno'], queryParams)
 	}
+	/**
+		Devuelve la lista de actividades definidas.
+		@return {Promise} Devuelve la promesa asociada a la petición.
+	**/
+	getActividades(){
+		return Rest.get('actividad')
+	}
+	/**
+		Devuelve la lista de calificaciones definidas.
+		@return {Promise} Devuelve la promesa asociada a la petición.
+	**/
+	getCalificaciones(){
+		return Rest.get('calificacion')
+	}
 }

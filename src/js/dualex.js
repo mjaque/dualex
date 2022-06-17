@@ -123,6 +123,30 @@ class DualEx{
 			})
 			.catch(error => this.gestionarError(error))
 	}
+	/**
+		Muestra la vista de tarea.
+		@param idTarea {Number} Identificador de la tarea a mostrar. Si es nul0 se mostrará la vista vacía para crear una nueva Tarea.
+	**/
+	mostrarTarea(idTarea){
+		if (idTarea)
+			console.log('No implementado')
+		this.ocultarVistas()
+		this.vistaTarea.mostrar(true)
+	}
+	/**
+		Devuelve la lista de actividades definidas.
+		@return {Promise} Promesa de resolución de la petición.
+	**/
+	verActividades(){
+		return this.modelo.getActividades()
+	}
+	/**
+		Devuelve la lista de calificaciones definidas.
+		@return {Promise} Promesa de resolución de la petición.
+	**/
+	verCalificaciones(){
+		return this.modelo.getCalificaciones()
+	}
 }
 
 new DualEx()
