@@ -91,6 +91,7 @@ class Tarea{
 	**/
 	function verModulo($elemento){
 		$modulo = [];
+		$modulo['id'] = $elemento['id_modulo'];
 		$modulo['codigo'] = $elemento['codigo'];
 		$modulo['titulo'] = $elemento['titulo'];
 		$modulo['color_fondo'] = $elemento['color_fondo'];
