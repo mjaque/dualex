@@ -83,7 +83,7 @@ export class VistaTarea extends Vista{
 			for(let calificacion of calificaciones){
 				let option = document.createElement('option')
 				this.sCalificacion.appendChild(option)
-				option.setAttribute('data-idCalificacion', calificacion.id)
+				option.setAttribute('value', calificacion.id)
 				option.setAttribute('title', calificacion.descripcion)
 				option.textContent = calificacion.titulo
 			}

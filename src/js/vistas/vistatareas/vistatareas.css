@@ -6,11 +6,12 @@
 .vistatareas>div {
 	border-bottom: 1px solid lightgrey;
   	height: 2rem;
+	line-height: 2rem;	/* igual que el height para que el contenido se alinee verticalmente al centro */
 }
 .vistatareas .icono_grande{
 	position: fixed;
-	top: 5%;
-	left: 80%;
+	top: 2%;
+	left: 90%;
 	background-color: blue;
 	border-radius: 2rem;
 	cursor: pointer;
@@ -21,6 +22,7 @@
 }
 .vistatareas .iconos{
 	float: right;
+	height: 2rem;	/* igual que el line-height del div que lo contiene */
 }
 .vistatareas .icono{
 	display: inline;
@@ -30,5 +32,11 @@
 .vistatareas .icono:hover{
 	background-color: lightblue;
   	border-radius: 0.7rem;
+}
+.vistatareas .modulo{
+	font-size: 0.8rem;
+	margin: 0 0.3rem;
+	padding: 0.2rem;
+	border-radius: 0.2rem;
 }
 

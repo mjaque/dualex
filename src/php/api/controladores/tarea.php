@@ -53,6 +53,10 @@ class Tarea{
 		@param $usuario {Usuario} Usuario que realiza la petición.
 	**/
 	function post($pathParams, $queryParams, $tarea, $usuario){
+		//Control de valores nulos
+		if ($tarea->idCalificacionEmpresa === "null")
+			$tarea->idCalificacionEmpresa = null;
+
     	$id = DAOTarea::insertar($tarea, $usuario);
     	//Respuesta a un POST
     	header('HTTP/1.1 201 Created');
@@ -71,14 +75,28 @@ class Tarea{
 		if (count($elementos) == 0) return [];
 		
 		$resultado = [];
-		$elementos[0]['modulos'] = [$this->verModulo($elementos[0])];
-		array_push($resultado, $elementos[0]);
-		for($i = 1; $i < count($elementos); $i++){
-			//Si es igual que el actual, añadimos el módulo al elemento actual
-			if ($elementos[$i]['id'] == $resultado[count($resultado) - 1]['id'])
-				array_push($resultado[count($resultado) -1]['modulos'], $this->verModulo($elementos[$i]));
-			else{
-				$elementos[$i]['modulos'] = [$this->verModulo($elementos[$i])];
+		$idTareaActual = null;
+		for($i = 0; $i < count($elementos); $i++){
+			//Si el id de la tarea actual es igual que el de la tarea actual
+			if ($elementos[$i]['id'] === $idTareaActual){
+				//Si hay módulo, lo añadimos al array
+				if ($elementos[$i]['id_modulo']){
+					//Comprobamos que no haya ya el mismo módulo
+					$esta = false;
+					for ($j = 0; $j < count($resultado[count($resultado)-1]['modulos']); $j++)
+						$esta = $resultado[count($resultado)-1]['modulos'][$j] == $elementos[$i]['id_modulo'];
+					if (!$esta) //Si no está, lo añadimos
+						$resultado[count($resultado)-1]['modulos'] = [$this->verModulo($elementos[$i])];
+				}
+			}
+			else{ //Cambiamos la tarea actual
+				$idTareaActual = $elementos[$i]['id'];
+				//Creamos el array de módulos de la tarea actual
+				$elementos[$i]['modulos'] = [];
+				//Si hay módulo, lo añadimos al array
+				if ($elementos[$i]['id_modulo'])
+					$elementos[$i]['modulos'] = [$this->verModulo($elementos[$i])];
+				//Añadimos el elemento al resultado
 				array_push($resultado, $elementos[$i]);
 			}
 		}
@@ -93,7 +111,7 @@ class Tarea{
 		$modulo = [];
 		$modulo['id'] = $elemento['id_modulo'];
 		$modulo['codigo'] = $elemento['codigo'];
-		$modulo['titulo'] = $elemento['titulo'];
+		$modulo['titulo'] = $elemento['modulo_titulo'];
 		$modulo['color_fondo'] = $elemento['color_fondo'];
 		$modulo['color_letra'] = $elemento['color_letra'];
 		$modulo['icono'] = $elemento['icono'];

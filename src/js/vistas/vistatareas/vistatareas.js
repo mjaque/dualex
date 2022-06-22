@@ -51,7 +51,16 @@ export class VistaTareas extends Vista{
 		let spanTarea = document.createElement('span')
 		div.appendChild(spanTarea)
 		spanTarea.classList.add('tarea')
-		spanTarea.textContent = `${tarea.titulo} - ${tarea.calificacion_empresa}(${tarea.calificacion})` 
+		let texto = `${tarea.titulo} - `
+		if (tarea.calificacion_empresa)
+			texto += tarea.calificacion_empresa
+		else
+			texto += 'Sin calificación de empresa'
+		if (tarea.calificacion)
+			texto += ' - ' + tarea.calificacion
+		else
+			texto += ' - Sin calificación del profesor'
+		spanTarea.textContent = texto
 
 		//TODO: Refactorizar para evitar DRY.
 		let spanIconos = document.createElement('span')

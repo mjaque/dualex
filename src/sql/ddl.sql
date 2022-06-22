@@ -101,6 +101,6 @@ CREATE TABLE Actividad_Tarea(
 	id_actividad INT UNSIGNED,
 	id_tarea INT UNSIGNED,
 	FOREIGN KEY (id_actividad) REFERENCES Actividad (id) ON DELETE CASCADE,
-	FOREIGN KEY (id_tarea) REFERENCES Alumno (id) ON DELETE CASCADE
+	FOREIGN KEY (id_tarea) REFERENCES Tarea (id) ON DELETE CASCADE
 );
 
