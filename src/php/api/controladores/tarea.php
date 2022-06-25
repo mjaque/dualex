@@ -12,7 +12,7 @@ class Tarea{
 		@param $pathParams {Array} Array de parámetros.
 		@param $queryParams {Array} Array de parámetros. Array con el identificador del alumno.
 		@param $usuario {Usuario} Usuario que realiza la petición.
-		@return {Array[Usuario]}
+		@return {Array[Tarea]}
 	**/
 	function get($pathParams, $queryParams, $usuario){
 	switch(count($pathParams)){
@@ -26,19 +26,23 @@ class Tarea{
 					$resultado = DAOTarea::verTareasDeAlumnoComoProfesor($queryParams['id'], $usuario->id);
 				if ($usuario->rol == 'alumno')
 					$resultado = DAOTarea::verTareasDeAlumno($usuario->id);
-				if (count($resultado) > 0)
-					$resultado = $this->agruparModulos($resultado);
-				//El resultado tiene una fila por alumno y módulo. Debemos agruparlo.
 			}
+			elseif (is_numeric($pathParams[0]))
+					if ($usuario->rol == 'alumno')
+						$resultado = DAOTarea::verTareaDeAlumno($pathParams[0], $usuario->id);
+					else die("No implementado");
 			else{
-				$id = $pathParams[0];
-				die("No implementado.");
+				header('HTTP/1.1 422 Unprocesable entity');
+				die();
 			}
 			break;
 		default:
 			die("No implementado.");
 	}
 		//Adaptación del Resultado
+		//El resultado tiene una fila por tarea, actividad módulo. Debemos agruparlo.
+		if (count($resultado) > 0)
+			$resultado = $this->agruparPorModulosYActividades($resultado);
 		$json = json_encode($resultado);
 		header('Content-type: application/json; charset=utf-8');
 		header('HTTP/1.1 200 OK');
@@ -64,41 +68,40 @@ class Tarea{
     	echo $localizacion;
     	die();
   	}
-//TODO: Refactorizar con controlador.alumno.
 	/**
-		Procesa un array de tareas x módulo para unificar los módulos en un array.
-		Espera que los elementos iguales sean contiguos.
-		@params $tareas {[Tareas]} Array de tareas con una fila por módulo de la tarea.
-		@return {[Tareas]} Array de tareas con un campo de array que agrupa todos sus módulos.
+		Procesa un array de tareas x módulo y actividades para crear arrays de módulos y actividades.
+		@params $tareas {[Tareas]} Array de tareas con una fila por módulo de la tarea y otra por actividad.
+		@return {[Tareas]} Array de tareas con un campo de array que agrupa todos sus módulos y actividades.
 	**/
-	function agruparModulos($elementos){
-		if (count($elementos) == 0) return [];
+	function agruparPorModulosYActividades($tareas){
+		if (count($tareas) == 0) return [];
 		
 		$resultado = [];
-		$idTareaActual = null;
-		for($i = 0; $i < count($elementos); $i++){
-			//Si el id de la tarea actual es igual que el de la tarea actual
-			if ($elementos[$i]['id'] === $idTareaActual){
-				//Si hay módulo, lo añadimos al array
-				if ($elementos[$i]['id_modulo']){
-					//Comprobamos que no haya ya el mismo módulo
-					$esta = false;
-					for ($j = 0; $j < count($resultado[count($resultado)-1]['modulos']); $j++)
-						$esta = $resultado[count($resultado)-1]['modulos'][$j] == $elementos[$i]['id_modulo'];
-					if (!$esta) //Si no está, lo añadimos
-						$resultado[count($resultado)-1]['modulos'] = [$this->verModulo($elementos[$i])];
-				}
+
+		for($i = 0; $i < count($tareas); $i++){
+			//Vemos si la tarea ya está en los resultados
+			for ($j = 0; $j < count($resultado); $j++)
+				if ($resultado[$j]['id'] == $tareas[$i]['id'])
+					break;
+			if ($j == count($resultado)){	//La tarea no está en el resultado
+				$tareas[$i]['modulos'] = [];
+				$tareas[$i]['actividades'] = [];
+				array_push($resultado, $tareas[$i]);
 			}
-			else{ //Cambiamos la tarea actual
-				$idTareaActual = $elementos[$i]['id'];
-				//Creamos el array de módulos de la tarea actual
-				$elementos[$i]['modulos'] = [];
-				//Si hay módulo, lo añadimos al array
-				if ($elementos[$i]['id_modulo'])
-					$elementos[$i]['modulos'] = [$this->verModulo($elementos[$i])];
-				//Añadimos el elemento al resultado
-				array_push($resultado, $elementos[$i]);
-			}
+
+			//Vemos si el módulo ya está en el resultado
+			for($k = 0; $k < count($resultado[$j]['modulos']); $k++)
+				if ($resultado[$j]['modulos'] == $tareas[$i]['id_modulo'])
+					break;
+			if ($k == count($resultado[$j]['modulos']))	//El módulo no está en los resultados
+				array_push($resultado[$j]['modulos'], $this->verModulo($tareas[$i]));
+			
+			//Vemos si la actividad ya está en el resultado
+			for($k = 0; $k < count($resultado[$j]['actividades']); $k++)
+				if ($resultado[$j]['actividades'] == $tareas[$i]['id_actividad'])
+					break;
+			if ($k == count($resultado[$j]['actividades']))	//La actividad no está en los resultados
+				array_push($resultado[$j]['actividades'], $this->verActividad($tareas[$i]));
 		}
 		return $resultado;
 	}
@@ -116,5 +119,17 @@ class Tarea{
 		$modulo['color_letra'] = $elemento['color_letra'];
 		$modulo['icono'] = $elemento['icono'];
 		return $modulo;
+	}
+	/**
+		Devuelve la actividad de un elemento.
+		@param $elemento {Elemento} Elemento con información de tarea.
+		@return {Actividad} Actividad del elemento.
+	**/
+	function verActividad($elemento){
+		$actividad = [];
+		$actividad['id'] = $elemento['id_actividad'];
+		$actividad['titulo'] = $elemento['actividad_titulo'];
+		$actividad['descripcion'] = $elemento['actividad_descripcion'];
+		return $actividad;
 	}
 }

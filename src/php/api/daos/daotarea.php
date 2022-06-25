@@ -7,14 +7,14 @@
 class DAOTarea{
 	/**
 		Devuelve un array de tareas de un alumno.
-		@param $id_alumno Identificador del alumno.
+		@param $idAlumno Identificador del alumno.
 		@return Un array de arrays con los datos de cada tarea.
 	**/
-	public static function verTareasDeAlumno($id_alumno){
-		$sql	= 'SELECT Tarea.id AS id, Tarea.titulo AS titulo, Tarea.descripcion, Tarea.fecha ';
-		$sql .= ', Tarea.comentario_calificacion_empresa, Tarea.calificacion, Tarea.evaluacion ';
+	public static function verTareasDeAlumno($idAlumno){
+		$sql	= 'SELECT Tarea.id AS id, Tarea.titulo AS titulo, Tarea.descripcion AS descripcion, Tarea.fecha ';
+		$sql .= ', Tarea.id_calificacion_empresa, Tarea.comentario_calificacion_empresa, Tarea.calificacion, Tarea.evaluacion ';
 		$sql .= ', Calificacion.titulo AS calificacion_empresa ';
-		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion ';
+		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
 		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra, Modulo.icono ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'JOIN Alumno ON Alumno.id = Tarea.id_alumno ';
@@ -26,7 +26,32 @@ class DAOTarea{
 		$sql .= 'WHERE Alumno.id = :id_alumno ';
 		$sql .= 'ORDER BY Actividad.titulo, Tarea.titulo ';
 		
-		$params = array('id_alumno' => $id_alumno);
+		$params = array('id_alumno' => $idAlumno);
+
+		return BD::seleccionar($sql, $params);
+	}
+	/**
+		Devuelve una tarea de un alumno.
+		@param $idTarea Identificador de la tarea solicitada.
+		@param $idAlumno Identificador del alumno.
+		@return Un array de arrays con los datos de cada tarea.
+	**/
+	public static function verTareaDeAlumno($idTarea, $idAlumno){
+		$sql	= 'SELECT Tarea.id AS id, Tarea.titulo AS titulo, Tarea.descripcion AS descripcion, Tarea.fecha ';
+		$sql .= ', Tarea.id_calificacion_empresa, Tarea.comentario_calificacion_empresa, Tarea.calificacion, Tarea.evaluacion ';
+		$sql .= ', Calificacion.titulo AS calificacion_empresa ';
+		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
+		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra, Modulo.icono ';
+		$sql .= 'FROM Tarea ';
+		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
+		$sql .= 'LEFT JOIN Actividad_Tarea ON Actividad_Tarea.id_tarea = Tarea.id ';
+		$sql .= 'LEFT JOIN Actividad ON Actividad_Tarea.id_actividad = Actividad.id ';
+		$sql .= 'LEFT JOIN Actividad_Modulo ON Actividad_Modulo.id_actividad = Actividad.id ';
+		$sql .= 'LEFT JOIN Modulo ON Modulo.id = Actividad_Modulo.id_modulo ';
+		$sql .= 'WHERE Tarea.id_alumno = :id_alumno AND Tarea.id = :id_tarea ';
+		$sql .= 'ORDER BY Actividad.titulo, Tarea.titulo ';
+		
+		$params = array('id_alumno' => $idAlumno, 'id_tarea' => $idTarea);
 
 		return BD::seleccionar($sql, $params);
 	}

@@ -128,10 +128,18 @@ class DualEx{
 		@param idTarea {Number} Identificador de la tarea a mostrar. Si es nul0 se mostrará la vista vacía para crear una nueva Tarea.
 	**/
 	mostrarTarea(idTarea){
-		if (idTarea)
-			console.log('No implementado')
-		this.ocultarVistas()
-		this.vistaTarea.mostrar(true)
+		if (idTarea){
+			this.modelo.getTarea(idTarea)
+				.then(tareas => {
+					this.ocultarVistas()
+					this.vistaTarea.mostrar(true)
+					this.vistaTarea.setTarea(tareas[0])
+				})
+		}
+		else{
+			this.ocultarVistas()
+			this.vistaTarea.mostrar(true)
+		}
 	}
 	/**
 		Devuelve la lista de actividades definidas.
@@ -154,7 +162,6 @@ class DualEx{
 	crearTarea(tarea){
 		this.modelo.crearTarea(tarea)
 			.then(resultado => {
-console.log(resultado)
 				this.vistaMensaje.mostrar('La tarea se creó correctamente', VistaMensaje.OK)
 				this.mostrarTareasAlumno(this.#usuario)
 			})

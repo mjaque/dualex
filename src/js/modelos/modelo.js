@@ -52,4 +52,13 @@ export class Modelo{
 	crearTarea(tarea){
 		return Rest.post('tarea', [] , tarea)
 	}
+	/**
+		Devuelve los datos de una tarea.
+		@param idTarea {Number} Identificador de la tarea.
+		@return {Promise} Devuelve la promesa asociada a la petición.
+	**/
+	getTarea(idTarea){
+		let queryParams = new Map()
+		return Rest.get('tarea', [idTarea])
+	}
 }

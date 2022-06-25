@@ -36,6 +36,47 @@ export class VistaTarea extends Vista{
 		super.transferir(this.base, this.doc)
 		super.cargarCSS(`${this.getNombreClase()}.css`)
 
+		//Referencia a la tarea que se está mostrando
+		this.tarea = null;
+		
+		//Cargamos los valores	
+		this.cargarActividades()
+		this.cargarCalificaciones()
+	}
+	/**
+		Carga en la vista la información de una tarea.
+		@param tarea {Tarea} Información de la tarea.
+	**/
+	setTarea(tarea){
+		this.tarea = tarea
+		this.iTitulo.value = tarea.titulo
+		this.iFecha.value = tarea.fecha
+		this.taDescripcion.value = tarea.descripcion
+		this.taComentarioCalificacionEmpresa.value = tarea.comentario_calificacion_empresa
+		//Seleccionamos la calificación de la empresa
+		this.sCalificacion.value = tarea.id_calificacion_empresa
+		//Marcamos las actividades de la tarea
+		for(let actividad of tarea.actividades)
+			this.divActividades.querySelector('input[data-idActividad="' + actividad.id + '"').setAttribute('checked', true)
+		if (tarea.id_calificacion_empresa)
+			this.deshabilitar(true)
+	}
+	/**
+		Cambia la capacidad de editar los campos de la vista (para el alumno).
+		@param deshabilitar {Boolean} True para deshabilitar los campos.
+	**/
+	deshabilitar(deshabilitar){
+		this.iTitulo.disabled = deshabilitar
+		this.iFecha.disabled = deshabilitar
+		this.taDescripcion.disabled = deshabilitar
+		this.taComentarioCalificacionEmpresa.disabled = deshabilitar
+		this.sCalificacion.disabled = deshabilitar
+		for(let input of this.divActividades.getElementsByTagName('input'))
+			input.disabled = deshabilitar
+		if (deshabilitar)
+			this.btnAceptar.style.display = 'none'
+		else
+			this.btnAceptar.style.display = 'block'
 	}
 	/**
 		Muestra u oculta.
@@ -43,12 +84,22 @@ export class VistaTarea extends Vista{
 		@param ver {Boolean} True para mostrar, false para ocultar
 	**/
 	mostrar(ver){
-		if (ver){
-			this.cargarActividades()
-			this.cargarCalificaciones()
-		}
+		this.limpiar()
 		super.mostrar(ver)
+		this.deshabilitar(false)
+		for(let input of this.divActividades.getElementsByTagName('input'))
+			input.removeAttribute('checked')
 		this.iTitulo.focus()
+	}
+	/**
+		Borra los datos del interfaz.
+	**/
+	limpiar(){
+		this.iTitulo.value = ''
+		this.iFecha.value = ''
+		this.taDescripcion.value = ''
+		this.sCalificacion.selectedIndex = 0
+		this.taComentarioCalificacionEmpresa.value = ''
 	}
 	/**
 		Carga la lista de Actividades.

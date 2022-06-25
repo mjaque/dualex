@@ -46,6 +46,33 @@ export class VistaTareas extends Vista{
 	crearDivTarea(tarea){
 		let div = document.createElement('div')
 		this.base.appendChild(div)
+		//TODO: Refactorizar para evitar DRY.
+		let divIconos = document.createElement('div')
+		div.appendChild(divIconos)
+		divIconos.classList.add('iconos')
+		if (tarea.calificacion_empresa != null){
+			let iconoConsultar = document.createElement('img')
+			divIconos.appendChild(iconoConsultar)
+			iconoConsultar.classList.add('icono')
+			iconoConsultar.setAttribute('title', 'consultar')
+			iconoConsultar.setAttribute('src', '../src/iconos/visibility.svg')
+			iconoConsultar.onclick = this.pulsarConsultar.bind(this, tarea)
+		}
+		else{
+			let iconoEditar = document.createElement('img')
+			divIconos.appendChild(iconoEditar)
+			iconoEditar.classList.add('icono')
+			iconoEditar.setAttribute('title', 'editar')
+			iconoEditar.setAttribute('src', '../src/iconos/edit.svg')
+			iconoEditar.onclick = this.pulsarEditar.bind(this, tarea)
+
+			let iconoEliminar = document.createElement('img')
+			divIconos.appendChild(iconoEliminar)
+			iconoEliminar.classList.add('icono')
+			iconoEliminar.setAttribute('title', 'editar')
+			iconoEliminar.setAttribute('src', '../src/iconos/delete.svg')
+			iconoEliminar.onclick = this.pulsarEliminar.bind(this, tarea)
+		}
 		//TODO: Código de colores para las tareas en función de su evaluación.
 		tarea.modulos.forEach(this.crearSpanModulo.bind(this, div))
 		let spanTarea = document.createElement('span')
@@ -62,32 +89,6 @@ export class VistaTareas extends Vista{
 			texto += ' - Sin calificación del profesor'
 		spanTarea.textContent = texto
 
-		//TODO: Refactorizar para evitar DRY.
-		let spanIconos = document.createElement('span')
-		div.appendChild(spanIconos)
-		spanIconos.classList.add('iconos')
-		let iconoConsultar = document.createElement('img')
-		spanIconos.appendChild(iconoConsultar)
-		iconoConsultar.classList.add('icono')
-		iconoConsultar.setAttribute('title', 'consultar')
-		iconoConsultar.setAttribute('src', '../src/iconos/visibility.svg')
-		iconoConsultar.onclick = this.pulsarConsultar.bind(this, tarea)
-
-		if (tarea.calificacion_empresa == null){
-				let iconoEditar = document.createElement('img')
-				spanIconos.appendChild(iconoEditar)
-				iconoEditar.classList.add('icono')
-				iconoEditar.setAttribute('title', 'editar')
-				iconoEditar.setAttribute('src', '../src/iconos/edit.svg')
-				iconoEditar.onclick = this.pulsarEditar.bind(this, tarea)
-
-				let iconoEliminar = document.createElement('img')
-				spanIconos.appendChild(iconoEliminar)
-				iconoEliminar.classList.add('icono')
-				iconoEliminar.setAttribute('title', 'editar')
-				iconoEliminar.setAttribute('src', '../src/iconos/delete.svg')
-				iconoEliminar.onclick = this.pulsarEliminar.bind(this, tarea)
-		}
 	}
 	//TODO: DRY con vistaalumnos.js
 	/**
@@ -118,7 +119,7 @@ export class VistaTareas extends Vista{
 		@param tarea {Tarea} Datos de la tarea.
 	**/
 	pulsarConsultar(tarea){
-		console.log('No implementado')
+		this.controlador.mostrarTarea(tarea.id)
 	}
 	/**
 		Atención a la pulsación en el icono de "Eliminar"
@@ -132,6 +133,6 @@ export class VistaTareas extends Vista{
 		@param tarea {Tarea} Datos de la tarea.
 	**/
 	pulsarEditar(tarea){
-		console.log('No implementado')
+		this.controlador.mostrarTarea(tarea.id)
 	}
 }

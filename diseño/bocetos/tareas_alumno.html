@@ -16,7 +16,7 @@
 	}
 	.vistatareas>div {
   		border-bottom: 1px solid lightgrey;
-  		height: 2rem;
+  		margin-bottom: 0.5rem;
 	}
 	.icono_grande{
 		position: fixed;
@@ -31,7 +31,9 @@
 		transform: rotate(180deg);
 	}
     .iconos{
-      float: right;
+		position:absolute;
+		left: 90%;
+		white-space: nowrap;
     }
 	.icono{
 		display: inline;
@@ -42,6 +44,10 @@
 		background-color: lightblue;
   		border-radius: 0.7rem;
 	}
+	.tarea{
+		border: 1px solid yellow;
+		margin-right: 2rem;
+	}
 
   </style>
 </head>
@@ -50,37 +56,37 @@
 
   <div class='vistatareas'>
 	<h1>Tareas</h1>
-    <img class='icono_grande' title='nueva' src=../iconos/add_blanco.svg />
+    <img class='icono_grande' title='nueva' src=../../src/iconos/add_blanco.svg />
 	<div>
       <span>MOD1: Título Tarea 1 - Óptimo(9)</span>
       <span class=iconos >
-        <img class="icono" title="consultar" src=../iconos/visibility.svg />
+        <img class="icono" title="consultar" src=../../src/iconos/visibility.svg />
       </span>
     </div>
     <div>
       <span>MOD1, MOD2: Título Tarea 2 - Óptimo(9)</span>
       <span class=iconos >
-        <img class="icono" title="consultar" src=../iconos/visibility.svg />
+        <img class="icono" title="consultar" src=../../src/iconos/visibility.svg />
       </span>
     </div>
 	<div>
-      <span>MOD3: Título Tarea 3 - ?(-)</span>
       <span class=iconos >
-        <img class="icono" title="editar" src=../iconos/edit.svg />
-        <img class="icono" title="eliminar" src=../iconos/delete.svg />
+        <img class="icono" title="editar" src=../../src/iconos/edit.svg />
+        <img class="icono" title="eliminar" src=../../src/iconos/delete.svg />
       </span>
+      <span class=tarea>MOD3: Título Tarea 3 - Sin calificación de empresa - Sin calificación del profesor</span>
     </div>
 	<div>
       <span>MOD3: Título Tarea 4 - Aceptable(-)</span>
       <span class=iconos >
-        <img class="icono" title="consultar" src=../iconos/visibility.svg />
+        <img class="icono" title="consultar" src=../../src/iconos/visibility.svg />
       </span>
     </div>
 	<div>
       <span>MOD3: Título Tarea 5 - ?(-)</span>
       <span class=iconos >
-        <img class="icono" title="editar" src=../iconos/edit.svg />
-        <img class="icono" title="eliminar" src=../iconos/delete.svg />
+        <img class="icono" title="editar" src=../../src/iconos/edit.svg />
+        <img class="icono" title="eliminar" src=../../src/iconos/delete.svg />
       </span>
     </div>
   </div>

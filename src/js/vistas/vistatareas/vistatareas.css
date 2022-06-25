@@ -4,9 +4,9 @@
   	padding: 2rem;
 }
 .vistatareas>div {
+  	margin-bottom: 0.5rem;
 	border-bottom: 1px solid lightgrey;
-  	height: 2rem;
-	line-height: 2rem;	/* igual que el height para que el contenido se alinee verticalmente al centro */
+	min-height: 1.5rem;
 }
 .vistatareas .icono_grande{
 	position: fixed;
@@ -21,8 +21,9 @@
 	transform: rotate(180deg);
 }
 .vistatareas .iconos{
-	float: right;
-	height: 2rem;	/* igual que el line-height del div que lo contiene */
+	position: absolute;
+	right: 2%;
+	white-space: nowrap;
 }
 .vistatareas .icono{
 	display: inline;
@@ -39,4 +40,7 @@
 	padding: 0.2rem;
 	border-radius: 0.2rem;
 }
-
+.vistatareas .tarea{
+	margin-right: 20%;	/* Para dejar espacio a los iconos */
+	line-height: 1.5rem;
+}
