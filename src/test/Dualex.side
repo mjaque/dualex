@@ -2,7 +2,7 @@
   "id": "324b0bfb-084b-4973-8a9b-3c354287386b",
   "version": "2.0",
   "name": "Dualex",
-  "url": "http://localhost/dualex/src/index.html",
+  "url": "http://localhost/dualex/src/php/api/index.php?cargarBDPruebas",
   "tests": [{
     "id": "b56f75f7-55fc-446d-a4cd-9651e61abc0d",
     "name": "Login",
@@ -201,12 +201,19 @@
       ],
       "value": ""
     }, {
+      "id": "6f900e91-b18d-4164-87c0-bf53d23bb7d3",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "xpath=//div[@id='divAlumnos']",
+      "targets": [],
+      "value": "30000"
+    }, {
       "id": "bfb77724-0fa7-4ea2-a73c-5ee96e5e1766",
       "comment": "",
       "command": "assertElementPresent",
       "target": "xpath=//div[@id='divAlumnos' and contains(@style, 'display: block')]",
       "targets": [],
-      "value": ""
+      "value": "30000"
     }, {
       "id": "4a7c8cf4-0145-4d15-be1b-e2d5a2a07091",
       "comment": "",
@@ -299,6 +306,13 @@
       ],
       "value": ""
     }, {
+      "id": "998458a7-2a5f-4363-a3e1-9fd56a4c5cd6",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "xpath=//div[@id='divTareas']",
+      "targets": [],
+      "value": "30000"
+    }, {
       "id": "b3f5deec-3c94-4504-b844-853a07a9d4d6",
       "comment": "",
       "command": "assertElementPresent",
@@ -324,6 +338,30 @@
       "targets": [],
       "value": ""
     }, {
+      "id": "4f679b81-0a7c-47c8-8e82-caf4d64e0ba7",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(1) > input",
+      "targets": [
+        ["css=label:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@value='email2@email.es']", "xpath:attributes"],
+        ["xpath=//div[@id='divLogin']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "aportero@fundacionloyola.es"
+    }, {
+      "id": "500f3992-e0ee-4674-a1b7-96999c422d5e",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(3) > input",
+      "targets": [
+        ["css=label:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@value='clave 2']", "xpath:attributes"],
+        ["xpath=//div[@id='divLogin']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": "aportero"
+    }, {
       "id": "b7a9efdf-91be-40a8-a1b5-7b2413589f43",
       "comment": "",
       "command": "click",
@@ -347,6 +385,13 @@
         ["xpath=//div[7]", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "ea4429b4-2bc2-4792-bc94-63d36d3405f0",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "xpath=//div[@id='divAlumnos']",
+      "targets": [],
+      "value": "30000"
     }, {
       "id": "6e61b663-c9b8-4d2f-ad6f-f9177168f51e",
       "comment": "",
@@ -560,13 +605,53 @@
       "id": "ad2ed6ca-939f-4e3e-9833-9fae34677d29",
       "comment": "",
       "command": "assertText",
-      "target": "css=div:nth-child(8) > .tarea",
+      "target": "css=div:nth-child(3) > .tarea",
       "targets": [
         ["css=div:nth-child(8) > .tarea", "css:finder"],
         ["xpath=//div[@id='divTareas']/div[6]/span[2]", "xpath:idRelative"],
         ["xpath=//div[6]/span[2]", "xpath:position"]
       ],
-      "value": "Tarea de Prueba - Sin calificación de empresa - Sin calificación del profesor"
+      "value": "Tarea 10.1 - Sin calificación de empresa - Sin calificación del profesor"
+    }]
+  }, {
+    "id": "2b8a7206-bb72-477c-b5f4-d566501eaa07",
+    "name": "cargarBDPruebas",
+    "commands": [{
+      "id": "fb70fe67-cd30-496d-afa1-4cbf23745d15",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/dualex/src/php/api/index.php?cargarBDPruebas",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5050386a-8248-4e5c-bbcd-d1a8872afc7f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "675x633",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "45ed097f-eed1-42ce-9115-557e5f4cc5a6",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=body",
+      "targets": [
+        ["css=body", "css:finder"],
+        ["xpath=//body", "xpath:position"],
+        ["xpath=//body[contains(.,'Cargada BD Pruebas.')]", "xpath:innerText"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "8436153f-5a18-4009-bd29-b6faa3f27efb",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=body",
+      "targets": [
+        ["css=body", "css:finder"],
+        ["xpath=//body", "xpath:position"],
+        ["xpath=//body[contains(.,'Cargada BD Pruebas.')]", "xpath:innerText"]
+      ],
+      "value": "Cargada BD Pruebas."
     }]
   }],
   "suites": [{
@@ -575,8 +660,8 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["b56f75f7-55fc-446d-a4cd-9651e61abc0d"]
+    "tests": ["2b8a7206-bb72-477c-b5f4-d566501eaa07", "b56f75f7-55fc-446d-a4cd-9651e61abc0d", "8f5a937f-75f3-41db-a7fe-95fa9ee3eec1", "24a9fbf5-380d-4362-817a-d3b67b5c43bd"]
   }],
-  "urls": ["http://localhost/", "http://localhost/dualex/src/index.html"],
+  "urls": ["http://localhost/", "http://localhost/dualex/src/index.html", "http://localhost/dualex/src/php/api/index.php?cargarBDPruebas"],
   "plugins": []
 }

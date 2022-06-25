@@ -61,6 +61,11 @@ DELETE FROM Alumno_Modulo;
 INSERT INTO Alumno_Modulo (id_alumno, id_modulo) VALUES
 (10, 1), (11, 3), (12, 1), (10, 2), (13, 2);
 
+DELETE FROM Tarea;
 INSERT INTO Tarea (id, id_alumno, titulo, descripcion, fecha) VALUES
 (1, 10, 'Tarea 10.1', 'Descripción de la tarea 10.1', '2022-09-21'),
 (2, 10, 'Tarea 10.2', 'Descripción de la tarea 10.2', '2022-09-22');
+
+DELETE FROM Actividad_Tarea;
+INSERT INTO Actividad_Tarea (id_actividad, id_tarea) VALUES
+(1, 1), (2, 1), (2, 2), (5,2);

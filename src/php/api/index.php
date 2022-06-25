@@ -5,12 +5,16 @@
 		También identifica al usuario (autenticación).
 		Es un interfaz RESTful (https://www.rfc-editor.org/rfc/rfc7231)
 	**/
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
+	
+	//Cargamos la configuración
+	$config = require_once('config.php');
+	if ($config['debug']){
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+	}
+
 	try{
-		//Cargamos la configuración
-		$config = require_once('config.php');
 		require_once('./servicios/bd.php');
 
 		//Inyección de dependencias
@@ -18,6 +22,15 @@
 		BD::$bd = $config['bd'];
 		BD::$usuario = $config['usuario'];
 		BD::$clave = $config['clave'];
+
+		//Peticiones especiales de depuración
+		if ($config['debug']){
+			if ($_SERVER['QUERY_STRING'] == 'cargarBDPruebas'){
+				$salida = [];
+				exec('mysql -u dualex --password=dualex dualex < ../../sql/datos_prueba.sql', $salida);
+				die('Cargada BD Pruebas.');
+			}
+		}
 
 		//Procesamos la petición para identificar el recurso solicitado
 		$metodo = $_SERVER['REQUEST_METHOD'];
