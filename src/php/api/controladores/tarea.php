@@ -69,6 +69,23 @@ class Tarea{
     	die();
   	}
 	/**
+		Actualiza una nueva tarea en la base de datos
+		@param $pathParams {Array} Array de parámetros.
+		@param $queryParams {Array} Array de parámetros.
+		@param $tarea {Tarea} Datos de la tarea a actualizar.
+		@param $usuario {Usuario} Usuario que realiza la petición.
+	**/
+	function put($pathParams, $queryParams, $tarea, $usuario){
+		//Control de valores nulos
+		if ($tarea->idCalificacionEmpresa === "null")
+			$tarea->idCalificacionEmpresa = null;
+
+    	$id = DAOTarea::modificar($tarea, $usuario);
+    	//Respuesta a un PUT
+    	header('HTTP/1.1 200 Ok');
+    	die();
+  	}
+	/**
 		Procesa un array de tareas x módulo y actividades para crear arrays de módulos y actividades.
 		@params $tareas {[Tareas]} Array de tareas con una fila por módulo de la tarea y otra por actividad.
 		@return {[Tareas]} Array de tareas con un campo de array que agrupa todos sus módulos y actividades.

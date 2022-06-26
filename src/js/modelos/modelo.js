@@ -61,4 +61,12 @@ export class Modelo{
 		let queryParams = new Map()
 		return Rest.get('tarea', [idTarea])
 	}
+	/**
+		Modifica una tarea.
+		@param tarea {Tarea} Datos de la tarea.
+		@return {Promise} Devuelve la promesa asociada a la petición.
+	**/
+	modificarTarea(tarea){
+		return Rest.put('tarea', [] , tarea)
+	}
 }

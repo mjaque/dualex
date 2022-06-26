@@ -125,15 +125,14 @@ class DualEx{
 	}
 	/**
 		Muestra la vista de tarea.
-		@param idTarea {Number} Identificador de la tarea a mostrar. Si es nul0 se mostrará la vista vacía para crear una nueva Tarea.
+		@param idTarea {Number} Identificador de la tarea a mostrar. Si es nulo se mostrará la vista vacía para crear una nueva Tarea.
 	**/
 	mostrarTarea(idTarea){
 		if (idTarea){
 			this.modelo.getTarea(idTarea)
 				.then(tareas => {
 					this.ocultarVistas()
-					this.vistaTarea.mostrar(true)
-					this.vistaTarea.setTarea(tareas[0])
+					this.vistaTarea.mostrar(true, tareas[0])
 				})
 		}
 		else{
@@ -163,6 +162,18 @@ class DualEx{
 		this.modelo.crearTarea(tarea)
 			.then(resultado => {
 				this.vistaMensaje.mostrar('La tarea se creó correctamente', VistaMensaje.OK)
+				this.mostrarTareasAlumno(this.#usuario)
+			})
+			.catch(error => this.gestionarError(error))
+	}
+	/**
+		Modifica una tarea y vuelve a la vista de tareas del alumno.
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	modificarTarea(tarea){
+		this.modelo.modificarTarea(tarea)
+			.then(resultado => {
+				this.vistaMensaje.mostrar('La tarea se modificó correctamente', VistaMensaje.OK)
 				this.mostrarTareasAlumno(this.#usuario)
 			})
 			.catch(error => this.gestionarError(error))

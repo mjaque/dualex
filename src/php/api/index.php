@@ -27,6 +27,11 @@
 		if ($config['debug']){
 			if ($_SERVER['QUERY_STRING'] == 'cargarBDPruebas'){
 				$salida = [];
+				//Establecemos los locales
+				$locale='es_ES.UTF-8';
+				setlocale(LC_ALL,$locale);
+				putenv('LC_ALL='.$locale);
+				//echo exec('locale charmap');
 				exec('mysql -u dualex --password=dualex dualex < ../../sql/datos_prueba.sql', $salida);
 				die('Cargada BD Pruebas.');
 			}

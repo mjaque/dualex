@@ -82,14 +82,20 @@ export class VistaTarea extends Vista{
 		Muestra u oculta.
 		Al mostrar la vista carga las actividades.
 		@param ver {Boolean} True para mostrar, false para ocultar
+		@param tarea {Tarea} Información de la tarea que se quiere mostrar (solo en edición).
 	**/
-	mostrar(ver){
+	mostrar(ver, tarea = null){
 		this.limpiar()
-		super.mostrar(ver)
 		this.deshabilitar(false)
 		for(let input of this.divActividades.getElementsByTagName('input'))
 			input.removeAttribute('checked')
 		this.iTitulo.focus()
+
+		if (tarea)
+			this.setTarea(tarea)
+		else
+			this.tarea = null
+		super.mostrar(ver)
 	}
 	/**
 		Borra los datos del interfaz.
@@ -147,7 +153,7 @@ export class VistaTarea extends Vista{
 		this.controlador.mostrarTareasAlumno(this.controlador.getUsuario())
 	}
 	/**
-		Recoge los datos de la nueva Tarea y la envía al controlador.
+		Recoge los datos de la Tarea y la envía al controlador.
 	**/
 	aceptar(){
 		try{
@@ -172,7 +178,12 @@ export class VistaTarea extends Vista{
 			tarea.idCalificacionEmpresa = this.sCalificacion.value
 			tarea.comentarioCalificacionEmpresa = this.taComentarioCalificacionEmpresa.value
 			
-			this.controlador.crearTarea(tarea)	
+			if (this.tarea){
+				tarea.id = this.tarea.id
+				this.controlador.modificarTarea(tarea)	
+			}
+			else
+				this.controlador.crearTarea(tarea)	
 		}
 		catch(e){
 			this.controlador.gestionarError(e)

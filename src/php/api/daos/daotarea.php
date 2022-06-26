@@ -97,4 +97,40 @@ class DAOTarea{
 		if (!BD::commit())
 			throw new Exception('No se pudo confirmar la transacción.');
 	}
+	/**
+		Modifica una nueva tarea.
+		@param tarea {Tarea} Datos de la tarea a modificar.
+		@param usuario {Usuario} Datos del usuario loggeado.
+	**/
+	public static function modificar($tarea, $usuario){
+		if (!BD::iniciarTransaccion())
+			throw new Exception('No es posible iniciar la transacción.');
+		$sql = 'UPDATE Tarea SET titulo = :titulo, descripcion = :descripcion , fecha = :fecha, id_calificacion_empresa = :idCalificacionEmpresa, ';
+		$sql .= 'comentario_calificacion_empresa = :comentarioCalificacionEmpresa ';
+		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno';
+		
+		$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'idAlumno'=>$usuario->id);
+
+		$idNuevo = BD::actualizar($sql, $params);
+
+		//Borramos sus actividades
+		$sql = 'DELETE FROM Actividad_Tarea WHERE id_tarea = :id AND id_tarea IN (SELECT id FROM Tarea WHERE Tarea.id_alumno = :idAlumno)';
+		$params = array('id' => $tarea->id, 'idAlumno' => $usuario->id);
+		BD::borrar($sql, $params);
+
+		//Las volvemos a insertar
+		if (count($tarea->actividades) > 0){
+			$sql = 'INSERT INTO Actividad_Tarea (id_actividad, id_tarea) VALUES ';
+			$values = array();
+			for ($i = 0; $i < count($tarea->actividades); $i++)
+				array_push($values, '('.$tarea->actividades[$i].', '.$tarea->id.')');
+
+			$sql .= join(",", $values);
+
+			BD::insertar($sql);
+		}
+
+		if (!BD::commit())
+			throw new Exception('No se pudo confirmar la transacción.');
+	}
 }
