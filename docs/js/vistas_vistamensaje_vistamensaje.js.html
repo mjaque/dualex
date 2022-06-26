@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: vistas/vistadialogo/vistadialogo.js</title>
+    <title>JSDoc: Source: vistas/vistamensaje/vistamensaje.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: vistas/vistadialogo/vistadialogo.js</h1>
+    <h1 class="page-title">Source: vistas/vistamensaje/vistamensaje.js</h1>
 
     
 
@@ -27,71 +27,44 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
-  Vista de diálogos modales de la aplicación.
-  Se muestran sobre un fondo oscuro semitransparente.
+  Vista de mensajes de la aplicación.
+  Muestra los mensajes de la aplicación.
 **/
 import {Vista} from '../vista.js'
 
-export class VistaDialogo extends Vista{
+export class VistaMensaje extends Vista{
+  static INFO = 'info'
+  static OK = 'ok'
+  static AVISO = 'aviso'
+  static ERROR = 'error'
   /**
     Constructor de la clase.
-    @param {Object} controlador Controlador de la vista.
-    @param {Node} base Nodo al que se añadirá la vista.
+    @param {Object} controlador Controlador de la vista principal.
+    @param {Node} base Nodo al que se añadirá la vista principal.
   **/
   constructor(controlador, base) {
     super(controlador)
     this.base = base
     this.base.classList.add(this.getNombreClase())
-    this.callback = null //Función que se llamará al cerrar el diálogo.
   }
   iniciar(){
     //Cogemos referencias a los elementos del interfaz
     this.btnCerrar = this.doc.getElementsByTagName('span')[0]
-    this.hTitulo = this.doc.getElementsByTagName('h2')[0]
-    this.pMensaje = this.doc.getElementsByTagName('p')[0]
-    this.btnCancelar = this.doc.getElementsByTagName('button')[0]
-    this.btnAceptar = this.doc.getElementsByTagName('button')[1]
+    this.spanMensaje = this.doc.getElementsByTagName('span')[1]
 
     //Asociamos eventos
     this.btnCerrar.onclick = this.cerrar.bind(this)
-    this.btnCancelar.onclick = this.cerrar.bind(this)
-    this.btnAceptar.onclick = this.aceptar.bind(this)
 
     super.transferir(this.base, this.doc)
     super.cargarCSS(`${this.getNombreClase()}.css`)
   }
-  /**
-    Abre el diálogo y establece la función de callback.
-    Si de pulsa el botón Aceptar, la función de callback recibirá el valor true. Si se pulsa Cancelar, recibirá false.
-    @param titulo {String} Título del diálogo.
-    @param mensaje {String} Mensaje del diálogo.
-    @param callback {Function} Función que se llamará al cerrar el diálogo.
-  **/
-  abrir(titulo, texto, callback){
-    this.hTitulo.textContent = titulo
-    this.pMensaje.textContent = texto
-    this.callback = callback
-    this.mostrar()
-  }
-  /**
-    Cierra el diálogo sin realizar ninguna acción.
-  **/
   cerrar(){
     this.base.style.display = 'none'
   }
-  /**
-    Cierra el diálogo llamando a la función de callback con false.
-  **/
-  cancelar(){
-    this.cerrar()
-    this.callback(false)
-  }
-  /**
-    Cierra el diálogo llamando a la función de callback con true.
-  **/
-  aceptar(){
-    this.cerrar()
-    this.callback(true)
+  mostrar(mensaje, nivel = VistaMensaje.ERROR){
+    this.base.className = `vistamensaje ${nivel}`
+    this.spanMensaje.textContent = mensaje
+    this.base.style.display = 'block'
   }
 }
 </code></pre>

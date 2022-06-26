@@ -43,14 +43,126 @@ export class VistaTareas extends Vista{
     this.base.classList.add(this.getNombreClase())
     this.callback = null //Función que se llamará al cerrar el diálogo.
   }
-  iniciar(){
-    //Cogemos referencias a los elementos del interfaz
+	/**
+		Inicia la vista.
+		Obtiene las referencias a los elementos del interfaz, captura los eventos, transfiere la plantilla al documento principal...
+	**/
+	iniciar(){
+    	//Cogemos referencias a los elementos del interfaz
+		this.btnNueva = this.doc.getElementsByClassName('icono_grande')[0]
 
-    //Asociamos eventos
+    	//Asociamos eventos
+		this.btnNueva.onclick = this.pulsarNueva.bind(this)
 
-    super.transferir(this.base, this.doc)
-    super.cargarCSS(`${this.getNombreClase()}.css`)
-  }
+    	super.transferir(this.base, this.doc)
+    	super.cargarCSS(`${this.getNombreClase()}.css`)
+	}
+	/**
+		Carga las tareas.
+	**/
+	cargar(tareas){
+		this.eliminarHijos(this.base, 2)	//Dejamos el h1 y el icono de Nueva
+		if (!tareas)
+			this.base.appendChild(document.createTextNode('No tiene tareas.'))
+		else
+			tareas.forEach(this.crearDivTarea.bind(this))
+	}
+	/**
+		Crea el div asociado a una tarea y lo añade a la base.
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	crearDivTarea(tarea){
+		let div = document.createElement('div')
+		this.base.appendChild(div)
+		//TODO: Refactorizar para evitar DRY.
+		let divIconos = document.createElement('div')
+		div.appendChild(divIconos)
+		divIconos.classList.add('iconos')
+		if (tarea.calificacion_empresa != null){
+			let iconoConsultar = document.createElement('img')
+			divIconos.appendChild(iconoConsultar)
+			iconoConsultar.classList.add('icono')
+			iconoConsultar.setAttribute('title', 'consultar')
+			iconoConsultar.setAttribute('src', '../src/iconos/visibility.svg')
+			iconoConsultar.onclick = this.pulsarConsultar.bind(this, tarea)
+		}
+		else{
+			let iconoEditar = document.createElement('img')
+			divIconos.appendChild(iconoEditar)
+			iconoEditar.classList.add('icono')
+			iconoEditar.setAttribute('title', 'editar')
+			iconoEditar.setAttribute('src', '../src/iconos/edit.svg')
+			iconoEditar.onclick = this.pulsarEditar.bind(this, tarea)
+
+			let iconoEliminar = document.createElement('img')
+			divIconos.appendChild(iconoEliminar)
+			iconoEliminar.classList.add('icono')
+			iconoEliminar.setAttribute('title', 'editar')
+			iconoEliminar.setAttribute('src', '../src/iconos/delete.svg')
+			iconoEliminar.onclick = this.pulsarEliminar.bind(this, tarea)
+		}
+		//TODO: Código de colores para las tareas en función de su evaluación.
+		tarea.modulos.forEach(this.crearSpanModulo.bind(this, div))
+		let spanTarea = document.createElement('span')
+		div.appendChild(spanTarea)
+		spanTarea.classList.add('tarea')
+		let texto = `${tarea.titulo} - `
+		if (tarea.calificacion_empresa)
+			texto += tarea.calificacion_empresa
+		else
+			texto += 'Sin calificación de empresa'
+		if (tarea.calificacion)
+			texto += ' - ' + tarea.calificacion
+		else
+			texto += ' - Sin calificación del profesor'
+		spanTarea.textContent = texto
+
+	}
+	//TODO: DRY con vistaalumnos.js
+	/**
+		Crea el span asociado a un módulo y lo añade al div.
+		@param div {DivElement} Elemento div la que se añadirá el span.
+		@param alumno {Modulo} Datos del módulo.
+		@param index {Number} Índice del alumno en el array.
+		@param array {Array} Array de alumnos.
+	**/
+	crearSpanModulo(div, modulo, index, array){
+		let span = document.createElement('span')
+		div.appendChild(span)
+		//TODO: falta incluir el icono del módulo.
+		span.classList.add('modulo')
+		span.textContent = modulo.codigo
+		span.setAttribute('title', modulo.titulo)
+		span.style.backgroundColor = modulo.color_fondo
+		span.style.color = modulo.color_letra
+	}
+	/**
+		Atención a la pulsación en el icono de "Nueva"
+	**/
+	pulsarNueva(){
+		this.controlador.mostrarTarea()
+	}
+	/**
+		Atención a la pulsación en el icono de "Consultar"
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	pulsarConsultar(tarea){
+		this.controlador.mostrarTarea(tarea.id)
+	}
+	/**
+		Atención a la pulsación en el icono de "Eliminar"
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	pulsarEliminar(tarea){
+		console.log('No implementado')
+	}
+	/**
+		Atención a la pulsación en el icono de "Editar"
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	pulsarEditar(tarea){
+		this.controlador.mostrarTarea(tarea.id)
+	}
 }
 </code></pre>
         </article>
@@ -62,13 +174,13 @@ export class VistaTareas extends Vista{
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DualEx.html">DualEx</a></li><li><a href="Rest.html">Rest</a></li><li><a href="Vista.html">Vista</a></li><li><a href="VistaAlumnos_VistaAlumnos.html">VistaAlumnos</a></li><li><a href="VistaDialogo_VistaDialogo.html">VistaDialogo</a></li><li><a href="VistaLogin_VistaLogin.html">VistaLogin</a></li><li><a href="VistaTarea_VistaTarea.html">VistaTarea</a></li><li><a href="VistaTareas_VistaTareas.html">VistaTareas</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DualEx.html">DualEx</a></li><li><a href="Modelo.html">Modelo</a></li><li><a href="Rest.html">Rest</a></li><li><a href="Vista.html">Vista</a></li><li><a href="VistaAlumnos_VistaAlumnos.html">VistaAlumnos</a></li><li><a href="VistaDialogo_VistaDialogo.html">VistaDialogo</a></li><li><a href="VistaLogin_VistaLogin.html">VistaLogin</a></li><li><a href="VistaMensaje_VistaMensaje.html">VistaMensaje</a></li><li><a href="VistaTarea_VistaTarea.html">VistaTarea</a></li><li><a href="VistaTareas_VistaTareas.html">VistaTareas</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun May 08 2022 10:12:38 GMT+0200 (hora de verano de Europa central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Jun 26 2022 09:44:27 GMT+0200 (hora de verano de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>

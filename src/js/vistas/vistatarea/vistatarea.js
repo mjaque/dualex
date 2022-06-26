@@ -109,7 +109,7 @@ export class VistaTarea extends Vista{
 	}
 	/**
 		Carga la lista de Actividades.
-		@param actividades {[Actividades]} Array de Actividades definidas.
+		@param actividades {Actividades[]} Array de Actividades definidas.
 	**/
 	cargarActividades(actividades){
 		this.controlador.verActividades()
@@ -131,7 +131,7 @@ export class VistaTarea extends Vista{
 	}
 	/**
 		Carga la lista de Calificaciones.
-		@param calificaciones {[Calificaciones]} Array de Calificaciones definidas.
+		@param calificaciones {Calificaciones[]} Array de Calificaciones definidas.
 	**/
 	cargarCalificaciones(calificaciones){
 		this.controlador.verCalificaciones()

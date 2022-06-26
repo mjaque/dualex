@@ -29,9 +29,14 @@
             <pre class="prettyprint source linenums"><code>/**
 	Controlador principal de la aplicación.
 **/
+
+//Modelos
+import {Modelo} from './modelos/modelo.js'
+
 //Vistas
 import {VistaLogin} from './vistas/vistalogin/vistalogin.js'
 import {VistaDialogo} from './vistas/vistadialogo/vistadialogo.js'
+import {VistaMensaje} from './vistas/vistamensaje/vistamensaje.js'
 
 //Vista de tareas del alumno
 import {VistaTareas} from './vistas/vistatareas/vistatareas.js'
@@ -59,12 +64,22 @@ class DualEx{
 		Se llama al cargar la página.
 	**/
 	iniciar(){
+		this.modelo = new Modelo()
 		this.vistaLogin = new VistaLogin(this, document.getElementById('divLogin'))
 		this.vistaDialogo = new VistaDialogo(this, document.getElementById('divDialogo'))
+		this.vistaMensaje = new VistaMensaje(this, document.getElementById('divMensaje'))
 		this.vistaAlumnos = new VistaAlumnos(this, document.getElementById('divAlumnos'))
 		this.vistaTarea = new VistaTarea(this, document.getElementById('divTarea'))
 		this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
 	}
+  /**
+    Muestra el error en la vista de mensajes.
+    @param error {Error} Error que se ha producido.
+  **/
+  gestionarError(error){
+    this.vistaMensaje.mostrar(error)
+    console.error(error)
+  }
 	/**
 		Envía los datos del login (email y clave) al servidor para obtener acceso.
 		@param email {String} Dirección de correo electrónico del ususario.
@@ -82,7 +97,7 @@ class DualEx{
 				this.vistaLogin.mostrar(false)
 		switch(usuario.rol){
 			case 'alumno':
-				this.mostrarTareasAlumno()
+				this.mostrarTareasAlumno(this.#usuario)
 				break;
 			case 'profesor':
 				this.mostrarAlumnos()
@@ -110,17 +125,86 @@ class DualEx{
 	}
 	/**
 		Muestra la vista de tareas del alumno.
+		@param alumno {Alumno} Datos del alumno.
 	**/
-	mostrarTareasAlumno(){
+	mostrarTareasAlumno(alumno){
 		this.ocultarVistas()
-		this.vistaTareas.mostrar(true)
+		this.modelo.getTareasAlumno(alumno)
+			.then(tareas => {
+				this.vistaTareas.cargar(tareas)
+				this.ocultarVistas()
+				this.vistaTareas.mostrar(true)
+			})
+			.catch(error => this.gestionarError(error))
 	}
 	/**
 		Muestra la vista de alumnos del profesor.
 	**/
 	mostrarAlumnos(){
-		this.ocultarVistas()
-		this.vistaAlumnos.mostrar(true)
+		if (this.#usuario.rol != 'profesor')
+			throw Error ('Operación no permitida.')
+		this.modelo.getAlumnosProfesor()
+			.then(alumnos => {
+				this.vistaAlumnos.cargar(alumnos)
+				this.ocultarVistas()
+				this.vistaAlumnos.mostrar(true)
+			})
+			.catch(error => this.gestionarError(error))
+	}
+	/**
+		Muestra la vista de tarea.
+		@param idTarea {Number} Identificador de la tarea a mostrar. Si es nulo se mostrará la vista vacía para crear una nueva Tarea.
+	**/
+	mostrarTarea(idTarea){
+		if (idTarea){
+			this.modelo.getTarea(idTarea)
+				.then(tareas => {
+					this.ocultarVistas()
+					this.vistaTarea.mostrar(true, tareas[0])
+				})
+		}
+		else{
+			this.ocultarVistas()
+			this.vistaTarea.mostrar(true)
+		}
+	}
+	/**
+		Devuelve la lista de actividades definidas.
+		@return {Promise} Promesa de resolución de la petición.
+	**/
+	verActividades(){
+		return this.modelo.getActividades()
+	}
+	/**
+		Devuelve la lista de calificaciones definidas.
+		@return {Promise} Promesa de resolución de la petición.
+	**/
+	verCalificaciones(){
+		return this.modelo.getCalificaciones()
+	}
+	/**
+		Crea una nueva tarea y vuelve a la vista de tareas del alumno.
+		@param tarea {Tarea} Datos de la nueva tarea.
+	**/
+	crearTarea(tarea){
+		this.modelo.crearTarea(tarea)
+			.then(resultado => {
+				this.vistaMensaje.mostrar('La tarea se creó correctamente', VistaMensaje.OK)
+				this.mostrarTareasAlumno(this.#usuario)
+			})
+			.catch(error => this.gestionarError(error))
+	}
+	/**
+		Modifica una tarea y vuelve a la vista de tareas del alumno.
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	modificarTarea(tarea){
+		this.modelo.modificarTarea(tarea)
+			.then(resultado => {
+				this.vistaMensaje.mostrar('La tarea se modificó correctamente', VistaMensaje.OK)
+				this.mostrarTareasAlumno(this.#usuario)
+			})
+			.catch(error => this.gestionarError(error))
 	}
 }
 
@@ -135,13 +219,13 @@ new DualEx()
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DualEx.html">DualEx</a></li><li><a href="Rest.html">Rest</a></li><li><a href="Vista.html">Vista</a></li><li><a href="VistaAlumnos_VistaAlumnos.html">VistaAlumnos</a></li><li><a href="VistaDialogo_VistaDialogo.html">VistaDialogo</a></li><li><a href="VistaLogin_VistaLogin.html">VistaLogin</a></li><li><a href="VistaTarea_VistaTarea.html">VistaTarea</a></li><li><a href="VistaTareas_VistaTareas.html">VistaTareas</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DualEx.html">DualEx</a></li><li><a href="Modelo.html">Modelo</a></li><li><a href="Rest.html">Rest</a></li><li><a href="Vista.html">Vista</a></li><li><a href="VistaAlumnos_VistaAlumnos.html">VistaAlumnos</a></li><li><a href="VistaDialogo_VistaDialogo.html">VistaDialogo</a></li><li><a href="VistaLogin_VistaLogin.html">VistaLogin</a></li><li><a href="VistaMensaje_VistaMensaje.html">VistaMensaje</a></li><li><a href="VistaTarea_VistaTarea.html">VistaTarea</a></li><li><a href="VistaTareas_VistaTareas.html">VistaTareas</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun May 08 2022 10:12:38 GMT+0200 (hora de verano de Europa central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Jun 26 2022 09:44:27 GMT+0200 (hora de verano de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>
