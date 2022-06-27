@@ -69,4 +69,12 @@ export class Modelo{
 	modificarTarea(tarea){
 		return Rest.put('tarea', [] , tarea)
 	}
+	/**
+		Borrar una tarea.
+		@param tarea {Tarea} Datos de la tarea.
+		@return {Promise} Devuelve la promesa asociada a la petición.
+	**/
+	borrarTarea(tarea){
+		return Rest.delete('tarea', [tarea.id])
+	}
 }

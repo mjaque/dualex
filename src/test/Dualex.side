@@ -1143,7 +1143,7 @@
       "id": "d0e1d23d-ec24-4865-9e2a-619ff0fc6da0",
       "comment": "",
       "command": "assertNotEditable",
-      "target": "css=label:nth-child(4) > input",
+      "target": "css=div:nth-child(4) > input",
       "targets": [],
       "value": ""
     }, {

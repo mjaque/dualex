@@ -126,7 +126,7 @@ export class VistaTareas extends Vista{
 		@param tarea {Tarea} Datos de la tarea.
 	**/
 	pulsarEliminar(tarea){
-		console.log('No implementado')
+		this.controlador.eliminarTarea(tarea)
 	}
 	/**
 		Atención a la pulsación en el icono de "Editar"

@@ -98,7 +98,8 @@ class DAOTarea{
 			throw new Exception('No se pudo confirmar la transacción.');
 	}
 	/**
-		Modifica una nueva tarea.
+		Modificación de tarea por alumno.
+		Condiciones: la tarea tiene que pertenceder al alumno y no puede tener calificación ni de empresa ni del profesor.
 		@param tarea {Tarea} Datos de la tarea a modificar.
 		@param usuario {Usuario} Datos del usuario loggeado.
 	**/
@@ -107,7 +108,7 @@ class DAOTarea{
 			throw new Exception('No es posible iniciar la transacción.');
 		$sql = 'UPDATE Tarea SET titulo = :titulo, descripcion = :descripcion , fecha = :fecha, id_calificacion_empresa = :idCalificacionEmpresa, ';
 		$sql .= 'comentario_calificacion_empresa = :comentarioCalificacionEmpresa ';
-		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno';
+		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno AND Tarea.id_calificacion_empresa IS NULL AND Tarea.calificacion IS NULL AND Tarea.evaluacion IS NULL';
 		
 		$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'idAlumno'=>$usuario->id);
 
@@ -132,5 +133,19 @@ class DAOTarea{
 
 		if (!BD::commit())
 			throw new Exception('No se pudo confirmar la transacción.');
+	}
+	/**
+		Borrado de tarea por alumno.
+		Condiciones: la tarea tiene que pertenceder al alumno y no puede tener calificación ni de empresa ni del profesor.
+		@param idTarea {Number} Identificador de la tarea a eliminar.
+		@param usuario {Usuario} Datos del usuario loggeado.
+	**/
+	public static function borrar($idTarea, $usuario){
+		$sql = 'DELETE FROM Tarea ';
+		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno AND Tarea.id_calificacion_empresa IS NULL AND Tarea.calificacion IS NULL AND Tarea.evaluacion IS NULL';
+		
+		$params = array('id'=>$tarea->id, 'idAlumno'=>$usuario->id);
+
+		$idNuevo = BD::borrar($sql, $params);
 	}
 }

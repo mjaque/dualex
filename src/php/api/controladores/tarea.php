@@ -69,7 +69,7 @@ class Tarea{
     	die();
   	}
 	/**
-		Actualiza una nueva tarea en la base de datos
+		Actualiza una tarea en la base de datos
 		@param $pathParams {Array} Array de parámetros.
 		@param $queryParams {Array} Array de parámetros.
 		@param $tarea {Tarea} Datos de la tarea a actualizar.
@@ -82,6 +82,18 @@ class Tarea{
 
     	$id = DAOTarea::modificar($tarea, $usuario);
     	//Respuesta a un PUT
+    	header('HTTP/1.1 200 Ok');
+    	die();
+  	}
+	/**
+		Elimina una tarea de la base de datos
+		@param $pathParams {Array} Array de parámetros. Lleva el identificador de la tarea a borrar.
+		@param $queryParams {Array} Array de parámetros.
+		@param $usuario {Usuario} Usuario que realiza la petición.
+	**/
+	function delete($pathParams, $queryParams, $usuario){
+    	$id = DAOTarea::borrar($pathParams[0], $usuario);
+    	//Respuesta a un DELETE
     	header('HTTP/1.1 200 Ok');
     	die();
   	}

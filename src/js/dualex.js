@@ -44,14 +44,14 @@ class DualEx{
 		this.vistaTarea = new VistaTarea(this, document.getElementById('divTarea'))
 		this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
 	}
-  /**
-    Muestra el error en la vista de mensajes.
-    @param error {Error} Error que se ha producido.
-  **/
-  gestionarError(error){
-    this.vistaMensaje.mostrar(error)
-    console.error(error)
-  }
+	/**
+		Muestra el error en la vista de mensajes.
+		@param error {Error} Error que se ha producido.
+	**/
+	gestionarError(error){
+		this.vistaMensaje.mostrar(error)
+		console.error(error)
+	}
 	/**
 		Envía los datos del login (email y clave) al servidor para obtener acceso.
 		@param email {String} Dirección de correo electrónico del ususario.
@@ -177,6 +177,25 @@ class DualEx{
 				this.mostrarTareasAlumno(this.#usuario)
 			})
 			.catch(error => this.gestionarError(error))
+	}
+	/**
+		Elimina una tarea.
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	eliminarTarea(tarea){
+		let titulo = `¿Realmente quiere ELIMINAR la tarea	"${tarea.titulo}"?`
+		let mensaje = 'Esta operación no puede deshacerse.'
+		this.vistaDialogo.abrir(titulo, mensaje, confirmar => {
+			if (confirmar)
+				this.modelo.borrarTarea(tarea)
+				.then(respuesta => {
+					this.vistaMensaje.mostrar('La tarea se eliminó correctamente.', VistaMensaje.OK)
+					this.mostrarTareasAlumno(this.#usuario)
+				})
+				.catch(error => this.gestionarError(error))
+			else
+				this.vistaDialogo.cerrar()
+		})
 	}
 }
 

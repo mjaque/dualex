@@ -5,7 +5,8 @@
 		También identifica al usuario (autenticación).
 		Es un interfaz RESTful (https://www.rfc-editor.org/rfc/rfc7231)
 	**/
-	
+	//echo 'PHP version: ' . phpversion();die();
+
 	//Cargamos la configuración
 	$config = require_once('config.php');
 	if ($config['debug']){
@@ -32,7 +33,7 @@
 				setlocale(LC_ALL,$locale);
 				putenv('LC_ALL='.$locale);
 				//echo exec('locale charmap');
-				exec('mysql -u dualex --password=dualex dualex < ../../sql/datos_prueba.sql', $salida);
+				exec('mysql -u '.BD::$usuario.' --password='.BD::$clave.' '.BD::$bd.' < ../../sql/datos_prueba.sql', $salida);
 				die('Cargada BD Pruebas.');
 			}
 		}
