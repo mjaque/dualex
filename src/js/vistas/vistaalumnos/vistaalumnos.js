@@ -60,13 +60,13 @@ export class VistaAlumnos extends Vista{
 		spanIconos.appendChild(iconoTareas)
 		iconoTareas.classList.add('icono')
 		iconoTareas.setAttribute('title', 'tareas')
-		iconoTareas.setAttribute('src', '../src/iconos/build.svg')
+		iconoTareas.setAttribute('src', 'iconos/build.svg')
 		iconoTareas.onclick = this.pulsarTareas.bind(this, alumno)
 		let iconoInforme = document.createElement('img')
 		spanIconos.appendChild(iconoInforme)
 		iconoInforme.classList.add('icono')
 		iconoInforme.setAttribute('title', 'informe')
-		iconoInforme.setAttribute('src', '../src/iconos/description.svg')
+		iconoInforme.setAttribute('src', 'iconos/description.svg')
 		iconoInforme.onclick = this.pulsarInforme.bind(this, alumno)
 	}
 	/**
