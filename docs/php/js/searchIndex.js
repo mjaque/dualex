@@ -203,8 +203,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Tarea\u003A\u003Aput\u0028\u0029",
             "name": "put",
-            "summary": "Actualiza\u0020una\u0020nueva\u0020tarea\u0020en\u0020la\u0020base\u0020de\u0020datos",
+            "summary": "Actualiza\u0020una\u0020tarea\u0020en\u0020la\u0020base\u0020de\u0020datos",
             "url": "classes/Tarea.html#method_put"
+        },                {
+            "fqsen": "\\Tarea\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "Elimina\u0020una\u0020tarea\u0020de\u0020la\u0020base\u0020de\u0020datos",
+            "url": "classes/Tarea.html#method_delete"
         },                {
             "fqsen": "\\Tarea\u003A\u003AagruparPorModulosYActividades\u0028\u0029",
             "name": "agruparPorModulosYActividades",
@@ -278,8 +283,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\DAOTarea\u003A\u003Amodificar\u0028\u0029",
             "name": "modificar",
-            "summary": "Modifica\u0020una\u0020nueva\u0020tarea.",
+            "summary": "Modificaci\u00F3n\u0020de\u0020tarea\u0020por\u0020alumno.",
             "url": "classes/DAOTarea.html#method_modificar"
+        },                {
+            "fqsen": "\\DAOTarea\u003A\u003Aborrar\u0028\u0029",
+            "name": "borrar",
+            "summary": "Borrado\u0020de\u0020tarea\u0020por\u0020alumno.",
+            "url": "classes/DAOTarea.html#method_borrar"
         },                {
             "fqsen": "\\",
             "name": "\\",

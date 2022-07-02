@@ -1,3 +1,4 @@
 phpDocumentor.phar
 *.phpdoc
 *.swp
+config_prod.php

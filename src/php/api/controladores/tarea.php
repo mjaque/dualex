@@ -15,30 +15,30 @@ class Tarea{
 		@return {Array[Tarea]}
 	**/
 	function get($pathParams, $queryParams, $usuario){
-	switch(count($pathParams)){
-		case 1:
-			if ($pathParams[0] == 'alumno'){
-				if (!array_key_exists('id', $queryParams)){
-					header('HTTP/1.1 403 Forbidden');
-					die();
+		switch(count($pathParams)){
+			case 1:
+				if ($pathParams[0] == 'alumno'){
+			 		if (!array_key_exists('id', $queryParams)){
+						header('HTTP/1.1 403 Forbidden');
+						die();
+					}
+					if ($usuario->rol == 'profesor')
+						$resultado = DAOTarea::verTareasDeAlumnoComoProfesor($queryParams['id'], $usuario->id);
+					if ($usuario->rol == 'alumno')
+						$resultado = DAOTarea::verTareasDeAlumno($usuario->id);
 				}
-				if ($usuario->rol == 'profesor')
-					$resultado = DAOTarea::verTareasDeAlumnoComoProfesor($queryParams['id'], $usuario->id);
-				if ($usuario->rol == 'alumno')
-					$resultado = DAOTarea::verTareasDeAlumno($usuario->id);
-			}
-			elseif (is_numeric($pathParams[0]))
+				elseif (is_numeric($pathParams[0]))
 					if ($usuario->rol == 'alumno')
 						$resultado = DAOTarea::verTareaDeAlumno($pathParams[0], $usuario->id);
 					else die("No implementado");
-			else{
-				header('HTTP/1.1 422 Unprocesable entity');
-				die();
-			}
-			break;
-		default:
-			die("No implementado.");
-	}
+				else{
+					header('HTTP/1.1 422 Unprocesable entity');
+					die();
+				}
+				break;
+			default:
+				die("No implementado.");
+		}
 		//Adaptación del Resultado
 		//El resultado tiene una fila por tarea, actividad módulo. Debemos agruparlo.
 		if (count($resultado) > 0)
