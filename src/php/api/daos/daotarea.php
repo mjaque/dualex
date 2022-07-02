@@ -144,7 +144,7 @@ class DAOTarea{
 		$sql = 'DELETE FROM Tarea ';
 		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno AND Tarea.id_calificacion_empresa IS NULL AND Tarea.calificacion IS NULL AND Tarea.evaluacion IS NULL';
 		
-		$params = array('id'=>$tarea->id, 'idAlumno'=>$usuario->id);
+		$params = array('id'=>$idTarea, 'idAlumno'=>$usuario->id);
 
 		$idNuevo = BD::borrar($sql, $params);
 	}

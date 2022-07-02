@@ -57,7 +57,7 @@ export class VistaTarea extends Vista{
 		this.sCalificacion.value = tarea.id_calificacion_empresa
 		//Marcamos las actividades de la tarea
 		for(let actividad of tarea.actividades)
-			this.divActividades.querySelector('input[data-idActividad="' + actividad.id + '"').setAttribute('checked', true)
+			this.divActividades.querySelector('input[data-idActividad="' + actividad.id + '"').checked = true
 		if (tarea.id_calificacion_empresa)
 			this.deshabilitar(true)
 	}
@@ -88,7 +88,7 @@ export class VistaTarea extends Vista{
 		this.limpiar()
 		this.deshabilitar(false)
 		for(let input of this.divActividades.getElementsByTagName('input'))
-			input.removeAttribute('checked')
+			input.checked = false
 		this.iTitulo.focus()
 
 		if (tarea)

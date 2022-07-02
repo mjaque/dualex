@@ -1173,6 +1173,358 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "170f279c-875f-4a17-8f85-d3f15897499a",
+    "name": "Borrar Tarea",
+    "commands": [{
+      "id": "06d2865a-f007-4c3f-8e09-5475175fd1f3",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/dualex/src/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "689d2362-dbd9-46fd-8b31-beedf3f770ec",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "634x641",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b8486432-5924-4e0f-9c38-35a833e6296a",
+      "comment": "",
+      "command": "click",
+      "target": "css=#divLogin > button",
+      "targets": [
+        ["css=#divLogin > button", "css:finder"],
+        ["xpath=//div[@id='divLogin']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Acceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b4b5a3a9-a206-4119-b3e6-30534da5efc9",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(5) > .iconos > .icono:nth-child(2)",
+      "targets": [
+        ["css=div:nth-child(5) > .iconos > .icono:nth-child(2)", "css:finder"],
+        ["xpath=(//img[@title='editar'])[4]", "xpath:img"],
+        ["xpath=//div[@id='divTareas']/div[3]/div/img[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/img[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "24d0c695-852e-41ef-bb78-cd939c18c312",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(4)",
+      "targets": [
+        ["css=button:nth-child(4)", "css:finder"],
+        ["xpath=//div[@id='divDialogo']/div/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Cancelar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a1023038-343f-4499-8d2e-d72859ff9ae4",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=div:nth-child(5) > .tarea",
+      "targets": [
+        ["css=div:nth-child(5) > .tarea", "css:finder"],
+        ["xpath=//div[@id='divTareas']/div[3]/span[3]", "xpath:idRelative"],
+        ["xpath=//div[3]/span[3]", "xpath:position"],
+        ["xpath=//span[contains(.,'Tarea 10.2 - Sin calificación de empresa - Sin calificación del profesor')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "01bf2ca6-d887-4a41-80a7-26f096b7d457",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(5) > .iconos > .icono:nth-child(2)",
+      "targets": [
+        ["css=div:nth-child(5) > .iconos > .icono:nth-child(2)", "css:finder"],
+        ["xpath=(//img[@title='editar'])[4]", "xpath:img"],
+        ["xpath=//div[@id='divTareas']/div[3]/div/img[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/img[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a655d73e-5241-42a2-be13-8148167244ca",
+      "comment": "",
+      "command": "click",
+      "target": "css=#divDialogo button:nth-child(5)",
+      "targets": [
+        ["css=#divDialogo button:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='divDialogo']/div/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Aceptar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ded50d85-f1ee-47bf-851f-43451212a91e",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#divMensaje > span:nth-child(2)",
+      "targets": [
+        ["css=#divMensaje > span:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='divMensaje']/span[2]", "xpath:idRelative"],
+        ["xpath=//span[2]", "xpath:position"],
+        ["xpath=//span[contains(.,'La tarea se eliminó correctamente.')]", "xpath:innerText"]
+      ],
+      "value": "La tarea se eliminó correctamente."
+    }, {
+      "id": "981226a9-fba6-4510-8384-1f31a618181f",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=div:nth-child(5) > .tarea",
+      "targets": [
+        ["css=div:nth-child(5) > .tarea", "css:finder"],
+        ["xpath=//div[@id='divTareas']/div[3]/span[3]", "xpath:idRelative"],
+        ["xpath=//div[3]/span[3]", "xpath:position"],
+        ["xpath=//span[contains(.,'Tarea 10.2 - Sin calificación de empresa - Sin calificación del profesor')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "e129477f-3142-46fa-a556-7e1441aaf49f",
+    "name": "Bug Alta",
+    "commands": [{
+      "id": "a4df70df-6cac-4429-a9d6-b99a3116c748",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/dualex/src/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7c8712d3-3f9b-4639-b4b5-9307baa85957",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "634x641",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b25744c1-690f-4bb4-ae4a-6335174c3680",
+      "comment": "",
+      "command": "click",
+      "target": "css=#divLogin > button",
+      "targets": [
+        ["css=#divLogin > button", "css:finder"],
+        ["xpath=//div[@id='divLogin']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Acceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7642450f-e2cd-469f-954f-2e4ac920f430",
+      "comment": "",
+      "command": "click",
+      "target": "css=.icono_grande",
+      "targets": [
+        ["css=.icono_grande", "css:finder"],
+        ["xpath=//img[@title='nueva']", "xpath:img"],
+        ["xpath=//div[@id='divTareas']/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7f2db09f-92b0-4759-97a3-73320ba9fa37",
+      "comment": "",
+      "command": "click",
+      "target": "css=label:nth-child(4) > input",
+      "targets": [
+        ["css=label:nth-child(4) > input", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/label/input", "xpath:idRelative"],
+        ["xpath=//div[6]/label/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a5f99364-6303-411e-bb0e-40ba47827f63",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(4) > input",
+      "targets": [
+        ["css=label:nth-child(4) > input", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/label/input", "xpath:idRelative"],
+        ["xpath=//div[6]/label/input", "xpath:position"]
+      ],
+      "value": "Tarea de prueba 2"
+    }, {
+      "id": "6f393a51-a3d5-4273-b663-0a855e92592b",
+      "comment": "",
+      "command": "click",
+      "target": "css=label:nth-child(6) > input",
+      "targets": [
+        ["css=label:nth-child(6) > input", "css:finder"],
+        ["xpath=//input[@type='date']", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/label[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b51f01b5-e7f3-4dc5-ac97-b837639ad4ac",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(6) > input",
+      "targets": [
+        ["css=label:nth-child(6) > input", "css:finder"],
+        ["xpath=//input[@type='date']", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/label[2]/input", "xpath:position"]
+      ],
+      "value": "2022-07-01"
+    }, {
+      "id": "f9f17029-82b1-4407-a905-fdab73137dad",
+      "comment": "",
+      "command": "click",
+      "target": "css=label:nth-child(8) > textarea",
+      "targets": [
+        ["css=label:nth-child(8) > textarea", "css:finder"],
+        ["xpath=//div[@id='divTarea']/label[3]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8d6c1136-04c6-407c-81c6-3262d145d2ff",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(8) > textarea",
+      "targets": [
+        ["css=label:nth-child(8) > textarea", "css:finder"],
+        ["xpath=//div[@id='divTarea']/label[3]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "sdfasd fasd fas "
+    }, {
+      "id": "a63d2632-55b6-483f-b7a4-46c6dced1d2c",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(1) > input",
+      "targets": [
+        ["css=div:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@type='checkbox']", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/fieldset/div/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dd0fc549-bcb4-41ad-8ec1-443de2705c44",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(2) > input",
+      "targets": [
+        ["css=div:nth-child(2) > input", "css:finder"],
+        ["xpath=(//input[@type='checkbox'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/fieldset/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "69315c9b-5778-4398-bc25-073ca8f8a24b",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(4) > input",
+      "targets": [
+        ["css=div:nth-child(4) > input", "css:finder"],
+        ["xpath=(//input[@type='checkbox'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/fieldset/div/div[4]/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c9699822-420b-4953-8d42-c0dfde7df6a6",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(21)",
+      "targets": [
+        ["css=button:nth-child(21)", "css:finder"],
+        ["xpath=//div[@id='divTarea']/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "248eebd7-47f2-4ae0-8f82-a9d21b293619",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "48b307c2-f34f-4be7-8eb6-fad5328ea62e",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(4) .icono:nth-child(1)",
+      "targets": [
+        ["css=div:nth-child(4) .icono:nth-child(1)", "css:finder"],
+        ["xpath=(//img[@title='editar'])[3]", "xpath:img"],
+        ["xpath=//div[@id='divTareas']/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "721d0a3d-d81b-49aa-bc39-4f2cba2cf2e5",
+      "comment": "",
+      "command": "assertChecked",
+      "target": "css=div:nth-child(1) > input",
+      "targets": [
+        ["css=div:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@type='checkbox']", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/fieldset/div/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7f42d39f-f862-4166-9ff0-be5972b9104c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.icono_rectangular",
+      "targets": [
+        ["css=.icono_rectangular", "css:finder"],
+        ["xpath=//img[@title='volver']", "xpath:img"],
+        ["xpath=//div[@id='divTarea']/img", "xpath:idRelative"],
+        ["xpath=//div[6]/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7f67c111-6deb-4c74-b23a-0c19d978cc20",
+      "comment": "",
+      "command": "click",
+      "target": "css=.icono_grande",
+      "targets": [
+        ["css=.icono_grande", "css:finder"],
+        ["xpath=//img[@title='nueva']", "xpath:img"],
+        ["xpath=//div[@id='divTareas']/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7fe04cd-c73f-4cdb-8cb0-b4032b9c78aa",
+      "comment": "",
+      "command": "assertNotChecked",
+      "target": "css=div:nth-child(1) > input",
+      "targets": [
+        ["css=div:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@type='checkbox']", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/fieldset/div/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0a93d834-7ada-4009-aff4-594d2589d333",
+      "comment": "",
+      "command": "assertNotChecked",
+      "target": "css=div:nth-child(2) > input",
+      "targets": [
+        ["css=div:nth-child(2) > input", "css:finder"],
+        ["xpath=(//input[@type='checkbox'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/fieldset/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "2036daef-972c-4d1e-a948-e845b45554ba",
@@ -1180,7 +1532,7 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["2b8a7206-bb72-477c-b5f4-d566501eaa07", "b56f75f7-55fc-446d-a4cd-9651e61abc0d", "8f5a937f-75f3-41db-a7fe-95fa9ee3eec1", "24a9fbf5-380d-4362-817a-d3b67b5c43bd", "08cc7c50-a30e-4733-9fa6-16543882510e", "70e2585a-d14c-4a40-9e31-498a4ca916ae"]
+    "tests": ["2b8a7206-bb72-477c-b5f4-d566501eaa07", "b56f75f7-55fc-446d-a4cd-9651e61abc0d", "8f5a937f-75f3-41db-a7fe-95fa9ee3eec1", "24a9fbf5-380d-4362-817a-d3b67b5c43bd", "08cc7c50-a30e-4733-9fa6-16543882510e", "70e2585a-d14c-4a40-9e31-498a4ca916ae", "170f279c-875f-4a17-8f85-d3f15897499a", "e129477f-3142-46fa-a556-7e1441aaf49f"]
   }],
   "urls": ["http://localhost/", "http://localhost/dualex/src/index.html", "http://localhost/dualex/src/php/api/index.php?cargarBDPruebas", "http://localhost/dualex/src/"],
   "plugins": []

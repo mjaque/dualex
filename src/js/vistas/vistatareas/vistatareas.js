@@ -69,7 +69,7 @@ export class VistaTareas extends Vista{
 			let iconoEliminar = document.createElement('img')
 			divIconos.appendChild(iconoEliminar)
 			iconoEliminar.classList.add('icono')
-			iconoEliminar.setAttribute('title', 'editar')
+			iconoEliminar.setAttribute('title', 'eliminar')
 			iconoEliminar.setAttribute('src', 'iconos/delete.svg')
 			iconoEliminar.onclick = this.pulsarEliminar.bind(this, tarea)
 		}

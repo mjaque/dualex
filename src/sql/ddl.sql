@@ -79,7 +79,7 @@ CREATE TABLE Calificacion(
 );
 
 INSERT INTO Calificacion VALUES
-(1, 'Óptimo', null), (2, 'Profesional', null), (3, 'Aceptable', null);
+(1, 'Óptima', null), (2, 'Buena', null), (3, 'Aceptable', null), (4, 'Mejorable', null;
 
 DROP TABLE IF EXISTS Tarea;
 CREATE TABLE Tarea(
