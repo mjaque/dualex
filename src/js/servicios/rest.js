@@ -125,7 +125,7 @@ export class Rest {
 		return {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
-			'Authorization': Rest.#autorizacion
+			'Authorization2': Rest.#autorizacion
 		}
 	}
 	static _construirURL(path, pathParams = [], queryParams){

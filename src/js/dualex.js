@@ -9,6 +9,7 @@ import {Modelo} from './modelos/modelo.js'
 import {VistaLogin} from './vistas/vistalogin/vistalogin.js'
 import {VistaDialogo} from './vistas/vistadialogo/vistadialogo.js'
 import {VistaMensaje} from './vistas/vistamensaje/vistamensaje.js'
+import {VistaMenu} from './vistas/vistamenu/vistamenu.js'
 
 //Vista de tareas del alumno
 import {VistaTareas} from './vistas/vistatareas/vistatareas.js'
@@ -40,6 +41,7 @@ class DualEx{
 		this.vistaLogin = new VistaLogin(this, document.getElementById('divLogin'))
 		this.vistaDialogo = new VistaDialogo(this, document.getElementById('divDialogo'))
 		this.vistaMensaje = new VistaMensaje(this, document.getElementById('divMensaje'))
+		this.vistaMenu = new VistaMenu(this, document.getElementById('divMenu'))
 		this.vistaAlumnos = new VistaAlumnos(this, document.getElementById('divAlumnos'))
 		this.vistaTarea = new VistaTarea(this, document.getElementById('divTarea'))
 		this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
@@ -81,6 +83,12 @@ class DualEx{
 		.catch(e => {this.vistaLogin.mostrarError(e)})
 	}
 	/**
+		Cierra la sesión del usuario.
+	**/
+	logout(){
+		throw "No implementado"
+	}
+	/**
 		Devuelve el usuario logeado.
 		@return {Usuario} Devuelve el usuario logeado.
 	**/
@@ -103,6 +111,7 @@ class DualEx{
 		this.ocultarVistas()
 		this.modelo.getTareasAlumno(alumno)
 			.then(tareas => {
+				this.vistaMenu.verTareasAlumno(alumno)
 				this.vistaTareas.cargar(tareas)
 				this.ocultarVistas()
 				this.vistaTareas.mostrar(true)
@@ -117,6 +126,7 @@ class DualEx{
 			throw Error ('Operación no permitida.')
 		this.modelo.getAlumnosProfesor()
 			.then(alumnos => {
+				this.vistaMenu.verAlumnosProfesor()
 				this.vistaAlumnos.cargar(alumnos)
 				this.ocultarVistas()
 				this.vistaAlumnos.mostrar(true)
@@ -131,6 +141,7 @@ class DualEx{
 		if (idTarea){
 			this.modelo.getTarea(idTarea)
 				.then(tareas => {
+					this.vistaMenu.verTarea(tarea)
 					this.ocultarVistas()
 					this.vistaTarea.mostrar(true, tareas[0])
 				})

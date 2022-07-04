@@ -24,7 +24,6 @@ export class VistaTareas extends Vista{
 		this.btnNueva = this.doc.getElementsByClassName('icono_grande')[0]
 
     	//Asociamos eventos
-		this.btnNueva.onclick = this.pulsarNueva.bind(this)
 
     	super.transferir(this.base, this.doc)
     	super.cargarCSS(`${this.getNombreClase()}.css`)
@@ -33,7 +32,7 @@ export class VistaTareas extends Vista{
 		Carga las tareas.
 	**/
 	cargar(tareas){
-		this.eliminarHijos(this.base, 2)	//Dejamos el h1 y el icono de Nueva
+		this.eliminarHijos(this.base)
 		if (!tareas)
 			this.base.appendChild(document.createTextNode('No tiene tareas.'))
 		else

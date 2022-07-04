@@ -120,7 +120,7 @@ class Tarea{
 
 			//Vemos si el módulo ya está en el resultado
 			for($k = 0; $k < count($resultado[$j]['modulos']); $k++)
-				if ($resultado[$j]['modulos'] == $tareas[$i]['id_modulo'])
+				if ($resultado[$j]['modulos'][$k]['id'] == $tareas[$i]['id_modulo'])
 					break;
 			if ($k == count($resultado[$j]['modulos']))	//El módulo no está en los resultados
 				array_push($resultado[$j]['modulos'], $this->verModulo($tareas[$i]));

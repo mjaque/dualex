@@ -442,6 +442,18 @@
       ],
       "value": "alumno1.guadalupe@alumnado.fundacionloyola.net"
     }, {
+      "id": "e508a346-1776-45e6-af26-d26cfae3e542",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(3) > input",
+      "targets": [
+        ["css=label:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@value='clave 2']", "xpath:attributes"],
+        ["xpath=//div[@id='divLogin']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": "alumno1"
+    }, {
       "id": "e776bea8-47ef-4ebe-a31d-1b27c63dedda",
       "comment": "",
       "command": "click",
@@ -478,14 +490,14 @@
       ],
       "value": ""
     }, {
-      "id": "8a29dabb-4cfa-4930-9d57-b56a4368222b",
+      "id": "8100e341-c39e-442d-bc96-cb0c2a60ef8e",
       "comment": "",
       "command": "click",
-      "target": "css=.icono_grande",
+      "target": "css=#divMenu > .icono:nth-child(2)",
       "targets": [
-        ["css=.icono_grande", "css:finder"],
-        ["xpath=//img[@title='nueva']", "xpath:img"],
-        ["xpath=//div[@id='divTareas']/img", "xpath:idRelative"],
+        ["css=#divMenu > .icono:nth-child(2)", "css:finder"],
+        ["xpath=//img[@title='nueva tarea']", "xpath:img"],
+        ["xpath=//div[@id='divMenu']/img", "xpath:idRelative"],
         ["xpath=//img", "xpath:position"]
       ],
       "value": ""
@@ -703,7 +715,7 @@
       "id": "edef9cf6-4fe2-4d72-9ea1-1edb6752fce6",
       "comment": "",
       "command": "click",
-      "target": "css=div:nth-child(5) > .iconos > .icono:nth-child(1)",
+      "target": "xpath=//div[@id='divTareas']/div[3]/div/img",
       "targets": [
         ["css=div:nth-child(5) > .iconos > .icono:nth-child(1)", "css:finder"],
         ["xpath=(//img[@title='editar'])[5]", "xpath:img"],
@@ -904,6 +916,37 @@
       "targets": [],
       "value": ""
     }, {
+      "id": "dbf8c864-db21-46c0-a235-274f14cf520e",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(1) > input",
+      "targets": [
+        ["css=label:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@value='alumno1.guadalupe@alumnado.fundacionloyola.net']", "xpath:attributes"],
+        ["xpath=//div[@id='divLogin']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "alumno1.guadalupe@alumnado.fundacionloyola.net"
+    }, {
+      "id": "0e9ba98e-d38b-4c0c-936c-26bfa32c7f92",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(3) > input",
+      "targets": [
+        ["css=label:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@value='clave 2']", "xpath:attributes"],
+        ["xpath=//div[@id='divLogin']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": "alumno1"
+    }, {
+      "id": "144ecffa-a63f-402e-a2a9-8324ea5c10a1",
+      "comment": "",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
       "id": "bffb4f4b-5774-4596-b443-8a9675f2143a",
       "comment": "",
       "command": "click",
@@ -919,7 +962,7 @@
       "id": "d0c79a50-b673-4156-8a98-a64de4004891",
       "comment": "",
       "command": "click",
-      "target": "css=#divTareas > div:nth-child(5)",
+      "target": "xpath=//div[@id='divTareas']/div[3]",
       "targets": [
         ["css=#divTareas > div:nth-child(5)", "css:finder"],
         ["xpath=//div[@id='divTareas']/div[3]", "xpath:idRelative"],
@@ -930,7 +973,7 @@
       "id": "133be102-434b-49af-92b7-387b7e110030",
       "comment": "",
       "command": "click",
-      "target": "css=div:nth-child(4) .icono:nth-child(1)",
+      "target": "xpath=(//img[@title='editar'])[3]",
       "targets": [
         ["css=div:nth-child(4) .icono:nth-child(1)", "css:finder"],
         ["xpath=(//img[@title='editar'])[3]", "xpath:img"],
@@ -1191,6 +1234,30 @@
       "targets": [],
       "value": ""
     }, {
+      "id": "3f24d203-9a35-4f08-9392-f0c128b0cb1a",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(1) > input",
+      "targets": [
+        ["css=label:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@value='alumno1.guadalupe@alumnado.fundacionloyola.net']", "xpath:attributes"],
+        ["xpath=//div[@id='divLogin']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "alumno1.guadalupe@alumnado.fundacionloyola.net"
+    }, {
+      "id": "a8b2a683-e325-46e0-b963-93120685f69e",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(3) > input",
+      "targets": [
+        ["css=label:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@value='clave 2']", "xpath:attributes"],
+        ["xpath=//div[@id='divLogin']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": "alumno1"
+    }, {
       "id": "b8486432-5924-4e0f-9c38-35a833e6296a",
       "comment": "",
       "command": "click",
@@ -1305,7 +1372,31 @@
       "targets": [],
       "value": ""
     }, {
-      "id": "b25744c1-690f-4bb4-ae4a-6335174c3680",
+      "id": "702ba256-e672-4a2f-9c16-bfcb60f47f6d",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(1) > input",
+      "targets": [
+        ["css=label:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@value='alumno1.guadalupe@alumnado.fundacionloyola.net']", "xpath:attributes"],
+        ["xpath=//div[@id='divLogin']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "alumno1.guadalupe@alumnado.fundacionloyola.net"
+    }, {
+      "id": "9e2222aa-5b0d-42bb-9fbf-752b493832e1",
+      "comment": "",
+      "command": "type",
+      "target": "css=label:nth-child(3) > input",
+      "targets": [
+        ["css=label:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@value='clave 2']", "xpath:attributes"],
+        ["xpath=//div[@id='divLogin']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": "alumno1"
+    }, {
+      "id": "e29fdb5b-bc29-4b6b-8c55-aa5220c7e721",
       "comment": "",
       "command": "click",
       "target": "css=#divLogin > button",
@@ -1317,10 +1408,10 @@
       ],
       "value": ""
     }, {
-      "id": "7642450f-e2cd-469f-954f-2e4ac920f430",
+      "id": "0c518ea3-9779-4133-a492-ed72e4ad6488",
       "comment": "",
       "command": "click",
-      "target": "css=.icono_grande",
+      "target": "xpath=//img",
       "targets": [
         ["css=.icono_grande", "css:finder"],
         ["xpath=//img[@title='nueva']", "xpath:img"],

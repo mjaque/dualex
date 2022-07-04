@@ -1,0 +1,22 @@
+.vistamenu{
+	display:flex;
+	justify-content: flex-end;
+	padding: 0.5rem;
+}
+.vistamenu h1{
+	flex-grow: 2;
+	text-align: left;
+	order: 0;
+	margin: auto;
+	padding: 0.5rem;
+}
+.vistamenu .icono{
+	cursor: pointer;
+	border-radius: 0.5rem;
+	transition: background-color 1s;
+	margin: 0.3rem;
+}
+.vistamenu .icono:hover{
+	background-color: lightgreen;
+}
+
