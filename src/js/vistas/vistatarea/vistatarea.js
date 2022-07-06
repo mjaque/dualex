@@ -20,18 +20,19 @@ export class VistaTarea extends Vista{
 	**/
 	iniciar(){
 		//Cogemos referencias a los elementos del interfaz
-		this.btnVolver = this.doc.getElementsByTagName('img')[0]
 		this.iTitulo = this.doc.querySelectorAll('input[type=text]')[0]
 		this.iFecha = this.doc.querySelectorAll('input[type=date]')[0]
 		this.taDescripcion = this.doc.getElementsByTagName('textarea')[0]
 		this.divActividades = this.doc.querySelector('fieldset div')
 		this.sCalificacion = this.doc.getElementsByTagName('select')[0]
 		this.taComentarioCalificacionEmpresa = this.doc.getElementsByTagName('textarea')[1]
-		this.btnAceptar = this.doc.getElementsByTagName('button')[0]
+		this.divBotones = this.doc.querySelector('body > div')
+		this.btnCancelar = this.doc.getElementsByTagName('button')[0]
+		this.btnAceptar = this.doc.getElementsByTagName('button')[1]
 
 		//Asociamos eventos
-		this.btnVolver.onclick = this.volver.bind(this)
 		this.btnAceptar.onclick = this.aceptar.bind(this)
+		this.btnCancelar.onclick = this.cancelar.bind(this)
 
 		super.transferir(this.base, this.doc)
 		super.cargarCSS(`${this.getNombreClase()}.css`)
@@ -74,9 +75,9 @@ export class VistaTarea extends Vista{
 		for(let input of this.divActividades.getElementsByTagName('input'))
 			input.disabled = deshabilitar
 		if (deshabilitar)
-			this.btnAceptar.style.display = 'none'
+			this.divBotones.style.display = 'none'
 		else
-			this.btnAceptar.style.display = 'block'
+			this.divBotones.style.display = 'block'
 	}
 	/**
 		Muestra u oculta.
@@ -188,5 +189,11 @@ export class VistaTarea extends Vista{
 		catch(e){
 			this.controlador.gestionarError(e)
 		}
+	}
+	/**
+		Cancela la acción y vuelve a la vista anterior.
+	**/
+	cancelar(){
+		this.controlador.cancelarVistaTarea()
 	}
 }

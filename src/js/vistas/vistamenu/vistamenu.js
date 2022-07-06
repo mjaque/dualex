@@ -33,8 +33,8 @@ export class VistaMenu extends Vista{
 	**/
 	verAlumnosProfesor(){
 		this.limpiar()
-		this.verLogout(2)
 		this.verTitulo('Lista Alumnos')
+		this.base.appendChild(this.crearIcono('logout.svg', 2, 'salir', this.controlador.logout.bind(this.controlador)))
 	}
 	/**
 		Muestra el menú asociado a la lista de tareas de un alumno.
@@ -45,11 +45,11 @@ export class VistaMenu extends Vista{
 		this.limpiar()
 		if (this.controlador.getUsuario().rol == 'alumno'){
 			this.verTitulo(`Tus Tareas`)
-			this.verNuevaTarea(1)
+			this.base.appendChild(this.crearIcono('add.svg', 1, 'nueva tarea', this.controlador.mostrarTarea.bind(this.controlador, null)))
 		}
 		else
 			this.verTitulo(`Tareas de ${alumno.nombre} ${alumno.apellidos}`)
-		this.verLogout(2)
+		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
 	}
 	/**
 		Muestra el menú asociado a la vista de tarea.
@@ -58,8 +58,8 @@ export class VistaMenu extends Vista{
 	verTarea(tarea){
 		this.limpiar()
 		this.verTitulo(`Tarea: ${tarea.titulo}`)
-		this.verVolver(1)
-		this.verLogout(2)
+		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.cancelarVistaTarea.bind(this.controlador)))
+		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
 	}
 	/**
 		Elimina los elementos del menú.
@@ -78,42 +78,41 @@ export class VistaMenu extends Vista{
 	}
 	/**
 		Añade el icono de logout.
-		@param order {Number} Orden de posición en el menú.
+		@param orden {Number} Orden de posición en el menú.
 	**/
-	verLogout(order){
-		let icono = document.createElement('img')
-		icono.setAttribute('src', 'iconos/logout.svg')
-		icono.setAttribute('title', 'logout')
-		icono.classList.add('icono')
-		icono.style.order = order
-		icono.onclick = this.controlador.logout.bind(this.controlador)
-		this.base.appendChild(icono) 
+	verLogout(orden){
+		this.base.appendChild(this.crearIcono('logout.svg', orden, 'logout', this.controlador.logout.bind(this.controlador)))
 	}
 	/**
 		Añade el icono de Nueva Tarea.
 		@param order {Number} Orden de posición en el menú.
 	**/
-	verNuevaTarea(order){
-		let icono = document.createElement('img')
-		icono.setAttribute('src', 'iconos/add.svg')
-		icono.setAttribute('title', 'nueva tarea')
-		icono.classList.add('icono')
-		icono.style.order = order
-		icono.onclick = this.controlador.mostrarTarea.bind(this.controlador, null)
-		this.base.appendChild(icono) 
+	verNuevaTarea(orden){
+		this.base.appendChild(this.crearIcono('add.svg', orden, 'nueva tarea', this.controlador.mostrarTarea.bind(this.controlador, null)))
 	}
 	/**
 		Añade el icono de volver.
-		@param order {Number} Orden de posición en el menú.
+		@param orden {Number} Orden de posición en el menú.
 	**/
-	verVolver(order){
+	verVolver(orden){
+	console.log("No está claro a dónde tiene que ir este icono.");//TODO
+		this.base.appendChild(this.crearIcono('volver.svg', orden, 'volver', null)) 
+	}
+	/**
+		Crea un icono para el menú.
+		@param imagen {String} Nombre del fichero de imagen (svg) que formará el icono.
+		@param orden {Number} Número de orden del icono en el menú.
+		@param titulo {String} Texto que se mostrará en el tooltip del icono.
+		@param callback {Function} Función que se llamará al pulsar el icono.
+		@return {HTMLElement} Elemento HTML (img) que forma el icono.
+	**/
+	crearIcono(imagen, orden, titulo, callback){
 		let icono = document.createElement('img')
-		icono.setAttribute('src', 'iconos/volver.svg')
-		icono.setAttribute('title', 'volver')
+		icono.setAttribute('src', 'iconos/' + imagen)
+		icono.setAttribute('title', titulo)
 		icono.classList.add('icono')
-		icono.style.order = order
-console.log("No está claro a dónde tiene que ir este icono.");//TODO
-		icono.onclick = this.controlador.logout.bind(this.controlador)
-		this.base.appendChild(icono) 
+		icono.style.order = orden
+		icono.onclick = callback
+		return icono
 	}
 }

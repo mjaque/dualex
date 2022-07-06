@@ -141,7 +141,7 @@ class DualEx{
 		if (idTarea){
 			this.modelo.getTarea(idTarea)
 				.then(tareas => {
-					this.vistaMenu.verTarea(tarea)
+					this.vistaMenu.verTarea(tareas[0])
 					this.ocultarVistas()
 					this.vistaTarea.mostrar(true, tareas[0])
 				})
@@ -150,6 +150,12 @@ class DualEx{
 			this.ocultarVistas()
 			this.vistaTarea.mostrar(true)
 		}
+	}
+	/**
+		Cancela la vista de tareas y vuelve al menú anterior.
+	**/
+	cancelarVistaTarea(){
+		this.mostrarTareasAlumno(this.#usuario)
 	}
 	/**
 		Devuelve la lista de actividades definidas.

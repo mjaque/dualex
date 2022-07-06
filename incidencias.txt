@@ -1,3 +1,0 @@
-1. Guardar la autenticación del usuario en localstorage.
-	- Crear el proceso de logout.
-	- Si al acceder a la página hay autenticación en localstorage, no pedir el login.
