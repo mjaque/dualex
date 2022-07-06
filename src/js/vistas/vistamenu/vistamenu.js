@@ -47,8 +47,10 @@ export class VistaMenu extends Vista{
 			this.verTitulo(`Tus Tareas`)
 			this.base.appendChild(this.crearIcono('add.svg', 1, 'nueva tarea', this.controlador.mostrarTarea.bind(this.controlador, null)))
 		}
-		else
+		else{
 			this.verTitulo(`Tareas de ${alumno.nombre} ${alumno.apellidos}`)
+			this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
+		}
 		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
 	}
 	/**
@@ -58,8 +60,8 @@ export class VistaMenu extends Vista{
 	verTarea(tarea){
 		this.limpiar()
 		this.verTitulo(`Tarea: ${tarea.titulo}`)
-		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.cancelarVistaTarea.bind(this.controlador)))
 		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
+		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador)))
 	}
 	/**
 		Elimina los elementos del menú.

@@ -30,7 +30,8 @@ class Tarea{
 				elseif (is_numeric($pathParams[0]))
 					if ($usuario->rol == 'alumno')
 						$resultado = DAOTarea::verTareaDeAlumno($pathParams[0], $usuario->id);
-					else die("No implementado");
+					else 
+						$resultado = DAOTarea::verTareaDeAlumnoComoProfesor($pathParams[0], $usuario->id);
 				else{
 					header('HTTP/1.1 422 Unprocesable entity');
 					die();

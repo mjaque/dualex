@@ -108,6 +108,12 @@ class DualEx{
 		@param alumno {Alumno} Datos del alumno.
 	**/
 	mostrarTareasAlumno(alumno){
+		//Para saber volver cuando sea el profesor
+		if(this.#usuario.rol == 'profesor')
+			if (!alumno.id)
+				alumno = this.alumnoMostrado
+			else
+				this.alumnoMostrado = alumno
 		this.ocultarVistas()
 		this.modelo.getTareasAlumno(alumno)
 			.then(tareas => {
@@ -135,11 +141,11 @@ class DualEx{
 	}
 	/**
 		Muestra la vista de tarea.
-		@param idTarea {Number} Identificador de la tarea a mostrar. Si es nulo se mostrará la vista vacía para crear una nueva Tarea.
+		@param tarea {Tarea} Datos de la tarea. Si es nula se mostrará la vista vacía para crear una nueva Tarea.
 	**/
-	mostrarTarea(idTarea){
-		if (idTarea){
-			this.modelo.getTarea(idTarea)
+	mostrarTarea(tarea){
+		if (tarea){
+			this.modelo.getTarea(tarea.id)
 				.then(tareas => {
 					this.vistaMenu.verTarea(tareas[0])
 					this.ocultarVistas()
@@ -150,12 +156,6 @@ class DualEx{
 			this.ocultarVistas()
 			this.vistaTarea.mostrar(true)
 		}
-	}
-	/**
-		Cancela la vista de tareas y vuelve al menú anterior.
-	**/
-	cancelarVistaTarea(){
-		this.mostrarTareasAlumno(this.#usuario)
 	}
 	/**
 		Devuelve la lista de actividades definidas.
