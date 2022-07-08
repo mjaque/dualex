@@ -149,17 +149,37 @@ class DAOTarea{
 	public static function modificar($tarea, $usuario){
 		if (!BD::iniciarTransaccion())
 			throw new Exception('No es posible iniciar la transacción.');
-		$sql = 'UPDATE Tarea SET titulo = :titulo, descripcion = :descripcion , fecha = :fecha, id_calificacion_empresa = :idCalificacionEmpresa, ';
-		$sql .= 'comentario_calificacion_empresa = :comentarioCalificacionEmpresa ';
-		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno AND Tarea.id_calificacion_empresa IS NULL AND Tarea.calificacion IS NULL AND Tarea.evaluacion IS NULL';
+
+		if ($usuario->rol == 'profesor'){
+			$sql = 'UPDATE Tarea SET titulo = :titulo, descripcion = :descripcion , fecha = :fecha, id_calificacion_empresa = :idCalificacionEmpresa, ';
+			$sql .= 'comentario_calificacion_empresa = :comentarioCalificacionEmpresa ';
+			$sql .= ', calificacion = :calificacion, evaluacion = :evaluacion '; 
+			$sql .= 'WHERE Tarea.id = :id';
 		
-		$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'idAlumno'=>$usuario->id);
+			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'evaluacion' => $tarea->evaluacion, 'calificacion' => $tarea->calificacion);
+		}
+		if ($usuario->rol == 'alumno'){
+			$sql = 'UPDATE Tarea SET titulo = :titulo, descripcion = :descripcion , fecha = :fecha, id_calificacion_empresa = :idCalificacionEmpresa, ';
+			$sql .= 'comentario_calificacion_empresa = :comentarioCalificacionEmpresa ';
+			$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno ';
+			$sql .= ' AND Tarea.id_calificacion_empresa IS NULL AND Tarea.calificacion IS NULL AND Tarea.evaluacion IS NULL';
+		
+			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'idAlumno'=>$usuario->id);
+		}
+	
+		//print_r($params);die($sql);
 
 		$idNuevo = BD::actualizar($sql, $params);
 
 		//Borramos sus actividades
-		$sql = 'DELETE FROM Actividad_Tarea WHERE id_tarea = :id AND id_tarea IN (SELECT id FROM Tarea WHERE Tarea.id_alumno = :idAlumno)';
-		$params = array('id' => $tarea->id, 'idAlumno' => $usuario->id);
+		if ($usuario->rol == 'profesor'){
+			$sql = 'DELETE FROM Actividad_Tarea WHERE id_tarea = :id';
+			$params = array('id' => $tarea->id);
+		}
+		if ($usuario->rol == 'alumno'){
+			$sql = 'DELETE FROM Actividad_Tarea WHERE id_tarea = :id AND id_tarea IN (SELECT id FROM Tarea WHERE Tarea.id_alumno = :idAlumno)';
+			$params = array('id' => $tarea->id, 'idAlumno' => $usuario->id);
+		}
 		BD::borrar($sql, $params);
 
 		//Las volvemos a insertar

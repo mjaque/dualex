@@ -80,6 +80,8 @@ class Tarea{
 		//Control de valores nulos
 		if ($tarea->idCalificacionEmpresa === "null")
 			$tarea->idCalificacionEmpresa = null;
+		if ($tarea->calificacion === "")
+			$tarea->calificacion = null;
 
     	$id = DAOTarea::modificar($tarea, $usuario);
     	//Respuesta a un PUT

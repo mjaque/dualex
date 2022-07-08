@@ -10,6 +10,10 @@
 .vistatarea input{
 	margin: 0.3rem;
 }
+.vistatarea input[type='number']{
+	width: 3rem;
+	margin: 0.3rem;
+}
 .vistatarea .modulo{
 	padding: 0.3rem 1rem;
 	border: 1px solid grey;

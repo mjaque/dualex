@@ -67,6 +67,7 @@ DROP TABLE IF EXISTS Alumno_Modulo;
 CREATE TABLE Alumno_Modulo(
 	id_alumno INT UNSIGNED,
 	id_modulo INT UNSIGNED,
+	PRIMARY KEY (id_alumno, id_modulo),
 	FOREIGN KEY (id_alumno) REFERENCES Alumno (id) ON DELETE CASCADE,
 	FOREIGN KEY (id_modulo) REFERENCES Modulo (id) ON DELETE CASCADE
 );
@@ -100,6 +101,7 @@ DROP TABLE IF EXISTS Actividad_Tarea;
 CREATE TABLE Actividad_Tarea(
 	id_actividad INT UNSIGNED,
 	id_tarea INT UNSIGNED,
+	PRIMARY KEY (id_actividad, id_tarea),
 	FOREIGN KEY (id_actividad) REFERENCES Actividad (id) ON DELETE CASCADE,
 	FOREIGN KEY (id_tarea) REFERENCES Tarea (id) ON DELETE CASCADE
 );

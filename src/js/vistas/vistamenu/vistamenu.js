@@ -61,7 +61,7 @@ export class VistaMenu extends Vista{
 		this.limpiar()
 		this.verTitulo(`Tarea: ${tarea.titulo}`)
 		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
-		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador)))
+		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, null)))
 	}
 	/**
 		Elimina los elementos del menú.

@@ -14,24 +14,6 @@
 	margin: 0 0.2rem;
 	cursor: help;
 }
-.vistaalumnos .alumno{
-	cursor: pointer;
-}
-.vistaalumnos .alumno:hover{
-	color: blue;
-}
-.vistaalumnos .icono_grande{
-	position: fixed;
-	top: 5%;
-	left: 80%;
-	background-color: blue;
-	border-radius: 2rem;
-	cursor: pointer;
-	transition: transform .7s ease-in-out;
-}
-.vistaalumnos .icono_grande:hover{
-	transform: rotate(360deg);
-}
 .vistaalumnos .iconos{
 	float: right;
 }

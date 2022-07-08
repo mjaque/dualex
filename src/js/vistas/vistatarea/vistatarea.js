@@ -27,6 +27,8 @@ export class VistaTarea extends Vista{
 		this.sCalificacion = this.doc.getElementsByTagName('select')[0]
 		this.taComentarioCalificacionEmpresa = this.doc.getElementsByTagName('textarea')[1]
 		this.divBotones = this.doc.querySelector('body > div')
+		this.taEvaluacion = this.doc.getElementsByTagName('textarea')[2]
+		this.iCalificacion = this.doc.querySelectorAll('input[type=number]')[0]
 		this.btnCancelar = this.doc.getElementsByTagName('button')[0]
 		this.btnAceptar = this.doc.getElementsByTagName('button')[1]
 
@@ -54,13 +56,19 @@ export class VistaTarea extends Vista{
 		this.iFecha.value = tarea.fecha
 		this.taDescripcion.value = tarea.descripcion
 		this.taComentarioCalificacionEmpresa.value = tarea.comentario_calificacion_empresa
+		this.taEvaluacion.value = tarea.evaluacion
+		this.iCalificacion.value = tarea.calificacion
 		//Seleccionamos la calificación de la empresa
 		this.sCalificacion.value = tarea.id_calificacion_empresa
 		//Marcamos las actividades de la tarea
 		for(let actividad of tarea.actividades)
 			this.divActividades.querySelector('input[data-idActividad="' + actividad.id + '"').checked = true
-		if (tarea.id_calificacion_empresa)
-			this.deshabilitar(true)
+		if (this.controlador.getUsuario().rol == 'alumno'){
+			this.iCalificacion.disabled = true
+			this.taEvaluacion.disabled = true
+			if (tarea.id_calificacion_empresa || tarea.calificacion)
+				this.deshabilitar(true)
+		}
 	}
 	/**
 		Cambia la capacidad de editar los campos de la vista (para el alumno).
@@ -178,6 +186,11 @@ export class VistaTarea extends Vista{
 					tarea.actividades.push(iActividad.getAttribute('data-idActividad'))
 			tarea.idCalificacionEmpresa = this.sCalificacion.value
 			tarea.comentarioCalificacionEmpresa = this.taComentarioCalificacionEmpresa.value
+
+			if (this.controlador.getUsuario().rol == 'profesor'){
+				tarea.evaluacion = this.taEvaluacion.value
+				tarea.calificacion = this.iCalificacion.value
+			}
 			
 			if (this.tarea){
 				tarea.id = this.tarea.id
@@ -194,6 +207,6 @@ export class VistaTarea extends Vista{
 		Cancela la acción y vuelve a la vista anterior.
 	**/
 	cancelar(){
-		this.controlador.cancelarVistaTarea()
+		this.controlador.mostrarTareasAlumno()
 	}
 }

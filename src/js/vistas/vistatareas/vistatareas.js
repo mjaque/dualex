@@ -49,7 +49,7 @@ export class VistaTareas extends Vista{
 		let divIconos = document.createElement('div')
 		div.appendChild(divIconos)
 		divIconos.classList.add('iconos')
-		if (tarea.calificacion_empresa != null && this.controlador.getUsuario().rol == 'alumno'){
+		if ((tarea.calificacion_empresa != null || tarea.calificacion != null) && this.controlador.getUsuario().rol == 'alumno'){
 			let iconoConsultar = document.createElement('img')
 			divIconos.appendChild(iconoConsultar)
 			iconoConsultar.classList.add('icono')
@@ -118,7 +118,7 @@ export class VistaTareas extends Vista{
 		@param tarea {Tarea} Datos de la tarea.
 	**/
 	pulsarConsultar(tarea){
-		this.controlador.mostrarTarea(tarea.id)
+		this.controlador.mostrarTarea(tarea)
 	}
 	/**
 		Atención a la pulsación en el icono de "Eliminar"

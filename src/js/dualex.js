@@ -110,10 +110,12 @@ class DualEx{
 	mostrarTareasAlumno(alumno){
 		//Para saber volver cuando sea el profesor
 		if(this.#usuario.rol == 'profesor')
-			if (!alumno.id)
+			if (!alumno)
 				alumno = this.alumnoMostrado
 			else
 				this.alumnoMostrado = alumno
+		if (alumno == null)
+			alumno = this.#usuario
 		this.ocultarVistas()
 		this.modelo.getTareasAlumno(alumno)
 			.then(tareas => {
@@ -191,7 +193,10 @@ class DualEx{
 		this.modelo.modificarTarea(tarea)
 			.then(resultado => {
 				this.vistaMensaje.mostrar('La tarea se modificó correctamente', VistaMensaje.OK)
-				this.mostrarTareasAlumno(this.#usuario)
+				if (this.#usuario.rol == 'profesor')
+					this.mostrarTareasAlumno(this.alumnoMostrado)
+				else
+					this.mostrarTareasAlumno(this.#usuario)
 			})
 			.catch(error => this.gestionarError(error))
 	}

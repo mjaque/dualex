@@ -50,7 +50,7 @@ export class VistaAlumnos extends Vista{
 		div.appendChild(spanAlumno)
 		spanAlumno.classList.add('alumno')
 		spanAlumno.textContent = `${alumno.nombre} ${alumno.apellidos}`
-		spanAlumno.onclick = this.pulsarAlumno.bind(this, alumno)
+		//spanAlumno.onclick = this.pulsarAlumno.bind(this, alumno)
 
 		//TODO: Refactorizar para evitar DRY.
 		let spanIconos = document.createElement('span')
@@ -85,13 +85,6 @@ export class VistaAlumnos extends Vista{
 		span.setAttribute('title', modulo.titulo)
 		span.style.backgroundColor = modulo.color_fondo
 		span.style.color = modulo.color_letra
-	}
-	/**
-		Atención a la pulsación sobre el alumno.
-		@param alumno {Alumno} Datos del alumno.
-	**/
-	pulsarAlumno(alumno){
-		console.log('No implementado.')
 	}
 	/**
 		Atención a la pulsación sobre el icono de Tareas de un alumno.
