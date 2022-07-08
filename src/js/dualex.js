@@ -68,6 +68,7 @@ class DualEx{
 		.then(usuario => {
 				this.#usuario = usuario
 				Rest.setAutorizacion(this.#usuario.autorizacion)
+				this.vistaMenu.mostrar(true)
 				this.vistaLogin.mostrar(false)
 		switch(usuario.rol){
 			case 'alumno':
@@ -86,7 +87,11 @@ class DualEx{
 		Cierra la sesión del usuario.
 	**/
 	logout(){
-		throw "No implementado"
+		this.#usuario = null
+		Rest.setAutorizacion(null)
+		this.ocultarVistas()
+		this.vistaMenu.mostrar(false)
+		this.vistaLogin.mostrar(true)
 	}
 	/**
 		Devuelve el usuario logeado.

@@ -14,6 +14,7 @@ export class VistaMenu extends Vista{
 		super(controlador)
 		this.base = base
 		this.base.classList.add(this.getNombreClase())
+		this.display = 'flex'
 	}
 	/**
 		Inicia la vista.
