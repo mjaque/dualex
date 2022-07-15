@@ -23,6 +23,7 @@ export class Modelo{
 	}
 	/**
 		Devuelve la lista de tareas de un alumno.
+		@param alumno {Alumno} Datos del alumno.
 		@return {Promise} Devuelve la promesa asociada a la petición.
 	**/
 	getTareasAlumno(alumno){
@@ -76,5 +77,15 @@ export class Modelo{
 	**/
 	borrarTarea(tarea){
 		return Rest.delete('tarea', [tarea.id])
+	}
+	/**
+		Devuelve la información del informe de evaluación de un alumno.
+		@param alumno {Alumno} Datos del alumno.
+		@return {Promise} Devuelve la promesa asociada a la petición.
+	**/
+	getInformeAlumno(alumno){
+		let queryParams = new Map()
+		queryParams.set('id_alumno', alumno.id)
+		return Rest.get('informe', [], queryParams)
 	}
 }

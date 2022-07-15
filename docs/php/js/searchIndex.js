@@ -276,9 +276,14 @@ Search.appendIndex(
             "summary": "Devuelve\u0020un\u0020array\u0020de\u0020tareas\u0020de\u0020un\u0020alumno.",
             "url": "classes/DAOTarea.html#method_verTareasDeAlumnoComoProfesor"
         },                {
+            "fqsen": "\\DAOTarea\u003A\u003AverTareaDeAlumnoComoProfesor\u0028\u0029",
+            "name": "verTareaDeAlumnoComoProfesor",
+            "summary": "Devuelve\u0020una\u0020tarea\u0020de\u0020un\u0020alumno.",
+            "url": "classes/DAOTarea.html#method_verTareaDeAlumnoComoProfesor"
+        },                {
             "fqsen": "\\DAOTarea\u003A\u003Ainsertar\u0028\u0029",
             "name": "insertar",
-            "summary": "Inserta\u0020una\u0020nueva\u0020tarea.",
+            "summary": "",
             "url": "classes/DAOTarea.html#method_insertar"
         },                {
             "fqsen": "\\DAOTarea\u003A\u003Amodificar\u0028\u0029",

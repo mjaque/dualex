@@ -77,6 +77,10 @@
 				require_once('./controladores/tarea.php');
 				$controlador = new Tarea();
 				break;
+			case 'informe':
+				require_once('./controladores/informe.php');
+				$controlador = new Informe();
+				break;
 			case 'actividad':
 				require_once('./controladores/actividad.php');
 				$controlador = new Actividad();

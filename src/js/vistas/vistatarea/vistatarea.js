@@ -115,6 +115,8 @@ export class VistaTarea extends Vista{
 		this.taDescripcion.value = ''
 		this.sCalificacion.selectedIndex = 0
 		this.taComentarioCalificacionEmpresa.value = ''
+		this.taEvaluacion.value = ''
+		this.iCalificacion.value = ''
 	}
 	/**
 		Carga la lista de Actividades.

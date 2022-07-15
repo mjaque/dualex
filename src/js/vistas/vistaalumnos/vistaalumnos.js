@@ -98,6 +98,6 @@ export class VistaAlumnos extends Vista{
 		@param alumno {Alumno} Datos del alumno.
 	**/
 	pulsarInforme(alumno){
-		console.log('No implementado.')
+		this.controlador.mostrarInformeAlumno(alumno)
 	}
 }

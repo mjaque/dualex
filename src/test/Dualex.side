@@ -860,7 +860,7 @@
       "id": "001fda88-5c10-4981-af04-3588ecd252c6",
       "comment": "",
       "command": "assertText",
-      "target": "css=div:nth-child(1) > .modulo",
+      "target": "xpath=//div[@id='tarea_1']/span[@class='modulo']",
       "targets": [
         ["css=div:nth-child(1) > .modulo", "css:finder"],
         ["xpath=//div[@id='divTareas']/div/span", "xpath:idRelative"],
@@ -869,34 +869,10 @@
       ],
       "value": "PRFB"
     }, {
-      "id": "c7adcb09-94d7-4e9e-a360-fbe51ebbfbd9",
-      "comment": "",
-      "command": "click",
-      "target": "css=.tarea:nth-child(3)",
-      "targets": [
-        ["css=.tarea:nth-child(3)", "css:finder"],
-        ["xpath=//div[@id='divTareas']/div/span[2]", "xpath:idRelative"],
-        ["xpath=//div[5]/div/span[2]", "xpath:position"],
-        ["xpath=//span[contains(.,'Tarea 10.1 - Sin calificación de empresa - Sin calificación del profesor')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "0ea978b1-3a31-4947-81a5-5667f5b5a489",
-      "comment": "",
-      "command": "click",
-      "target": "css=.tarea:nth-child(3)",
-      "targets": [
-        ["css=.tarea:nth-child(3)", "css:finder"],
-        ["xpath=//div[@id='divTareas']/div/span[2]", "xpath:idRelative"],
-        ["xpath=//div[5]/div/span[2]", "xpath:position"],
-        ["xpath=//span[contains(.,'Tarea 10.1 - Sin calificación de empresa - Sin calificación del profesor')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
       "id": "f3ee8dbf-046c-4e67-a6d2-9d6097502673",
       "comment": "",
       "command": "assertText",
-      "target": "css=.tarea:nth-child(3)",
+      "target": "xpath=//div[@id='tarea_1']/span[@class='tarea']",
       "targets": [
         ["css=.tarea:nth-child(3)", "css:finder"],
         ["xpath=//div[@id='divTareas']/div/span[2]", "xpath:idRelative"],
@@ -906,9 +882,9 @@
       "value": "Tarea 10.1 - Sin calificación de empresa - Sin calificación del profesor"
     }, {
       "id": "77d6949b-f510-4558-a36b-d9f543e6b6bd",
-      "comment": "",
+      "comment": "Tiene icono para editar",
       "command": "assertElementPresent",
-      "target": "css=div:nth-child(1) > .iconos > .icono:nth-child(1)",
+      "target": "xpath=//div[@id='tarea_1']//img[@title='editar']",
       "targets": [
         ["css=div:nth-child(1) > .iconos > .icono:nth-child(1)", "css:finder"],
         ["xpath=//img[@title='editar']", "xpath:img"],
@@ -918,9 +894,9 @@
       "value": ""
     }, {
       "id": "3d88eb0b-b4fe-404b-a019-8d5f1808dd5c",
-      "comment": "",
+      "comment": "Tiene icono para eliminar",
       "command": "assertElementPresent",
-      "target": "css=div:nth-child(1) > .iconos > .icono:nth-child(2)",
+      "target": "xpath=//div[@id='tarea_1']//img[@title='eliminar']",
       "targets": [
         ["css=div:nth-child(1) > .iconos > .icono:nth-child(2)", "css:finder"],
         ["xpath=//img[@title='eliminar']", "xpath:img"],
@@ -929,22 +905,10 @@
       ],
       "value": ""
     }, {
-      "id": "aa111858-82f8-41a6-9599-533aee1733b1",
-      "comment": "",
-      "command": "assertText",
-      "target": "css=.modulo:nth-child(3)",
-      "targets": [
-        ["css=.modulo:nth-child(3)", "css:finder"],
-        ["xpath=//div[@id='divTareas']/div[2]/span[2]", "xpath:idRelative"],
-        ["xpath=//div[2]/span[2]", "xpath:position"],
-        ["xpath=//span[contains(.,'SMEC')]", "xpath:innerText"]
-      ],
-      "value": "SMEC"
-    }, {
       "id": "63d1cba2-7c98-4149-99cd-e34c091dbdd3",
-      "comment": "",
+      "comment": "Pulsamos en \"editar\"",
       "command": "click",
-      "target": "css=div:nth-child(1) > .iconos > .icono:nth-child(1)",
+      "target": "xpath=//div[@id='tarea_1']//img[@title='editar']",
       "targets": [
         ["css=div:nth-child(1) > .iconos > .icono:nth-child(1)", "css:finder"],
         ["xpath=//img[@title='editar']", "xpath:img"],
@@ -1088,9 +1052,9 @@
       "value": ""
     }, {
       "id": "0c526cab-0067-4df9-927f-b2de46d5bc24",
-      "comment": "",
+      "comment": "Escribimos el nombre de usuario",
       "command": "type",
-      "target": "css=label:nth-child(1) > input",
+      "target": "xpath=//div[@id='divLogin']//input[@type='email']",
       "targets": [
         ["css=label:nth-child(1) > input", "css:finder"],
         ["xpath=//input[@value='email2@email.es']", "xpath:attributes"],
@@ -1100,9 +1064,9 @@
       "value": "alumno1.guadalupe@alumnado.fundacionloyola.net"
     }, {
       "id": "49ffb8ff-4a43-4806-84cd-084323199560",
-      "comment": "",
+      "comment": "Escribimos la password",
       "command": "type",
-      "target": "css=label:nth-child(3) > input",
+      "target": "xpath=//div[@id='divLogin']//input[@type='password']",
       "targets": [
         ["css=label:nth-child(3) > input", "css:finder"],
         ["xpath=//input[@value='clave 2']", "xpath:attributes"],
@@ -1112,7 +1076,7 @@
       "value": "alumno1"
     }, {
       "id": "13003bdf-4730-426f-a636-2c006afa4a70",
-      "comment": "",
+      "comment": "Pulsamos el botón de login",
       "command": "click",
       "target": "css=#divLogin > button",
       "targets": [
@@ -1126,7 +1090,7 @@
       "id": "b23822d9-16b3-49d4-bbdc-afdb24bee4d8",
       "comment": "",
       "command": "click",
-      "target": "css=div:nth-child(2) .icono:nth-child(1)",
+      "target": "xpath=//div[id='tarea_1']//img[title='editar']",
       "targets": [
         ["css=div:nth-child(2) .icono:nth-child(1)", "css:finder"],
         ["xpath=(//img[@title='editar'])[2]", "xpath:img"],
@@ -1539,7 +1503,7 @@
         ["xpath=//div[5]/div/span[2]", "xpath:position"],
         ["xpath=//span[contains(.,'Tarea 10.1 - Sin calificación de empresa - Sin calificación del profesor')]", "xpath:innerText"]
       ],
-      "value": "Tarea 10.1 - Sin calificación de empresa - Sin calificación del profesor"
+      "value": "Tarea 10.2 - Sin calificación de empresa - Sin calificación del profesor"
     }, {
       "id": "fcfde321-2773-40e6-a185-7c793749272e",
       "comment": "",

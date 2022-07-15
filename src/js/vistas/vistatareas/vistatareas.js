@@ -45,6 +45,7 @@ export class VistaTareas extends Vista{
 	crearDivTarea(tarea){
 		let div = document.createElement('div')
 		this.base.appendChild(div)
+		div.id = `tarea_${tarea.id}`	//Nos servirá para las pruebas
 		//TODO: Refactorizar para evitar DRY.
 		let divIconos = document.createElement('div')
 		div.appendChild(divIconos)

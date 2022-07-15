@@ -17,7 +17,8 @@ import {VistaTareas} from './vistas/vistatareas/vistatareas.js'
 import {VistaTarea} from './vistas/vistatarea/vistatarea.js'
 //Listado de Alumnos
 import {VistaAlumnos} from './vistas/vistaalumnos/vistaalumnos.js'
-//Informe de Alumno ¿¿??
+//Informe de Alumno
+import {VistaInforme} from './vistas/vistainforme/vistainforme.js'
 
 //Servicios
 import {Rest} from './servicios/rest.js'
@@ -45,6 +46,7 @@ class DualEx{
 		this.vistaAlumnos = new VistaAlumnos(this, document.getElementById('divAlumnos'))
 		this.vistaTarea = new VistaTarea(this, document.getElementById('divTarea'))
 		this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
+		this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
 	}
 	/**
 		Muestra el error en la vista de mensajes.
@@ -128,6 +130,22 @@ class DualEx{
 				this.vistaTareas.cargar(tareas)
 				this.ocultarVistas()
 				this.vistaTareas.mostrar(true)
+			})
+			.catch(error => this.gestionarError(error))
+	}
+	/**
+		Muestra la vista del informe de un alumno.
+		@param alumno {Alumno} Datos del alumno.
+	**/
+	mostrarInformeAlumno(alumno){
+		if(this.#usuario.rol != 'profesor') return
+		this.ocultarVistas()
+		this.modelo.getInformeAlumno(alumno)
+			.then(informe => {
+				this.vistaMenu.verInforme(alumno)
+				this.vistaInforme.cargar(informe)
+				this.ocultarVistas()
+				this.vistaInforme.mostrar(true)
 			})
 			.catch(error => this.gestionarError(error))
 	}

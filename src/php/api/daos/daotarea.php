@@ -25,7 +25,7 @@ class DAOTarea{
 		$sql .= 'LEFT JOIN Modulo ON Modulo.id = Actividad_Modulo.id_modulo ';
 		$sql .= 'LEFT JOIN Alumno_Modulo ON Modulo.id = Alumno_Modulo.id_modulo AND Alumno_Modulo.id_alumno = :id_alumno1 ';
 		$sql .= 'WHERE Alumno.id = :id_alumno2 ';
-		$sql .= 'ORDER BY Actividad.titulo, Tarea.titulo ';
+		$sql .= 'ORDER BY Tarea.fecha DESC ';
 		
 		$params = array('id_alumno1' => $idAlumno, 'id_alumno2' => $idAlumno);
 
@@ -79,7 +79,7 @@ class DAOTarea{
 		$sql .= 'LEFT JOIN Modulo_Profesor ON Modulo.id = Modulo_Profesor.id_modulo ';
 		$sql .= 'WHERE Alumno.id = :id_alumno ';
 		$sql .= 'AND Modulo_Profesor.id_profesor = :id_profesor ';
-		$sql .= 'ORDER BY Actividad.titulo, Tarea.titulo ';
+		$sql .= 'ORDER BY Tarea.fecha DESC ';
 
 		$params = array('id_alumno' => $id_alumno, 'id_profesor' => $id_profesor);
 
