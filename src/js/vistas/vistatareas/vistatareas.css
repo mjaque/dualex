@@ -44,3 +44,7 @@
 	margin-right: 20%;	/* Para dejar espacio a los iconos */
 	line-height: 1.5rem;
 }
+.vistatareas .tarea_pendiente{
+	font-weight: bold;
+	color: red;
+}

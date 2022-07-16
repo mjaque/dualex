@@ -78,6 +78,16 @@ export class VistaTareas extends Vista{
 		let spanTarea = document.createElement('span')
 		div.appendChild(spanTarea)
 		spanTarea.classList.add('tarea')
+		//Si es profesor, ponemos el aviso de tarea pendiente de corrección
+		if (this.controlador.getUsuario().rol == 'profesor'){
+			if (!tarea.calificacion){
+				let spanAviso = document.createElement('span')
+				spanTarea.appendChild(spanAviso)
+				spanAviso.classList.add('tarea_pendiente')
+				spanAviso.textContent = '!'
+				spanAviso.setAttribute('title', 'pendiente de evaluación')
+			}
+		}
 		let texto = `${tarea.titulo} - `
 		if (tarea.calificacion_empresa)
 			texto += tarea.calificacion_empresa
@@ -87,7 +97,7 @@ export class VistaTareas extends Vista{
 			texto += ' - ' + tarea.calificacion
 		else
 			texto += ' - Sin calificación del profesor'
-		spanTarea.textContent = texto
+		spanTarea.appendChild(document.createTextNode(texto))
 
 	}
 	//TODO: DRY con vistaalumnos.js
