@@ -1,37 +1,37 @@
 .vistamensaje{
-  width: 60%;
-  margin: 1em auto;
-  padding: 1em;
-  font-size: 1.5em;
-  font-weight: bold;
-  border-radius: 0.3em;
-  display: none;
+	width: 60%;
+	margin: 1em auto;
+	padding: 1em;
+	font-size: 1.5em;
+	font-weight: bold;
+	border-radius: 0.3em;
+	display: none;
 }
 /* Botón de cierre del div */
 .vistamensaje > span:first-child{
-  margin-right: 1rem;
-  float: right;
-  font-size: 1rem;
-  color: grey;
-  cursor: pointer;
+	margin-right: 1rem;
+	float: right;
+	font-size: 1rem;
+	color: grey;
+	cursor: pointer;
 }
 /* Texto del mensaje */
 .vistamensaje > span:nth-child(2){
-  font-size: 1rem;
+	font-size: 1rem;
 }
 .vistamensaje.info{
-  background-color: blue;
-  color: white;
+	background-color: blue;
+	color: white;
 }
 .vistamensaje.ok{
-  background-color: green;
-  color: white;
+	background-color: green;
+	color: white;
 }
 .vistamensaje.aviso{
-  background-color: orange;
-  color: white;
+	background-color: orange;
+	color: white;
 }
 .vistamensaje.error{
-  background-color: red;
-  color: white;
+	background-color: red;
+	color: white;
 }
