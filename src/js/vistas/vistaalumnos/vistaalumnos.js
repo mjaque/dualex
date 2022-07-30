@@ -2,6 +2,7 @@
 	Vista con el listado de alumnos de un profesor.
 **/
 import {Vista} from '../vista.js'
+import {VistaMenuContexto} from '../vistamenucontexto/vistamenucontexto.js'
 
 export class VistaAlumnos extends Vista{
 	/**
@@ -20,9 +21,21 @@ export class VistaAlumnos extends Vista{
 		Obtiene las referencias a los elementos del interfaz, captura los eventos, transfiere la plantilla al documento principal...
 	**/
 	iniciar(){
-		//Cogemos referencias a los elementos del interfaz
+		//Creamos la subvista del menú de contexto
+	 	this.vistaMenuContexto = new VistaMenuContexto(this, this.doc.getElementsByTagName('div')[0])
+		this.controlador.verPeriodos()
+			.then(periodos => {
+				let opciones = []
+				for(let periodo of periodos){
+					opciones.push({'titulo': periodo.nombre, 'callback': this.elegirPeriodo.bind(this, periodo.id)})
+				}
+				this.vistaMenuContexto.cargar(opciones)
+			})
 
+		//Cogemos referencias a los elementos del interfaz
+		
 		//Asociamos eventos
+		window.addEventListener('click', this.ocultarMenuContexto.bind(this))
 
 		super.transferir(this.base, this.doc)
 		super.cargarCSS(`${this.getNombreClase()}.css`)
@@ -31,7 +44,7 @@ export class VistaAlumnos extends Vista{
 		Carga los alumnos.
 	**/
 	cargar(alumnos){
-		this.eliminarHijos(this.base)
+		this.eliminarHijos(this.base, 1)
 		if (!alumnos)
 			this.base.appendChild(document.createTextNode('No tiene alumnos en sus módulos.'))
 		else
@@ -97,7 +110,26 @@ export class VistaAlumnos extends Vista{
 		Atención a la pulsación sobre el icono de Informe de un alumno.
 		@param alumno {Alumno} Datos del alumno.
 	**/
-	pulsarInforme(alumno){
-		this.controlador.mostrarInformeAlumno(alumno)
+	pulsarInforme(alumno, evento){
+		this.alumnoElegido = alumno
+		this.vistaMenuContexto.mostrarEn(evento.clientX, evento.clientY)
+		evento.stopPropagation()
 	}
+	/**
+		Atención a la elección de periodo de informe en el menú de contexto.
+		@param periodo {Number} Identificador del periodo solicitado.
+		@param evento {ClickEvent} Evento de click.
+	**/
+	elegirPeriodo(periodo, evento){
+		this.controlador.mostrarInformeAlumno(this.alumnoElegido, periodo)
+		evento.stopPropagation()
+		evento.preventDefault()
+	}
+	/**
+		Oculta el menú de contexto.
+	**/
+	ocultarMenuContexto(){
+		this.vistaMenuContexto.mostrar(false)
+	}
+
 }

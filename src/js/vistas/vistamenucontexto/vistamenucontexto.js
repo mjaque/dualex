@@ -23,14 +23,22 @@ export class VistaMenuContexto extends Vista{
 		//Cogemos referencias a los elementos del interfaz
 
 		//Asociamos eventos
-		this.doc.getElementsByTagName('a')[0].onclick = this.controlador.elegirPeriodo.bind(this.controlador, 1)
-		this.doc.getElementsByTagName('a')[1].onclick = this.controlador.elegirPeriodo.bind(this.controlador, 2)
-		this.doc.getElementsByTagName('a')[2].onclick = this.controlador.elegirPeriodo.bind(this.controlador, 3)
-		this.doc.getElementsByTagName('a')[3].onclick = this.controlador.elegirPeriodo.bind(this.controlador, 4)
-		this.doc.getElementsByTagName('a')[4].onclick = this.controlador.elegirPeriodo.bind(this.controlador, 5)
 
 		super.transferir(this.base, this.doc)
 		super.cargarCSS(`${this.getNombreClase()}.css`)
+	}
+	/**
+		Carga las opciones del menú de contexto.
+		@param opciones {Array} Array bidimensional de objetos opciones con título y callback.
+	**/
+	cargar(opciones){
+		for(let opcion of opciones){
+			let a = document.createElement('a')
+			this.base.appendChild(a)
+			a.textContent = opcion.titulo
+			a.onclick = opcion.callback
+			this.base.appendChild(document.createElement('br'))
+		}
 	}
 	/**
 		Muestra el menú de contexto en las coordenadas indicadas.

@@ -76,11 +76,13 @@ DROP TABLE IF EXISTS Calificacion;
 CREATE TABLE Calificacion(
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	titulo VARCHAR(256),
+	valor INT NOT NULL,
 	descripcion TEXT
-);
+)
+COMMENT="Valores de la calificación de la empresa";
 
 INSERT INTO Calificacion VALUES
-(1, 'Óptima', null), (2, 'Buena', null), (3, 'Aceptable', null), (4, 'Mejorable', null);
+(1, 'Óptima', 10, null), (2, 'Buena', 7, null), (3, 'Aceptable', 5, null), (4, 'Mejorable', 3, null);
 
 DROP TABLE IF EXISTS Tarea;
 CREATE TABLE Tarea(
@@ -106,3 +108,11 @@ CREATE TABLE Actividad_Tarea(
 	FOREIGN KEY (id_tarea) REFERENCES Tarea (id) ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS Periodo;
+CREATE TABLE Periodo(
+	id INT PRIMARY KEY,
+	nombre VARCHAR(256),
+	fecha_inicio DATE NOT NULL,
+	fecha_fin DATE NOT NULL
+)
+COMMENT = 'Fechas de los periodos de evaluación'

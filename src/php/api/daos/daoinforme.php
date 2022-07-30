@@ -6,29 +6,69 @@
 
 class DAOInforme{
 	/**
-		Devuelve un array de tareas de un alumno.
+		Devuelve un array con las valoraciones del alumno en cada actividad.
+		La valoración de cada actividad se calcula como la media entre la calificación de la empresa y la calificación del profesor de todas las tareas del periodo asociadas a la actividad.
 		@param $idAlumno Identificador del alumno.
+		@param $idPeriodo Identificador del periodo solicitado.
 		@param $idProfesor Identificador del profesor.
 		@return Un array de arrays con los datos de cada tarea.
 	**/
-	public static function verInforme($idAlumno, $idProfesor){
-		$sql	= 'SELECT Tarea.id AS id, Tarea.titulo AS titulo, Tarea.descripcion AS descripcion, Tarea.fecha ';
-		$sql .= ', Tarea.id_calificacion_empresa, Tarea.comentario_calificacion_empresa, Tarea.calificacion, Tarea.evaluacion ';
-		$sql .= ', Calificacion.titulo AS calificacion_empresa ';
-		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
-		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra, Modulo.icono ';
-		$sql .= 'FROM Tarea ';
-		$sql .= 'JOIN Alumno ON Alumno.id = Tarea.id_alumno ';
-		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
-		$sql .= 'LEFT JOIN Actividad_Tarea ON Actividad_Tarea.id_tarea = Tarea.id ';
-		$sql .= 'LEFT JOIN Actividad ON Actividad_Tarea.id_actividad = Actividad.id ';
-		$sql .= 'LEFT JOIN Actividad_Modulo ON Actividad_Modulo.id_actividad = Actividad.id ';
-		$sql .= 'LEFT JOIN Modulo ON Modulo.id = Actividad_Modulo.id_modulo ';
-		$sql .= 'LEFT JOIN Alumno_Modulo ON Modulo.id = Alumno_Modulo.id_modulo AND Alumno_Modulo.id_alumno = :id_alumno1 ';
-		$sql .= 'WHERE Alumno.id = :id_alumno2 ';
-		$sql .= 'ORDER BY Actividad.titulo, Tarea.titulo ';
+	public static function verValoracion($idAlumno, $idPeriodo, $idProfesor){
+		$sql  = 'SELECT CONCAT(Actividad.id, ".-", Actividad.titulo) AS titulo, ';
+		$sql .= 'ROUND(( ';
+		$sql .= 'SELECT AVG((Tarea.calificacion + Calificacion.valor)/2) FROM Tarea '; 
+		$sql .= 'JOIN Calificacion ON Tarea.id_calificacion_empresa = Calificacion.id ';
+		$sql .= 'JOIN Actividad_Tarea ON Tarea.id = Actividad_Tarea.id_tarea AND Actividad_Tarea.id_actividad = Actividad.id ';
+		$sql .= 'WHERE id_alumno = :id_alumno ';
+		$sql .= 'AND Tarea.fecha BETWEEN ';
+		$sql .= '(SELECT fecha_inicio from Periodo WHERE id = :id_periodo1) AND ';
+		$sql .= '(SELECT fecha_fin from Periodo WHERE id = :id_periodo2) ';
+		$sql .= ')) as calificacion ';
+		$sql .= 'FROM `Actividad` ';
+		$sql .= 'ORDER BY Actividad.id';
 		
-		$params = array('id_alumno1' => $idAlumno, 'id_alumno2' => $idAlumno);
+		$params = array('id_alumno' => $idAlumno, 'id_periodo1' => $idPeriodo, 'id_periodo2' => $idPeriodo);
+
+		return BD::seleccionar($sql, $params);
+	}
+	/**
+		Devuelve un array con las evaluaciones del alumno en cada módulo.
+		La valoración de cada módulo se calcula como la media entre la calificación de la empresa y la calificación del profesor de todas las tareas del periodo asociadas a actividades que corresponden con el módulo.
+		@param $idAlumno Identificador del alumno.
+		@param $idPeriodo Identificador del periodo solicitado.
+		@param $idProfesor Identificador del profesor.
+		@return Un array de arrays con los datos de cada tarea.
+	**/
+	public static function verEvaluacion($idAlumno, $idPeriodo, $idProfesor){
+		$sql  = 'SELECT CONCAT(Modulo.codigo, " - ", Modulo.titulo) AS titulo, ';
+		$sql .= 'ROUND((SELECT AVG((Tarea.calificacion + Calificacion.valor)/2) FROM Tarea ';
+ 		$sql .= 'JOIN Calificacion ON Tarea.id_calificacion_empresa = Calificacion.id ';
+ 		$sql .= 'JOIN Actividad_Tarea ON Tarea.id = Actividad_Tarea.id_tarea ';
+		$sql .= 'JOIN Actividad_Modulo ON Actividad_Tarea.id_actividad = Actividad_Modulo.id_actividad ';
+		$sql .= 'AND Actividad_Modulo.id_modulo = Modulo.id ';
+		$sql .= 'WHERE id_alumno = :id_alumno ';
+		$sql .= 'AND Tarea.fecha BETWEEN ';
+		$sql .= '(SELECT fecha_inicio from Periodo WHERE id = :id_periodo1) AND ';
+		$sql .= '(SELECT fecha_fin from Periodo WHERE id = :id_periodo2) ';
+		$sql .= 'GROUP BY id_modulo),1) AS calificacion ';
+		$sql .= 'FROM Modulo ';
+		$sql .= 'ORDER BY Modulo.codigo ';
+
+		$params = array('id_alumno' => $idAlumno, 'id_periodo1' => $idPeriodo, 'id_periodo2' => $idPeriodo);
+
+		return BD::seleccionar($sql, $params);
+	}
+	/**
+		Devuelve un array con el nombre del periodo indicado.
+		@param $idPeriodo Identificador del periodo solicitado.
+		@return Un array de arrays con el nombre del periodo.
+	**/
+	public static function verPeriodo($idPeriodo){
+		$sql  = 'SELECT  nombre ';
+		$sql .= 'FROM Periodo ';
+		$sql .= 'WHERE id = :id_periodo ';
+
+		$params = array('id_periodo' => $idPeriodo);
 
 		return BD::seleccionar($sql, $params);
 	}

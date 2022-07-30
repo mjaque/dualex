@@ -59,14 +59,9 @@
     }, {
       "id": "a9c7a812-1c1d-4330-92d3-1290558d0fd3",
       "comment": "",
-      "command": "click",
+      "command": "",
       "target": "css=label:nth-child(1) > input",
-      "targets": [
-        ["css=label:nth-child(1) > input", "css:finder"],
-        ["xpath=//input[@value='email2@email.es']", "xpath:attributes"],
-        ["xpath=//div[@id='divLogin']/label/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
+      "targets": [],
       "value": ""
     }, {
       "id": "cb6009bd-77be-4870-9351-63ead56fe900",
@@ -103,7 +98,7 @@
         ["xpath=//p[2]", "xpath:position"],
         ["xpath=//p[contains(.,'401 - Unauthorized')]", "xpath:innerText"]
       ],
-      "value": "401 - Unauthorized"
+      "value": "Datos de acceso incorrectos."
     }, {
       "id": "e4da87a9-56f5-4c42-8a21-af5101669cb1",
       "comment": "",

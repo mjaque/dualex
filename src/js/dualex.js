@@ -19,6 +19,8 @@ import {VistaTarea} from './vistas/vistatarea/vistatarea.js'
 import {VistaAlumnos} from './vistas/vistaalumnos/vistaalumnos.js'
 //Informe de Alumno
 import {VistaInforme} from './vistas/vistainforme/vistainforme.js'
+//Créditos
+import {VistaCreditos} from './vistas/vistacreditos/vistacreditos.js'
 
 //Servicios
 import {Rest} from './servicios/rest.js'
@@ -47,6 +49,7 @@ class DualEx{
 		this.vistaTarea = new VistaTarea(this, document.getElementById('divTarea'))
 		this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
 		this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
+		this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
 	}
 	/**
 		Muestra el error en la vista de mensajes.
@@ -109,6 +112,8 @@ class DualEx{
 		this.vistaTarea.mostrar(false)
 		this.vistaTareas.mostrar(false)
 		this.vistaAlumnos.mostrar(false)
+		this.vistaInforme.mostrar(false)
+		this.vistaCreditos.mostrar(false)
 	}
 	/**
 		Muestra la vista de tareas del alumno.
@@ -136,14 +141,15 @@ class DualEx{
 	/**
 		Muestra la vista del informe de un alumno.
 		@param alumno {Alumno} Datos del alumno.
+		@param periodo {Number} Número del periodo del que se solicita el informe
 	**/
-	mostrarInformeAlumno(alumno){
+	mostrarInformeAlumno(alumno, periodo){
 		if(this.#usuario.rol != 'profesor') return
 		this.ocultarVistas()
-		this.modelo.getInformeAlumno(alumno)
+		this.modelo.getInformeAlumno(alumno, periodo)
 			.then(informe => {
 				this.vistaMenu.verInforme(alumno)
-				this.vistaInforme.cargar(informe)
+				this.vistaInforme.cargar(alumno, informe, this.#usuario)
 				this.ocultarVistas()
 				this.vistaInforme.mostrar(true)
 			})
@@ -241,6 +247,28 @@ class DualEx{
 			else
 				this.vistaDialogo.cerrar()
 		})
+	}
+	/**
+		Imprime la vista actual.
+	**/
+	imprimir(){
+		this.vistaInforme.combinar()
+		window.print()
+	}
+	/**
+		Devuelve una promesa que devolverá la lista de periodos con su identificador y su título.
+		@return {Promise} Promesa de resolución de la petición.
+	**/
+	verPeriodos(){
+		return this.modelo.getPeriodos()
+	}
+	/**
+		Muestra la vista de créditos de la aplicación.
+	**/
+	verCreditos(){
+		this.vistaMenu.verCreditos()
+		this.ocultarVistas()
+		this.vistaCreditos.mostrar(true)
 	}
 }
 

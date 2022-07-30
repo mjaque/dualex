@@ -101,7 +101,7 @@ export class Vista {
     link.href = `${this.getURLDirectorio()}${this.getNombreClase()}.css`
     link.type = 'text/css'
     link.rel = 'stylesheet'
-    link.media = 'screen'
+    //link.media = 'screen'
     link.onload = callback
     document.getElementsByTagName('head')[0].appendChild(link)
   }

@@ -34,8 +34,33 @@ export class VistaMenu extends Vista{
 	**/
 	verAlumnosProfesor(){
 		this.limpiar()
+		this.verUsuario()
 		this.verTitulo('Lista Alumnos')
 		this.base.appendChild(this.crearIcono('logout.svg', 2, 'salir', this.controlador.logout.bind(this.controlador)))
+		this.verAcercaDe()
+	}
+	/**
+		Muestra el menú asociado a la vista de informe de alumno.
+		@param alumno {Alumno} Datos del alumno.
+	**/
+	verInforme(alumno){
+		this.limpiar()
+		this.verTitulo(`Informe de ${alumno.nombre} ${alumno.apellidos}`)
+		this.base.appendChild(this.crearIcono('logout.svg', 3, 'logout', this.controlador.logout.bind(this.controlador)))
+		this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
+		this.base.appendChild(this.crearIcono('print.svg', 1, 'imprimir', this.controlador.imprimir.bind(this.controlador)))
+	}
+	/**
+		Muestra el menú asociado a la vista de créditos.
+	**/
+	verCreditos(){
+		this.limpiar()
+		this.verTitulo('Acerca de DUALEX')
+		this.base.appendChild(this.crearIcono('logout.svg', 3, 'logout', this.controlador.logout.bind(this.controlador)))
+		if (this.controlador.getUsuario().rol == 'profesor')
+			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
+		else
+			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarTareas.bind(this.controlador)))
 	}
 	/**
 		Muestra el menú asociado a la lista de tareas de un alumno.
@@ -53,16 +78,7 @@ export class VistaMenu extends Vista{
 			this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
 		}
 		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
-	}
-	/**
-		Muestra el menú asociado a la vista de tarea.
-		@param tarea {Tarea} Datos de la tarea.
-	**/
-	verTarea(tarea){
-		this.limpiar()
-		this.verTitulo(`Tarea: ${tarea.titulo}`)
-		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
-		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, null)))
+		this.verAcercaDe()
 	}
 	/**
 		Elimina los elementos del menú.
@@ -71,13 +87,28 @@ export class VistaMenu extends Vista{
 		this.eliminarHijos(this.base)
 	}
 	/**
+		Pone el icono de "Acerca de"
+	**/
+	verAcercaDe(){
+		this.base.appendChild(this.crearIcono('question_mark.svg', 10, 'acerca de Dualex', this.controlador.verCreditos.bind(this.controlador))) 
+	}
+	/**
+		Muestra el usuario logeado.
+	**/
+	verUsuario(){
+		let div = document.createElement('div')
+		this.base.appendChild(div)
+		div.textContent = this.controlador.getUsuario().email
+		div.classList.add('usuario')
+	}
+	/**
 		Muestra el título del menú.
 		@param titulo {String} Título del menú.
 	**/
 	verTitulo(titulo){
 		let h1 = document.createElement('h1')
-		h1.textContent = titulo
 		this.base.appendChild(h1)
+		h1.textContent = titulo
 	}
 	/**
 		Añade el icono de logout.
@@ -92,14 +123,6 @@ export class VistaMenu extends Vista{
 	**/
 	verNuevaTarea(orden){
 		this.base.appendChild(this.crearIcono('add.svg', orden, 'nueva tarea', this.controlador.mostrarTarea.bind(this.controlador, null)))
-	}
-	/**
-		Añade el icono de volver.
-		@param orden {Number} Orden de posición en el menú.
-	**/
-	verVolver(orden){
-	console.log("No está claro a dónde tiene que ir este icono.");//TODO
-		this.base.appendChild(this.crearIcono('volver.svg', orden, 'volver', null)) 
 	}
 	/**
 		Crea un icono para el menú.

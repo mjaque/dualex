@@ -1,2 +1,100 @@
 .vistainforme{
+	margin: 1cm;
+}
+.vistainforme > h1{
+	text-align: center;
+	color: blue;
+	font-weight: bold;
+}
+.vistainforme div{
+	border: 1px solid black;
+	padding: 0.5rem;
+}
+.vistainforme strong{
+	font-weight: bold;
+}
+.vistainforme .derecha{
+	float: right;
+}
+.vistainforme div.contenedor-grid{
+	padding: 0px;
+}
+.vistainforme div.contenedor-grid > p{
+	padding: 0.3rem;
+}
+.vistainforme div.grid1{
+	display: grid; 
+	grid-template-columns: 45% 5% 45% 5%; 
+	padding: 0px;
+}
+.vistainforme div.grid1 > div:nth-child(2n){
+	font-weight: bold;
+	text-align: center;
+}
+.vistainforme div.grid2{
+	display: grid; 
+	grid-template-columns: 40% 20% 20% 20%; 
+	border: none;
+}
+.vistainforme div.grid2 div{
+	padding: 0.1rem;
+}
+.vistainforme div.grid2 > div:nth-child(2n), .vistainforme div.grid2 > div:nth-child(4n+3){
+	text-align: center;
+}
+.vistainforme div.grid3{
+	display: grid; 
+	grid-template-columns: 45% 5% 45% 5%; 
+	border: none;
+}
+.vistainforme div.grid3 div{
+	padding: 0.1rem;
+}
+.vistainforme div.grid3 > div:nth-child(2n){
+	text-align: center;
+}
+.vistainforme div.grid3 em{
+	font-style: italic;
+	font-size: 0.8rem;
+}
+.vistainforme table{
+	margin: 2rem auto;
+}
+.vistainforme td, .vistainforme th{
+	border: 1px solid black;
+	padding: 0.2rem;
+}
+.vistainforme th{
+	font-weight: bold;
+	background-color: lightgrey;
+}
+.vistainforme tbody:nth-child(2){
+	text-align: center;
+}
+@page {
+	margin: 0; /* Quita el encabezado y pie que pone el navegador */
+	size: A4;
+}	
+
+@media print{
+	#divLogin, #divDialogo, #divMenu {
+		display: none !important;
+	}
+	#divInforme{
+		font-size: 0.7rem;
+		/* Para evitar que el navegador ahorre tinta en los fondos */
+		/* print-color-adjust: exact; */
+	}
+	.informe > div{
+		padding: 0.2rem 0.5rem;
+	}
+	.informe div.grid1 {
+		padding: 0;
+	}
+	.informe div.grid1 > div:nth-child(2n+1){
+		font-size: 0.5rem;
+	}
+	.informe textarea, .informe input[type='text']{
+		border: none;
+	}
 }

@@ -59,13 +59,29 @@ INSERT INTO Actividad_Modulo (id_actividad, id_modulo) VALUES
 
 DELETE FROM Alumno_Modulo;
 INSERT INTO Alumno_Modulo (id_alumno, id_modulo) VALUES
-(10, 1), (11, 3), (12, 1), (10, 2), (13, 2);
+(10, 1), (11, 3), (12, 1), (10, 2), (13, 5), (13, 6), (13, 7);
 
 DELETE FROM Tarea;
 INSERT INTO Tarea (id, id_alumno, titulo, descripcion, fecha) VALUES
 (1, 10, 'Tarea 10.1', 'Descripción de la tarea 10.1', '2022-06-21'),
-(2, 10, 'Tarea 10.2', 'Descripción de la tarea 10.2', '2022-06-22');
+(2, 10, 'Tarea 10.2', 'Descripción de la tarea 10.2', '2022-06-22'),
+(3, 13, 'Tarea 13.1', 'Descripción de la tarea 13.1', '2022-10-22'),
+(4, 13, 'Tarea 13.3', 'Descripción de la tarea 13.2', '2022-11-22'),
+(5, 13, 'Tarea 13.3', 'Descripción de la tarea 13.3', '2022-12-22'),
+(6, 13, 'Tarea 13.4', 'Descripción de la tarea 13.4', '2023-01-22'),
+(7, 13, 'Tarea 13.5', 'Descripción de la tarea 13.5', '2023-02-22');
+
+UPDATE Tarea SET id_calificacion_empresa = 1, calificacion = 7 WHERE id = 3;
+UPDATE Tarea SET id_calificacion_empresa = 2, calificacion = 8 WHERE id = 4;
+UPDATE Tarea SET id_calificacion_empresa = 3, calificacion = 6 WHERE id = 5;
+UPDATE Tarea SET id_calificacion_empresa = 4, calificacion = 4 WHERE id = 6;
+UPDATE Tarea SET id_calificacion_empresa = 2, calificacion = 6 WHERE id = 7;
 
 DELETE FROM Actividad_Tarea;
 INSERT INTO Actividad_Tarea (id_actividad, id_tarea) VALUES
-(1, 1), (2, 1), (2, 2), (5,2);
+(1, 1), (2, 1), (2, 2), (5,2), (14, 3), (14, 4), (16, 5), (17, 6), (18, 7);
+
+DELETE FROM Periodo;
+INSERT INTO Periodo (id, nombre, fecha_inicio, fecha_fin) VALUES
+(1, 'Periodo 1', '2022-09-01', '2022-12-31'), (2, 'Periodo 2', '2023-01-01', '2023-04-30');
+

@@ -134,9 +134,9 @@ export class Rest {
 		if (queryParams){
 			url += '?'
 			queryParams.forEach( (valor, clave, mapa) => {
-				url += `${clave}=${valor}&&`
+				url += `${clave}=${valor}&`
 			});
-			url = url.substring(0, url.length - 2)
+			url = url.substring(0, url.length - 1)
 		}
 		url = encodeURI(url.replace('//', '/null/')) //aseguramos los parámetros nulos.
 		return url;

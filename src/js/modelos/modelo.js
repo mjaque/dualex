@@ -46,6 +46,13 @@ export class Modelo{
 		return Rest.get('calificacion')
 	}
 	/**
+		Devuelve la lista de periodos definidos. 
+		@return {Promise} Devuelve la promesa asociada a la petición.
+	**/
+	getPeriodos(){
+		return Rest.get('periodo')
+	}
+	/**
 		Crea una tarea.
 		@param tarea {Tarea} Datos de la tarea.
 		@return {Promise} Devuelve la promesa asociada a la petición.
@@ -81,11 +88,13 @@ export class Modelo{
 	/**
 		Devuelve la información del informe de evaluación de un alumno.
 		@param alumno {Alumno} Datos del alumno.
+		@param periodo {Number} Identificador del periodo para el que se solicita el informe.
 		@return {Promise} Devuelve la promesa asociada a la petición.
 	**/
-	getInformeAlumno(alumno){
+	getInformeAlumno(alumno, periodo){
 		let queryParams = new Map()
 		queryParams.set('id_alumno', alumno.id)
+		queryParams.set('id_periodo', periodo)
 		return Rest.get('informe', [], queryParams)
 	}
 }

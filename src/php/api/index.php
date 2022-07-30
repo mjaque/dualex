@@ -89,6 +89,10 @@
 				require_once('./controladores/calificacion.php');
 				$controlador = new Calificacion();
 				break;
+			case 'periodo':
+				require_once('./controladores/periodo.php');
+				$controlador = new Periodo();
+				break;
 			default:
 				header('HTTP/1.1 501 Not Implemented');
 				die();

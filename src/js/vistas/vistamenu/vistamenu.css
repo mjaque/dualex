@@ -3,6 +3,12 @@
 	justify-content: flex-end;
 	padding: 0.5rem;
 }
+.vistamenu div.usuario{
+	position: absolute;
+	left: 1%;
+	font-size: 0.8rem;
+	color: grey;
+}
 .vistamenu h1{
 	flex-grow: 2;
 	text-align: left;

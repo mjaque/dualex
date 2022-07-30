@@ -29,7 +29,7 @@ legend{
 }
 
 /* Inicialmente ocultamos las vistas */
-#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas{
+#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos{
 	display: none;
 }
 
