@@ -63,6 +63,16 @@ export class VistaMenu extends Vista{
 			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarTareas.bind(this.controlador)))
 	}
 	/**
+		Muestra el menú asociado a la vista de tarea.
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	verTarea(tarea){
+		this.limpiar()
+		this.verTitulo(`Tarea: ${tarea.titulo}`)
+		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
+		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, null)))
+	}
+	/**
 		Muestra el menú asociado a la lista de tareas de un alumno.
 		El menú incluye: título y logout. Y si es un alumno se añade el icono de crear tarea.
 		@param alumno {Alumno} Datos del alumno.

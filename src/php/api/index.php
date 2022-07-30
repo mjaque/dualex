@@ -82,16 +82,10 @@
 				$controlador = new Informe();
 				break;
 			case 'actividad':
-				require_once('./controladores/actividad.php');
-				$controlador = new Actividad();
-				break;
 			case 'calificacion':
-				require_once('./controladores/calificacion.php');
-				$controlador = new Calificacion();
-				break;
 			case 'periodo':
-				require_once('./controladores/periodo.php');
-				$controlador = new Periodo();
+				require_once('./controladores/general.php');
+				$controlador = new Controlador($recurso);
 				break;
 			default:
 				header('HTTP/1.1 501 Not Implemented');
