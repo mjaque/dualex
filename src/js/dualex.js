@@ -184,6 +184,7 @@ class DualEx{
 				})
 		}
 		else{
+			this.vistaMenu.verTarea(null)
 			this.ocultarVistas()
 			this.vistaTarea.mostrar(true)
 		}

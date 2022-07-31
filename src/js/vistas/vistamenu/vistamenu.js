@@ -60,7 +60,7 @@ export class VistaMenu extends Vista{
 		if (this.controlador.getUsuario().rol == 'profesor')
 			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
 		else
-			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarTareas.bind(this.controlador)))
+			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, this.controlador.getUsuario())))
 	}
 	/**
 		Muestra el menú asociado a la vista de tarea.
@@ -68,7 +68,10 @@ export class VistaMenu extends Vista{
 	**/
 	verTarea(tarea){
 		this.limpiar()
-		this.verTitulo(`Tarea: ${tarea.titulo}`)
+		if (tarea)
+			this.verTitulo(`Tarea: ${tarea.titulo}`)
+		else
+			this.verTitulo('Nueva Tarea')
 		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
 		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, null)))
 	}

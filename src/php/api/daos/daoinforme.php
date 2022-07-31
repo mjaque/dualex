@@ -18,8 +18,9 @@ class DAOInforme{
 		$sql .= 'ROUND(( ';
 		$sql .= 'SELECT AVG((Tarea.calificacion + Calificacion.valor)/2) FROM Tarea '; 
 		$sql .= 'JOIN Calificacion ON Tarea.id_calificacion_empresa = Calificacion.id ';
-		$sql .= 'JOIN Actividad_Tarea ON Tarea.id = Actividad_Tarea.id_tarea AND Actividad_Tarea.id_actividad = Actividad.id ';
+		$sql .= 'JOIN Actividad_Tarea ON Tarea.id = Actividad_Tarea.id_tarea ';
 		$sql .= 'WHERE id_alumno = :id_alumno ';
+		$sql .= 'AND Actividad_Tarea.id_actividad = Actividad.id ';
 		$sql .= 'AND Tarea.fecha BETWEEN ';
 		$sql .= '(SELECT fecha_inicio from Periodo WHERE id = :id_periodo1) AND ';
 		$sql .= '(SELECT fecha_fin from Periodo WHERE id = :id_periodo2) ';
@@ -45,8 +46,8 @@ class DAOInforme{
  		$sql .= 'JOIN Calificacion ON Tarea.id_calificacion_empresa = Calificacion.id ';
  		$sql .= 'JOIN Actividad_Tarea ON Tarea.id = Actividad_Tarea.id_tarea ';
 		$sql .= 'JOIN Actividad_Modulo ON Actividad_Tarea.id_actividad = Actividad_Modulo.id_actividad ';
-		$sql .= 'AND Actividad_Modulo.id_modulo = Modulo.id ';
 		$sql .= 'WHERE id_alumno = :id_alumno ';
+		$sql .= 'AND Actividad_Modulo.id_modulo = Modulo.id ';
 		$sql .= 'AND Tarea.fecha BETWEEN ';
 		$sql .= '(SELECT fecha_inicio from Periodo WHERE id = :id_periodo1) AND ';
 		$sql .= '(SELECT fecha_fin from Periodo WHERE id = :id_periodo2) ';
