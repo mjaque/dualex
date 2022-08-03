@@ -60,31 +60,26 @@ class DualEx{
 		console.error(error)
 	}
 	/**
-		Envía los datos del login (email y clave) al servidor para obtener acceso.
-		@param email {String} Dirección de correo electrónico del ususario.
-		@param clave {String} Clave de identificación del usuario.
+		Recibe el token del login con Google y lo envía al servidor para identificar al usuario.
+		@param token {Object} Token de identificación de usuario de Google.
 	**/
-	autenticacion(email, clave){
-		const login = {
-			'email': email,
-			'clave': clave
-		}
-		Rest.post('login', [], login, true)
+	login(token){
+		Rest.post('login', [], token.credential, true)
 		.then(usuario => {
 				this.#usuario = usuario
 				Rest.setAutorizacion(this.#usuario.autorizacion)
 				this.vistaMenu.mostrar(true)
 				this.vistaLogin.mostrar(false)
-		switch(usuario.rol){
-			case 'alumno':
-				this.mostrarTareasAlumno(this.#usuario)
-				break;
-			case 'profesor':
-				this.mostrarAlumnos()
-				break;
-			default:
-				console.error(`Rol de usuario desconocido: ${usuario.rol}`)
-		}
+				switch(usuario.rol){
+					case 'alumno':
+						this.mostrarTareasAlumno(this.#usuario)
+						break;
+					case 'profesor':
+						this.mostrarAlumnos()
+						break;
+					default:
+						console.error(`Rol de usuario desconocido: ${usuario.rol}`)
+				}
 		})
 		.catch(e => {this.vistaLogin.mostrarError(e)})
 	}
@@ -273,4 +268,5 @@ class DualEx{
 	}
 }
 
-new DualEx()
+var app = new DualEx()
+

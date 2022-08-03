@@ -2,7 +2,7 @@ Generación de Documentación
 
 Desde el directorio del proyecto:
 
-	./herramientas/phpDocumentor.phar -d ./src/php/ -t docs/php --ignore ./src/php/api/config_prod.php
+	./herramientas/phpDocumentor.phar -d ./src/php/ -t docs/php --ignore ./src/php/api/config_prod.php --ignore ./src/php/api/vendor
 	jsdoc -r -d docs/js src/js src/js
 	
 

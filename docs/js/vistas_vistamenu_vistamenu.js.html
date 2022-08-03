@@ -62,8 +62,46 @@ export class VistaMenu extends Vista{
 	**/
 	verAlumnosProfesor(){
 		this.limpiar()
+		this.verUsuario()
 		this.verTitulo('Lista Alumnos')
 		this.base.appendChild(this.crearIcono('logout.svg', 2, 'salir', this.controlador.logout.bind(this.controlador)))
+		this.verAcercaDe()
+	}
+	/**
+		Muestra el menú asociado a la vista de informe de alumno.
+		@param alumno {Alumno} Datos del alumno.
+	**/
+	verInforme(alumno){
+		this.limpiar()
+		this.verTitulo(`Informe de ${alumno.nombre} ${alumno.apellidos}`)
+		this.base.appendChild(this.crearIcono('logout.svg', 3, 'logout', this.controlador.logout.bind(this.controlador)))
+		this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
+		this.base.appendChild(this.crearIcono('print.svg', 1, 'imprimir', this.controlador.imprimir.bind(this.controlador)))
+	}
+	/**
+		Muestra el menú asociado a la vista de créditos.
+	**/
+	verCreditos(){
+		this.limpiar()
+		this.verTitulo('Acerca de DUALEX')
+		this.base.appendChild(this.crearIcono('logout.svg', 3, 'logout', this.controlador.logout.bind(this.controlador)))
+		if (this.controlador.getUsuario().rol == 'profesor')
+			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
+		else
+			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, this.controlador.getUsuario())))
+	}
+	/**
+		Muestra el menú asociado a la vista de tarea.
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	verTarea(tarea){
+		this.limpiar()
+		if (tarea)
+			this.verTitulo(`Tarea: ${tarea.titulo}`)
+		else
+			this.verTitulo('Nueva Tarea')
+		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
+		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, null)))
 	}
 	/**
 		Muestra el menú asociado a la lista de tareas de un alumno.
@@ -81,16 +119,7 @@ export class VistaMenu extends Vista{
 			this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
 		}
 		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
-	}
-	/**
-		Muestra el menú asociado a la vista de tarea.
-		@param tarea {Tarea} Datos de la tarea.
-	**/
-	verTarea(tarea){
-		this.limpiar()
-		this.verTitulo(`Tarea: ${tarea.titulo}`)
-		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
-		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, null)))
+		this.verAcercaDe()
 	}
 	/**
 		Elimina los elementos del menú.
@@ -99,13 +128,28 @@ export class VistaMenu extends Vista{
 		this.eliminarHijos(this.base)
 	}
 	/**
+		Pone el icono de "Acerca de"
+	**/
+	verAcercaDe(){
+		this.base.appendChild(this.crearIcono('question_mark.svg', 10, 'acerca de Dualex', this.controlador.verCreditos.bind(this.controlador))) 
+	}
+	/**
+		Muestra el usuario logeado.
+	**/
+	verUsuario(){
+		let div = document.createElement('div')
+		this.base.appendChild(div)
+		div.textContent = this.controlador.getUsuario().email
+		div.classList.add('usuario')
+	}
+	/**
 		Muestra el título del menú.
 		@param titulo {String} Título del menú.
 	**/
 	verTitulo(titulo){
 		let h1 = document.createElement('h1')
-		h1.textContent = titulo
 		this.base.appendChild(h1)
+		h1.textContent = titulo
 	}
 	/**
 		Añade el icono de logout.
@@ -120,14 +164,6 @@ export class VistaMenu extends Vista{
 	**/
 	verNuevaTarea(orden){
 		this.base.appendChild(this.crearIcono('add.svg', orden, 'nueva tarea', this.controlador.mostrarTarea.bind(this.controlador, null)))
-	}
-	/**
-		Añade el icono de volver.
-		@param orden {Number} Orden de posición en el menú.
-	**/
-	verVolver(orden){
-	console.log("No está claro a dónde tiene que ir este icono.");//TODO
-		this.base.appendChild(this.crearIcono('volver.svg', orden, 'volver', null)) 
 	}
 	/**
 		Crea un icono para el menú.
@@ -157,13 +193,13 @@ export class VistaMenu extends Vista{
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DualEx.html">DualEx</a></li><li><a href="Modelo.html">Modelo</a></li><li><a href="Rest.html">Rest</a></li><li><a href="Vista.html">Vista</a></li><li><a href="VistaAlumnos_VistaAlumnos.html">VistaAlumnos</a></li><li><a href="VistaDialogo_VistaDialogo.html">VistaDialogo</a></li><li><a href="VistaLogin_VistaLogin.html">VistaLogin</a></li><li><a href="VistaMensaje_VistaMensaje.html">VistaMensaje</a></li><li><a href="VistaMenu_VistaMenu.html">VistaMenu</a></li><li><a href="VistaTarea_VistaTarea.html">VistaTarea</a></li><li><a href="VistaTareas_VistaTareas.html">VistaTareas</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DualEx.html">DualEx</a></li><li><a href="Modelo.html">Modelo</a></li><li><a href="Rest.html">Rest</a></li><li><a href="Vista.html">Vista</a></li><li><a href="VistaAlumnos_VistaAlumnos.html">VistaAlumnos</a></li><li><a href="VistaCreditos_VistaCreditos.html">VistaCreditos</a></li><li><a href="VistaDialogo_VistaDialogo.html">VistaDialogo</a></li><li><a href="VistaInforme_VistaInforme.html">VistaInforme</a></li><li><a href="VistaLogin_VistaLogin.html">VistaLogin</a></li><li><a href="VistaMensaje_VistaMensaje.html">VistaMensaje</a></li><li><a href="VistaMenu_VistaMenu.html">VistaMenu</a></li><li><a href="VistaMenuContexto_VistaMenuContexto.html">VistaMenuContexto</a></li><li><a href="VistaTarea_VistaTarea.html">VistaTarea</a></li><li><a href="VistaTareas_VistaTareas.html">VistaTareas</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jul 08 2022 11:48:22 GMT+0200 (hora de verano de Europa central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Aug 03 2022 13:17:59 GMT+0200 (hora de verano de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -4,6 +4,7 @@
 	**/
 	return array(
 		'debug' => true,
+		'test' => true,
 		'host' => 'localhost',
 		'usuario' => 'dualex',
 		'clave' => 'dualex',

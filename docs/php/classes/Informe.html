@@ -81,7 +81,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    DAOUsuario
+    Informe
 
     
             <div class="phpdocumentor-element__package">
@@ -95,9 +95,9 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/daos/daousuario.php"><a href="files/src-php-api-daos-daousuario.html"><abbr title="src/php/api/daos/daousuario.php">daousuario.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/controladores/informe.php"><a href="files/src-php-api-controladores-informe.html"><abbr title="src/php/api/controladores/informe.php">informe.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">7</span>
 
     </aside>
 
@@ -118,11 +118,11 @@
 
 <dl class="phpdocumentor-table-of-contents">
                         <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/DAOUsuario.html#method_autenticar">autenticar()</a>
+    <a href="classes/Informe.html#method_get">get()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd>Consulta la base de datos para autenticar al usuario y devolver sus datos.</dd>
+<dd>Devuelve los datos del informe de evaluación de un alumno.</dd>
 
         </dl>
 
@@ -135,42 +135,60 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/DAOUsuario.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Informe.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                                        "
 >
-    <h4 class="phpdocumentor-element__name" id="method_autenticar">
-        autenticar()
-        <a href="classes/DAOUsuario.html#method_autenticar" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_get">
+        get()
+        <a href="classes/Informe.html#method_get" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/daos/daousuario.php"><a href="files/src-php-api-daos-daousuario.html"><abbr title="src/php/api/daos/daousuario.php">daousuario.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/controladores/informe.php"><a href="files/src-php-api-controladores-informe.html"><abbr title="src/php/api/controladores/informe.php">informe.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Consulta la base de datos para autenticar al usuario y devolver sus datos.</p>
+        <p class="phpdocumentor-summary">Devuelve los datos del informe de evaluación de un alumno.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">autenticar</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">get</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pathParams</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$queryParams</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$usuario</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"><p>El email ha sido autenticado por Google.</p>
+        <section class="phpdocumentor-description"><p>Solo los profesores que tienen asignado al alumno a uno de sus módulos pueden consultar el informe de evaluación.</p>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$email</span>
+                <span class="phpdocumentor-signature__argument__name">$pathParams</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Email del usuario.</p>
+                    <section class="phpdocumentor-description"><p>{Array} Array de parámetros.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$queryParams</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>{Array} Array de parámetros. Array con el identificador del alumno y el identificador del periodo.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$usuario</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>{Usuario} Usuario que realiza la petición.</p>
 </section>
 
             </dd>
@@ -262,7 +280,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/DAOUsuario.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Informe.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

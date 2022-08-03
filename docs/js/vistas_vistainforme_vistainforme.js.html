@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: vistas/vistamensaje/vistamensaje.js</title>
+    <title>JSDoc: Source: vistas/vistainforme/vistainforme.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: vistas/vistamensaje/vistamensaje.js</h1>
+    <h1 class="page-title">Source: vistas/vistainforme/vistainforme.js</h1>
 
     
 
@@ -27,25 +27,21 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
-	Vista de mensajes de la aplicación.
-	Muestra los mensajes de la aplicación.
+	Vista con el Informe de Alumno (imprimible).
 **/
 import {Vista} from '../vista.js'
 
-export class VistaMensaje extends Vista{
-	static INFO = 'info'
-	static OK = 'ok'
-	static AVISO = 'aviso'
-	static ERROR = 'error'
+export class VistaInforme extends Vista{
 	/**
 		Constructor de la clase.
-		@param {Object} controlador Controlador de la vista principal.
-		@param {Node} base Nodo al que se añadirá la vista principal.
+		@param {Object} controlador Controlador de la vista.
+		@param {Node} base Nodo al que se añadirá la vista.
 	**/
 	constructor(controlador, base) {
 		super(controlador)
 		this.base = base
 		this.base.classList.add(this.getNombreClase())
+		this.callback = null //Función que se llamará al cerrar el diálogo.
 	}
 	/**
 		Inicia la vista.
@@ -53,29 +49,50 @@ export class VistaMensaje extends Vista{
 	**/
 	iniciar(){
 		//Cogemos referencias a los elementos del interfaz
-		this.btnCerrar = this.doc.getElementsByTagName('span')[0]
-		this.spanMensaje = this.doc.getElementsByTagName('span')[1]
+		this.sAlumno = this.doc.querySelector("span[data-informe='alumno']")
+		this.sProfesor = this.doc.querySelector("span[data-informe='profesor']")
+		this.sPeriodo = this.doc.querySelector("span[data-informe='periodo']")
+		this.divValoracion = this.doc.querySelector('.grid1')
+		this.divEvaluacion = this.doc.querySelector('.grid3')
 
 		//Asociamos eventos
-		this.btnCerrar.onclick = this.cerrar.bind(this)
 
 		super.transferir(this.base, this.doc)
 		super.cargarCSS(`${this.getNombreClase()}.css`)
 	}
 	/**
-		Cierra el mensaje.
+		Carga los datos del informe en la vista.
+		@param alumno {Alumno} Datos del alumno.
+		@param informe {Informe} Datos del informe.
+		@param profesor {Profesor} Datos del profesor.
 	**/
-	cerrar(){
-		this.base.style.display = 'none'
+	cargar(alumno, informe, profesor){
+		this.sAlumno.textContent = `${alumno.nombre} ${alumno.apellidos}`
+		this.sProfesor.textContent = `${profesor.nombre} ${profesor.apellidos}`
+		this.sPeriodo.textContent = informe.periodo
+		
+		this._crearGrid(informe.valoracion, this.divValoracion)
+		this._crearGrid(informe.evaluacion, this.divEvaluacion)
 	}
-	mostrar(mensaje, nivel = VistaMensaje.ERROR){
-		this.base.className = `vistamensaje ${nivel}`
-		this.spanMensaje.textContent = mensaje
-		this.base.style.display = 'block'
-		//Quitamos el mensaje a los 5 segundos
-		setTimeout(this.cerrar.bind(this), 5000)
+	/**
+		Cambia los input de texto y los textarea para mostrarlos como texto (no como inputs ni textareas).
+	**/
+	combinar(){
+		for (let elemento of this.base.querySelectorAll("input[type='text'], textarea")){
+			elemento.parentElement.insertBefore(document.createTextNode(elemento.value), elemento)
+			elemento.remove()
+		}
 	}
-	
+	_crearGrid(datos, div){
+		for(let dato of datos){
+			let div1 = document.createElement('div')
+			div.appendChild(div1)
+			div1.textContent = dato.titulo
+			let div2 = document.createElement('div')
+			div.appendChild(div2)
+			div2.textContent = dato.calificacion
+		}
+	}
 }
 </code></pre>
         </article>

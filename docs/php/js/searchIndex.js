@@ -3,7 +3,7 @@ Search.appendIndex(
                 {
             "fqsen": "\\Login",
             "name": "Login",
-            "summary": "Controlador\u0020de\u0020autenticaci\u00F3n.",
+            "summary": "",
             "url": "classes/Login.html"
         },                {
             "fqsen": "\\Login\u003A\u003Apost\u0028\u0029",
@@ -31,6 +31,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Login.html#property_iv"
         },                {
+            "fqsen": "\\Login\u003A\u003A\u0024ID_CLIENTE",
+            "name": "ID_CLIENTE",
+            "summary": "",
+            "url": "classes/Login.html#property_ID_CLIENTE"
+        },                {
             "fqsen": "\\DAOUsuario",
             "name": "DAOUsuario",
             "summary": "",
@@ -55,6 +60,16 @@ Search.appendIndex(
             "name": "email",
             "summary": "",
             "url": "classes/Usuario.html#property_email"
+        },                {
+            "fqsen": "\\Usuario\u003A\u003A\u0024nombre",
+            "name": "nombre",
+            "summary": "",
+            "url": "classes/Usuario.html#property_nombre"
+        },                {
+            "fqsen": "\\Usuario\u003A\u003A\u0024apellidos",
+            "name": "apellidos",
+            "summary": "",
+            "url": "classes/Usuario.html#property_apellidos"
         },                {
             "fqsen": "\\Usuario\u003A\u003A\u0024rol",
             "name": "rol",
@@ -146,16 +161,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/BD.html#property_conexion"
         },                {
-            "fqsen": "\\Actividad",
-            "name": "Actividad",
-            "summary": "",
-            "url": "classes/Actividad.html"
-        },                {
-            "fqsen": "\\Actividad\u003A\u003Aget\u0028\u0029",
-            "name": "get",
-            "summary": "Devuelve\u0020la\u0020lista\u0020de\u0020actividades.",
-            "url": "classes/Actividad.html#method_get"
-        },                {
             "fqsen": "\\Alumno",
             "name": "Alumno",
             "summary": "",
@@ -175,16 +180,6 @@ Search.appendIndex(
             "name": "verModuloAlumno",
             "summary": "Devuelve\u0020el\u0020m\u00F3dulo\u0020de\u0020un\u0020alumno.",
             "url": "classes/Alumno.html#method_verModuloAlumno"
-        },                {
-            "fqsen": "\\Calificacion",
-            "name": "Calificacion",
-            "summary": "",
-            "url": "classes/Calificacion.html"
-        },                {
-            "fqsen": "\\Calificacion\u003A\u003Aget\u0028\u0029",
-            "name": "get",
-            "summary": "Devuelve\u0020la\u0020lista\u0020de\u0020calificaciones.",
-            "url": "classes/Calificacion.html#method_get"
         },                {
             "fqsen": "\\Tarea",
             "name": "Tarea",
@@ -226,16 +221,6 @@ Search.appendIndex(
             "summary": "Devuelve\u0020la\u0020actividad\u0020de\u0020un\u0020elemento.",
             "url": "classes/Tarea.html#method_verActividad"
         },                {
-            "fqsen": "\\DAOActividad",
-            "name": "DAOActividad",
-            "summary": "DAO\u0020de\u0020Actividad.",
-            "url": "classes/DAOActividad.html"
-        },                {
-            "fqsen": "\\DAOActividad\u003A\u003AverActividades\u0028\u0029",
-            "name": "verActividades",
-            "summary": "Devuelve\u0020un\u0020array\u0020de\u0020actividades.",
-            "url": "classes/DAOActividad.html#method_verActividades"
-        },                {
             "fqsen": "\\DAOAlumno",
             "name": "DAOAlumno",
             "summary": "DAO\u0020de\u0020Alumno.",
@@ -245,16 +230,6 @@ Search.appendIndex(
             "name": "verAlumnosPorProfesor",
             "summary": "Devuelve\u0020un\u0020array\u0020de\u0020alumnos\u0020de\u0020un\u0020profesor.",
             "url": "classes/DAOAlumno.html#method_verAlumnosPorProfesor"
-        },                {
-            "fqsen": "\\DAOCalificacion",
-            "name": "DAOCalificacion",
-            "summary": "DAO\u0020de\u0020Calificaci\u00F3n.",
-            "url": "classes/DAOCalificacion.html"
-        },                {
-            "fqsen": "\\DAOCalificacion\u003A\u003AverCalificaciones\u0028\u0029",
-            "name": "verCalificaciones",
-            "summary": "Devuelve\u0020un\u0020array\u0020de\u0020calificaciones.",
-            "url": "classes/DAOCalificacion.html#method_verCalificaciones"
         },                {
             "fqsen": "\\DAOTarea",
             "name": "DAOTarea",
@@ -295,6 +270,61 @@ Search.appendIndex(
             "name": "borrar",
             "summary": "Borrado\u0020de\u0020tarea\u0020por\u0020alumno.",
             "url": "classes/DAOTarea.html#method_borrar"
+        },                {
+            "fqsen": "\\Controlador",
+            "name": "Controlador",
+            "summary": "",
+            "url": "classes/Controlador.html"
+        },                {
+            "fqsen": "\\Controlador\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor\u0020de\u0020la\u0020clase.",
+            "url": "classes/Controlador.html#method___construct"
+        },                {
+            "fqsen": "\\Controlador\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Devuelve\u0020la\u0020lista\u0020de\u0020campos\u0020de\u0020una\u0020tabla.",
+            "url": "classes/Controlador.html#method_get"
+        },                {
+            "fqsen": "\\Informe",
+            "name": "Informe",
+            "summary": "",
+            "url": "classes/Informe.html"
+        },                {
+            "fqsen": "\\Informe\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Devuelve\u0020los\u0020datos\u0020del\u0020informe\u0020de\u0020evaluaci\u00F3n\u0020de\u0020un\u0020alumno.",
+            "url": "classes/Informe.html#method_get"
+        },                {
+            "fqsen": "\\DAOGeneral",
+            "name": "DAOGeneral",
+            "summary": "DAO\u0020General\nObjeto\u0020para\u0020el\u0020acceso\u0020a\u0020los\u0020datos\u0020de\u0020una\u0020tabla.",
+            "url": "classes/DAOGeneral.html"
+        },                {
+            "fqsen": "\\DAOGeneral\u003A\u003Aver\u0028\u0029",
+            "name": "ver",
+            "summary": "Devuelve\u0020un\u0020array\u0020de\u0020datos\u0020de\u0020una\u0020tabla.",
+            "url": "classes/DAOGeneral.html#method_ver"
+        },                {
+            "fqsen": "\\DAOInforme",
+            "name": "DAOInforme",
+            "summary": "DAO\u0020de\u0020Informe.",
+            "url": "classes/DAOInforme.html"
+        },                {
+            "fqsen": "\\DAOInforme\u003A\u003AverValoracion\u0028\u0029",
+            "name": "verValoracion",
+            "summary": "Devuelve\u0020un\u0020array\u0020con\u0020las\u0020valoraciones\u0020del\u0020alumno\u0020en\u0020cada\u0020actividad.",
+            "url": "classes/DAOInforme.html#method_verValoracion"
+        },                {
+            "fqsen": "\\DAOInforme\u003A\u003AverEvaluacion\u0028\u0029",
+            "name": "verEvaluacion",
+            "summary": "Devuelve\u0020un\u0020array\u0020con\u0020las\u0020evaluaciones\u0020del\u0020alumno\u0020en\u0020cada\u0020m\u00F3dulo.",
+            "url": "classes/DAOInforme.html#method_verEvaluacion"
+        },                {
+            "fqsen": "\\DAOInforme\u003A\u003AverPeriodo\u0028\u0029",
+            "name": "verPeriodo",
+            "summary": "Devuelve\u0020un\u0020array\u0020con\u0020el\u0020nombre\u0020del\u0020periodo\u0020indicado.",
+            "url": "classes/DAOInforme.html#method_verPeriodo"
         },                {
             "fqsen": "\\",
             "name": "\\",

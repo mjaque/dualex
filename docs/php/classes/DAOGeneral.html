@@ -81,7 +81,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    DAOUsuario
+    DAOGeneral
 
     
             <div class="phpdocumentor-element__package">
@@ -95,14 +95,15 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/daos/daousuario.php"><a href="files/src-php-api-daos-daousuario.html"><abbr title="src/php/api/daos/daousuario.php">daousuario.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/daos/daogeneral.php"><a href="files/src-php-api-daos-daogeneral.html"><abbr title="src/php/api/daos/daogeneral.php">daogeneral.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">7</span>
 
     </aside>
 
-        
-    <section class="phpdocumentor-description"></section>
+            <p class="phpdocumentor-summary">DAO General
+Objeto para el acceso a los datos de una tabla.</p>
+
 
 
 
@@ -118,11 +119,11 @@
 
 <dl class="phpdocumentor-table-of-contents">
                         <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/DAOUsuario.html#method_autenticar">autenticar()</a>
+    <a href="classes/DAOGeneral.html#method_ver">ver()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="\Un">Un</abbr>    </span>
 </dt>
-<dd>Consulta la base de datos para autenticar al usuario y devolver sus datos.</dd>
+<dd>Devuelve un array de datos de una tabla.</dd>
 
         </dl>
 
@@ -135,7 +136,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/DAOUsuario.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/DAOGeneral.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -143,35 +144,32 @@
             -public
                                     -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_autenticar">
-        autenticar()
-        <a href="classes/DAOUsuario.html#method_autenticar" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_ver">
+        ver()
+        <a href="classes/DAOGeneral.html#method_ver" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/daos/daousuario.php"><a href="files/src-php-api-daos-daousuario.html"><abbr title="src/php/api/daos/daousuario.php">daousuario.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/daos/daogeneral.php"><a href="files/src-php-api-daos-daogeneral.html"><abbr title="src/php/api/daos/daogeneral.php">daogeneral.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Consulta la base de datos para autenticar al usuario y devolver sus datos.</p>
+        <p class="phpdocumentor-summary">Devuelve un array de datos de una tabla.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">autenticar</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">ver</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$tabla</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Un">Un</abbr></span></code>
 
-        <section class="phpdocumentor-description"><p>El email ha sido autenticado por Google.</p>
-</section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$email</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$tabla</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Email del usuario.</p>
-</section>
+                    <section class="phpdocumentor-description"></section>
 
             </dd>
             </dl>
@@ -179,9 +177,11 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Un">Un</abbr></span>
             &mdash;
-        
+            <section class="phpdocumentor-description"><p>array de arrays con los datos de la tabla.</p>
+</section>
+
     
 </article>
             </section>
@@ -262,7 +262,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/DAOUsuario.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/DAOGeneral.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

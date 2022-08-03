@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: vistas/vistamensaje/vistamensaje.js</title>
+    <title>JSDoc: Source: vistas/vistamenucontexto/vistamenucontexto.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: vistas/vistamensaje/vistamensaje.js</h1>
+    <h1 class="page-title">Source: vistas/vistamenucontexto/vistamenucontexto.js</h1>
 
     
 
@@ -27,16 +27,12 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
-	Vista de mensajes de la aplicación.
-	Muestra los mensajes de la aplicación.
+	Vista del menú de contexto de la aplicación.
+	Muestra los enlaces de contexto.
 **/
 import {Vista} from '../vista.js'
 
-export class VistaMensaje extends Vista{
-	static INFO = 'info'
-	static OK = 'ok'
-	static AVISO = 'aviso'
-	static ERROR = 'error'
+export class VistaMenuContexto extends Vista{
 	/**
 		Constructor de la clase.
 		@param {Object} controlador Controlador de la vista principal.
@@ -53,29 +49,35 @@ export class VistaMensaje extends Vista{
 	**/
 	iniciar(){
 		//Cogemos referencias a los elementos del interfaz
-		this.btnCerrar = this.doc.getElementsByTagName('span')[0]
-		this.spanMensaje = this.doc.getElementsByTagName('span')[1]
 
 		//Asociamos eventos
-		this.btnCerrar.onclick = this.cerrar.bind(this)
 
 		super.transferir(this.base, this.doc)
 		super.cargarCSS(`${this.getNombreClase()}.css`)
 	}
 	/**
-		Cierra el mensaje.
+		Carga las opciones del menú de contexto.
+		@param opciones {Array} Array bidimensional de objetos opciones con título y callback.
 	**/
-	cerrar(){
-		this.base.style.display = 'none'
+	cargar(opciones){
+		for(let opcion of opciones){
+			let a = document.createElement('a')
+			this.base.appendChild(a)
+			a.textContent = opcion.titulo
+			a.onclick = opcion.callback
+			this.base.appendChild(document.createElement('br'))
+		}
 	}
-	mostrar(mensaje, nivel = VistaMensaje.ERROR){
-		this.base.className = `vistamensaje ${nivel}`
-		this.spanMensaje.textContent = mensaje
-		this.base.style.display = 'block'
-		//Quitamos el mensaje a los 5 segundos
-		setTimeout(this.cerrar.bind(this), 5000)
+	/**
+		Muestra el menú de contexto en las coordenadas indicadas.
+		@param x {Number} Coordenada x.
+		@param y {Number} Coordenada y.
+	**/
+	mostrarEn(x, y){
+		super.mostrar(true)
+		this.base.style.left = `${x- 100}px`
+		this.base.style.top = `${y}px`
 	}
-	
 }
 </code></pre>
         </article>

@@ -22,15 +22,12 @@ export class VistaLogin extends Vista {
 	**/
 	iniciar() {
 		//Cogemos referencias a los elementos del interfaz
-		this.itEmail = this.doc.getElementsByTagName('input')[0]
-		this.itClave = this.doc.getElementsByTagName('input')[1]
-		this.btnAcceder = this.doc.getElementsByTagName('button')[0]
-		this.aRecuperarClave = this.doc.getElementsByTagName('p')[0]
 		this.pError = this.doc.getElementsByTagName('p')[1]
+		this.sTest = this.doc.getElementsByTagName('select')[0]
 
 		//Capturamos los eventos
-		this.btnAcceder.onclick = this.acceder.bind(this)
-		this.aRecuperarClave.onclick = this.recuperarClave.bind(this)
+		this.sTest.onchange = this.test.bind(this)
+		
 		//Transferimos el doc de la plantilla al documento
 		super.transferir(this.base, this.doc)
 
@@ -38,34 +35,20 @@ export class VistaLogin extends Vista {
 		//TODO: No funciona el onload del link. Se ve el formulario antes que el estilo.
 		this.cargarCSS(`${this.getNombreClase()}.css`)
 
-		this.itEmail.focus()
 		this.mostrar()
+		this.habilitarLogin()
 	}
-	/**
-		Valida los campos del formulario. Si son correctos, lo envía al controlador. Si hay error, lanza una excepción.
-	**/
-	acceder() {
-		try {
-			if (!this.itEmail.checkValidity() || !this.itClave.checkValidity())
-				throw Error("Datos de acceso incorrectos.")
-			if (this.itEmail.value == '' || this.itClave.value == '')
-				throw Error("Datos de acceso incorrectos.")
-			this.controlador.autenticacion(this.itEmail.value, this.itClave.value)
-		} catch (e) {
-			this.mostrarError(e)
-		}
-	}
-	/**
-		Solicita al controlador la recuperación de la clave.
-	**/
-	recuperarClave() {
-		try {
-			if (!this.itEmail.checkValidity() || this.itEmail.value == '')
-				throw Error("Es necesario indicar un email correcto.")
-			this.controlador.recuperarClave(this.itEmail.value)
-		} catch (e) {
-			this.mostrarError(e)
-		}
+	habilitarLogin(){
+		//Login con Google
+		google.accounts.id.initialize({
+            client_id: "756573648994-cn4uk8gsic003hnotjb9mpt1mjtnqvgm.apps.googleusercontent.com",
+            callback: this.controlador.login.bind(this.controlador)
+          });
+          google.accounts.id.renderButton(
+			document.getElementById('divGoogleLogin'),
+            { theme: "outline", size: "large" }  // customization attributes
+          );
+          //google.accounts.id.prompt(); // also display the One Tap dialog
 	}
 	/**
 		Muestra el error en la vista.
@@ -75,5 +58,11 @@ export class VistaLogin extends Vista {
 		console.error(error)
 		this.pError.textContent = error.message
 		this.pError.style.display = 'block'
+	}
+
+	test(){
+		let token = {}
+		token.credential = this.sTest.value
+		this.controlador.login(token)
 	}
 }
