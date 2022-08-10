@@ -1,20 +1,21 @@
 DELETE FROM Usuario;
-INSERT INTO Usuario (id, email) VALUES
-(1, 'aportero@fundacionloyola.es'),
-(2, 'dcamison@fundacionloyola.es'),
-(3, 'mmolano@fundacionloyola.es'),
-(4, 'asanchez@fundacionloyola.es'),
-(5, 'prisco@fundacionloyola.es'),
-(10, 'alumno1.guadalupe@alumnado.fundacionloyola.net'),
-(11, 'alumno2.guadalupe@alumnado.fundacionloyola.net'),
-(12, 'alumno3.guadalupe@alumnado.fundacionloyola.net'),
-(13, 'alumno4.guadalupe@alumnado.fundacionloyola.net');
+INSERT INTO Usuario (id, nombre, apellidos, email) VALUES
+(1, 'Antonio', 'Portero', 'aportero@fundacionloyola.es'),
+(2, 'Diego', 'Camisón', 'dcamison@fundacionloyola.es'),
+(3, 'Manuel', 'Molano', 'mmolano@fundacionloyola.es'),
+(4, 'Antonio', 'Sánchez', 'asanchez@fundacionloyola.es'),
+(5, 'Pedro', 'Risco', 'prisco@fundacionloyola.es'),
+(6, 'Miguel', 'Jaque', 'mjaque@fundacionloyola.es'),
+(10, 'Alumno', '1', 'alumno1.guadalupe@alumnado.fundacionloyola.net'),
+(11, 'Alumno', '2', 'alumno2.guadalupe@alumnado.fundacionloyola.net'),
+(12, 'Alumno', '3', 'alumno3.guadalupe@alumnado.fundacionloyola.net'),
+(13, 'Alumno', '4', 'alumno4.guadalupe@alumnado.fundacionloyola.net');
 
 DELETE FROM Alumno;
 INSERT INTO Alumno (id) VALUES (10), (11), (12), (13);
 
 DELETE FROM Profesor;
-INSERT INTO Profesor (id) VALUES (1), (2), (3), (4), (5);
+INSERT INTO Profesor (id) VALUES (1), (2), (3), (4), (5), (6);
 
 DELETE FROM Modulo;
 INSERT INTO Modulo (id, codigo, titulo, color_fondo, color_letra) VALUES

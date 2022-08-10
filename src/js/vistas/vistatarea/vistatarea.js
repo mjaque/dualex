@@ -79,6 +79,8 @@ export class VistaTarea extends Vista{
 		this.iFecha.disabled = deshabilitar
 		this.taDescripcion.disabled = deshabilitar
 		this.taComentarioCalificacionEmpresa.disabled = deshabilitar
+		this.taEvaluacion.disabled = deshabilitar
+		this.iCalificacion.disabled = deshabilitar
 		this.sCalificacion.disabled = deshabilitar
 		for(let input of this.divActividades.getElementsByTagName('input'))
 			input.disabled = deshabilitar

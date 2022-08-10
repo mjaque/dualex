@@ -27,8 +27,8 @@ class Login{
 		if ($config['test'] && strpos($token, 'fundacionloyola')) {
 			$payload = [];
 			$payload['email'] = $token;
-			$payload['given_name'] = 'Test';
-			$payload['family_name'] = 'Pruebas';
+			$payload['given_name'] = '-';
+			$payload['family_name'] = '-';
 		}
 		else{
 			$client = new Google_Client(['client_id' => self::$ID_CLIENTE]);
@@ -43,13 +43,11 @@ class Login{
 		$usuario = DAOUsuario::autenticar($payload['email']);
 		sleep(1);
 		if (!$usuario){
-      		header('HTTP/1.1 401 Unauthorized 2');
+      		header('HTTP/1.1 401 Unauthorized');
       		die();
     	}
 		//Completamos los datos del usuario
 		$usuario->email = $payload['email'];
-		$usuario->nombre = $payload['given_name'];
-		$usuario->apellidos = $payload['family_name'];
 		$usuario->autorizacion = openssl_encrypt(json_encode($usuario), self::$algoritmo_encriptacion, self::$clave, 0, self::$iv);
     	//print_r(openssl_get_cipher_methods()); //Muestra los algoritmos de encriptación disponibles
 

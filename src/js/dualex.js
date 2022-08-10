@@ -50,6 +50,13 @@ class DualEx{
 		this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
 		this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
 		this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
+		
+		//Activación de la caché
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker
+				.register('./js/servicios/cache.js')
+				.then(() => {console.log('Service Worker Caché Registrado.')})
+		}
 	}
 	/**
 		Muestra el error en la vista de mensajes.

@@ -5,11 +5,13 @@ CREATE TABLE dualex(
 	parametro VARCHAR(256) PRIMARY KEY,
 	valor VARCHAR(256)
 );
-INSERT INTO dualex VALUES('versión', '0.1');
+INSERT INTO dualex VALUES('versión', '1.0');
 
 DROP TABLE IF EXISTS Usuario;
 CREATE TABLE Usuario(
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	nombre VARCHAR(256),
+	apellidos VARCHAR(256),
 	email VARCHAR(256) UNIQUE
 );
 

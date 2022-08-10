@@ -5,4 +5,16 @@ Desde el directorio del proyecto:
 	./herramientas/phpDocumentor.phar -d ./src/php/ -t docs/php --ignore ./src/php/api/config_prod.php --ignore ./src/php/api/vendor
 	jsdoc -r -d docs/js src/js src/js
 	
+---------------------
+Crear el directorio en despliegue (plesk) y actualizar desde allí:
+
+git init
+git remote add dualex https://github.com/mjaque/dualex.git
+git fetch dualex
+git checkout dualex/master -- src
+
+Cambiar de nombre el directorio src a dualex.
+Eliminar directorios de test, doc, etc.
+Poner el archivo de configuración de producción.
+	
 

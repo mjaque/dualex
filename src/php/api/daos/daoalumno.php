@@ -19,8 +19,8 @@ class DAOAlumno{
 	$sql .= 'JOIN Modulo_Profesor ON Modulo_Profesor.id_modulo = Alumno_Modulo.id_modulo ';
 	$sql .= 'JOIN Modulo ON Modulo.id = Modulo_Profesor.id_modulo ';
 	$sql .= 'WHERE Modulo_Profesor.id_profesor = :id_profesor ';
-	$sql .= 'ORDER BY Usuario.apellidos, Usuario.nombre ';
-	 
+	$sql .= 'ORDER BY Usuario.apellidos, Usuario.nombre '; 
+
     $params = array('id_profesor' => $id_profesor);
 
     return BD::seleccionar($sql, $params);

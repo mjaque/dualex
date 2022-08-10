@@ -84,7 +84,7 @@ export class VistaAlumnos extends Vista{
 	}
 	/**
 		Crea el span asociado a un módulo y lo añade al div.
-		@param div {DivElement} Elemento div la que se añadirá el span.
+		@param div {DivElement} Elemento div al que se añadirá el span.
 		@param alumno {Modulo} Datos del módulo.
 		@param index {Number} Índice del alumno en el array.
 		@param array {Array} Array de alumnos.
