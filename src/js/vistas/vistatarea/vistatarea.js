@@ -122,9 +122,8 @@ export class VistaTarea extends Vista{
 	}
 	/**
 		Carga la lista de Actividades.
-		@param actividades {Actividades[]} Array de Actividades definidas.
 	**/
-	cargarActividades(actividades){
+	cargarActividades(){
 		this.controlador.verActividades()
 		.then(actividades => {
 			this.eliminarHijos(this.divActividades)
@@ -172,9 +171,9 @@ export class VistaTarea extends Vista{
 		try{
 			//Validación de datos.
 			if (this.iTitulo.value.length < 5)
-				throw Error('Debes especifica un título para la tarea que sea descriptivo.')
+				throw Error('Debes especificar un título para la tarea que sea descriptivo.')
 			if (this.iFecha.value == "")
-				throw Error('Debes especifica una fecha válida para la tarea.')
+				throw Error('Debes especificar una fecha válida para la tarea.')
 			if (new Date(this.iFecha.value) > new Date())
 				throw Error('No registres tareas que no hayas hecho todavía.')
 			if (this.taDescripcion.length < 10)

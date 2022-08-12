@@ -16,5 +16,13 @@ git checkout dualex/master -- src
 Cambiar de nombre el directorio src a dualex.
 Eliminar directorios de test, doc, etc.
 Poner el archivo de configuración de producción.
-	
-
+-------------------------------------------
+Branching 
+git branch nueva_rama
+git branch	//para comprobar
+git checkout nueva_rama	//para cambiar de rama
+---------------------------------------------
+Merge
+git checkout main		//Volvemos a main
+git merge nueva_rama	//A ver si puede hacer fast-forward
+git branch -d nueva_rama	//para borrar la rama...

@@ -86,12 +86,6 @@ class DAOTarea{
 		return BD::seleccionar($sql, $params);
 	}
 	/**
-		Inserta una nueva tarea.
-		@param tarea {Tarea} Datos de la tarea a insertar.
-		@param usuario {Usuario} Datos del usuario loggeado.
-		@return id {Integer} Identificador de la tarea insertada.
-	**/
-	/**
 		Devuelve una tarea de un alumno.
 		@param $idTarea Identificador de la tarea solicitada.
 		@param $idProfesor Identificador del profesor.
@@ -117,6 +111,12 @@ class DAOTarea{
 
 		return BD::seleccionar($sql, $params);
 	}
+	/**
+		Inserta una nueva tarea.
+		@param tarea {Tarea} Datos de la tarea a insertar.
+		@param usuario {Usuario} Datos del usuario loggeado.
+		@return id {Integer} Identificador de la tarea insertada.
+	**/
 	public static function insertar($tarea, $usuario){
 		if (!BD::iniciarTransaccion())
 			throw new Exception('No es posible iniciar la transacción.');
@@ -139,6 +139,7 @@ class DAOTarea{
 
 		if (!BD::commit())
 			throw new Exception('No se pudo confirmar la transacción.');
+		return $idNuevo;
 	}
 	/**
 		Modificación de tarea por alumno.
