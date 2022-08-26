@@ -36,7 +36,7 @@ export class VistaMenu extends Vista{
 		this.limpiar()
 		this.verUsuario()
 		this.verTitulo('Lista Alumnos')
-		this.base.appendChild(this.crearIcono('logout.svg', 2, 'salir', this.controlador.logout.bind(this.controlador)))
+		this.verLogout(2);
 		this.verAcercaDe()
 	}
 	/**
@@ -45,22 +45,26 @@ export class VistaMenu extends Vista{
 	**/
 	verInforme(alumno){
 		this.limpiar()
+		this.verUsuario()
 		this.verTitulo(`Informe de ${alumno.nombre} ${alumno.apellidos}`)
-		this.base.appendChild(this.crearIcono('logout.svg', 3, 'logout', this.controlador.logout.bind(this.controlador)))
 		this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
 		this.base.appendChild(this.crearIcono('print.svg', 1, 'imprimir', this.controlador.imprimir.bind(this.controlador)))
+		this.verLogout(3);
+		this.verAcercaDe()
 	}
 	/**
 		Muestra el menú asociado a la vista de créditos.
 	**/
 	verCreditos(){
 		this.limpiar()
+		this.verUsuario()
 		this.verTitulo('Acerca de DUALEX')
-		this.base.appendChild(this.crearIcono('logout.svg', 3, 'logout', this.controlador.logout.bind(this.controlador)))
 		if (this.controlador.getUsuario().rol == 'profesor')
 			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
 		else
 			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, this.controlador.getUsuario())))
+		this.verLogout(3);
+		this.verAcercaDe()
 	}
 	/**
 		Muestra el menú asociado a la vista de tarea.
@@ -68,12 +72,14 @@ export class VistaMenu extends Vista{
 	**/
 	verTarea(tarea){
 		this.limpiar()
+		this.verUsuario()
 		if (tarea)
 			this.verTitulo(`Tarea: ${tarea.titulo}`)
 		else
 			this.verTitulo('Nueva Tarea')
-		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
 		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, null)))
+		this.verLogout(2);
+		this.verAcercaDe()
 	}
 	/**
 		Muestra el menú asociado a la lista de tareas de un alumno.
@@ -82,6 +88,7 @@ export class VistaMenu extends Vista{
 	**/
 	verTareasAlumno(alumno){
 		this.limpiar()
+		this.verUsuario()
 		if (this.controlador.getUsuario().rol == 'alumno'){
 			this.verTitulo(`Tus Tareas`)
 			this.base.appendChild(this.crearIcono('add.svg', 1, 'nueva tarea', this.controlador.mostrarTarea.bind(this.controlador, null)))
@@ -90,7 +97,7 @@ export class VistaMenu extends Vista{
 			this.verTitulo(`Tareas de ${alumno.nombre} ${alumno.apellidos}`)
 			this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
 		}
-		this.base.appendChild(this.crearIcono('logout.svg', 2, 'logout', this.controlador.logout.bind(this.controlador)))
+		this.verLogout(2);
 		this.verAcercaDe()
 	}
 	/**
