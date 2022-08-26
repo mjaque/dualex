@@ -56,6 +56,9 @@ export class VistaInforme extends Vista{
 		}
 	}
 	_crearGrid(datos, div){
+		//Mejor si primero lo borramos
+		while(div.children.length > 0)
+			div.lastChild.remove()
 		for(let dato of datos){
 			let div1 = document.createElement('div')
 			div.appendChild(div1)
