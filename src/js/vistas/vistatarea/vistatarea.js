@@ -136,7 +136,7 @@ export class VistaTarea extends Vista{
 				input.setAttribute('data-idActividad', actividad.id)
 				let label = document.createElement('label')
 				div.appendChild(label)
-				label.textContent = actividad.titulo
+				label.textContent = actividad.id + '. ' + actividad.titulo
 				label.setAttribute('title', actividad.descripcion)
 			}
 		})

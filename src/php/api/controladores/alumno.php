@@ -7,7 +7,7 @@ require_once('./daos/daoalumno.php');
 class Alumno{
 	/**
 		Devuelve la lista de alumnos.
-		Si recibe un parámetro con el valor 'profesor', devuelve la lista de alumnos que cursan módulos impartidos por el profesor.
+		Si recibe un parámetro con el valor 'profesor', devuelve la lista de alumnos que cursan módulos impartidos por el profesor y que tienen tareas registradas.
 		@param $pathParams {Array} Array de parámetros.
 		@param $queryParams {Array} No utilizado
 		@param $usuario {Usuario} Profesor del que se quieren conocer los alumnos.

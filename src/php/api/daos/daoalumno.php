@@ -6,7 +6,7 @@
 
 class DAOAlumno{
   /**
-    Devuelve un array de alumnos de un profesor.
+    Devuelve un array de alumnos de un profesor que tengan tareas registradas.
     @param $id_profesor Identificador del profesor.
     @return Un array de arrays con los datos de cada alumno.
   **/
@@ -19,6 +19,7 @@ class DAOAlumno{
 	$sql .= 'JOIN Modulo_Profesor ON Modulo_Profesor.id_modulo = Alumno_Modulo.id_modulo ';
 	$sql .= 'JOIN Modulo ON Modulo.id = Modulo_Profesor.id_modulo ';
 	$sql .= 'WHERE Modulo_Profesor.id_profesor = :id_profesor ';
+	$sql .= 'AND Alumno.id IN (SELECT id_alumno FROM Tarea) ';
 	$sql .= 'ORDER BY Usuario.apellidos, Usuario.nombre '; 
 
     $params = array('id_profesor' => $id_profesor);
