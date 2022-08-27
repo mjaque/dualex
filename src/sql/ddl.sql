@@ -115,3 +115,15 @@ CREATE TABLE Periodo(
 	fecha_fin DATE NOT NULL
 )
 COMMENT = 'Fechas de los periodos de evaluación'
+
+DROP TABLE IF EXISTS Log;
+CREATE TABLE Log(
+	timestamp TIMESTAMP NOT NULL DEFAULT NOW(),
+	usuario VARCHAR(256),
+	controlador VARCHAR(256),
+	metodo VARCHAR(256),
+	pathParams TEXT,
+	queryParams TEXT,
+	body TEXT
+);
+	

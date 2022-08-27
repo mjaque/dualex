@@ -81,7 +81,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    DAOAlumno
+    Log
 
     
             <div class="phpdocumentor-element__package">
@@ -95,16 +95,14 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/daos/daoalumno.php"><a href="files/src-php-api-daos-daoalumno.html"><abbr title="src/php/api/daos/daoalumno.php">daoalumno.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/servicios/log.php"><a href="files/src-php-api-servicios-log.html"><abbr title="src/php/api/servicios/log.php">log.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">7</span>
+    <span class="phpdocumentor-element-found-in__line">6</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">DAO de Alumno.</p>
+            <p class="phpdocumentor-summary">Servicio de log.</p>
 
-    <section class="phpdocumentor-description"><p>Objeto para el acceso a los datos relacionados con los alumnos.</p>
-</section>
 
 
 
@@ -120,11 +118,11 @@
 
 <dl class="phpdocumentor-table-of-contents">
                         <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/DAOAlumno.html#method_verAlumnosPorProfesor">verAlumnosPorProfesor()</a>
+    <a href="classes/Log.html#method_registrar">registrar()</a>
     <span>
-                                &nbsp;: <abbr title="\Un">Un</abbr>    </span>
+                                &nbsp;: mixed    </span>
 </dt>
-<dd>Devuelve un array de alumnos de un profesor que tengan tareas registradas.</dd>
+<dd>Registra una operación en el log de base de datos.</dd>
 
         </dl>
 
@@ -137,7 +135,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/DAOAlumno.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Log.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -145,33 +143,72 @@
             -public
                                     -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_verAlumnosPorProfesor">
-        verAlumnosPorProfesor()
-        <a href="classes/DAOAlumno.html#method_verAlumnosPorProfesor" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_registrar">
+        registrar()
+        <a href="classes/Log.html#method_registrar" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/daos/daoalumno.php"><a href="files/src-php-api-daos-daoalumno.html"><abbr title="src/php/api/daos/daoalumno.php">daoalumno.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/php/api/servicios/log.php"><a href="files/src-php-api-servicios-log.html"><abbr title="src/php/api/servicios/log.php">log.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">10</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Devuelve un array de alumnos de un profesor que tengan tareas registradas.</p>
+        <p class="phpdocumentor-summary">Registra una operación en el log de base de datos.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">verAlumnosPorProfesor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id_profesor</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Un">Un</abbr></span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">registrar</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$usuario</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$controlador</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$metodo</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pathParams</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$queryParams</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$body</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$id_profesor</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$usuario</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Identificador del profesor.</p>
-</section>
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$controlador</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$metodo</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$pathParams</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$queryParams</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$body</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
 
             </dd>
             </dl>
@@ -179,11 +216,9 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Un">Un</abbr></span>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
-            <section class="phpdocumentor-description"><p>array de arrays con los datos de cada alumno.</p>
-</section>
-
+        
     
 </article>
             </section>
@@ -264,7 +299,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/DAOAlumno.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Log.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

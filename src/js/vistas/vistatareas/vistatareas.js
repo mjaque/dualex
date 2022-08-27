@@ -30,7 +30,7 @@ export class VistaTareas extends Vista{
 	}
 	/**
 		Carga las tareas.
-		@param tareas {[Tarea]} Array de tareas.
+		@param tareas {Array} Array de tareas.
 	**/
 	cargar(tareas){
 		this.eliminarHijos(this.base)

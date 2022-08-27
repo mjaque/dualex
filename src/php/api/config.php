@@ -5,6 +5,7 @@
 	return array(
 		'debug' => true,
 		'test' => true,
+		'log' => true,
 		'host' => 'localhost',
 		'usuario' => 'dualex',
 		'clave' => 'dualex',

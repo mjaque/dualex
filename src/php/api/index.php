@@ -38,7 +38,7 @@
 			}
 		}
 
-		//Procesamos la petición para identificar el recurso solicitado
+		//Procesamos la petición para identificar el recurso solicitado y sus parámetros
 		$metodo = $_SERVER['REQUEST_METHOD'];
 		$pathParams = explode('/', $_SERVER['PATH_INFO']);
 		$queryParams = [];
@@ -49,6 +49,7 @@
 		for($i = 0; $i < count($pathParams); $i++)
 			if ($pathParams[$i] == 'null')
 				$pathParams[$i] = null;
+		$body = json_decode(file_get_contents('php://input'));
 
 		//Autenticación
 		$usuario = null;
@@ -60,6 +61,12 @@
 			$autorizacion = apache_request_headers()['Authorization2'];
 			if ($autorizacion != "null")
 				$usuario = json_decode(Login::desencriptar($autorizacion));
+		}
+
+		//Logging
+		if ($config['log']){
+			require_once('./servicios/log.php');
+			Log::registrar($usuario, $recurso, $metodo, $pathParams, $queryParams, $body);
 		}
 
 		//Routing
@@ -97,14 +104,12 @@
 						$controlador->get($pathParams, $queryParams, $usuario);
 						die();
 					case 'POST':
-						$body = json_decode(file_get_contents('php://input'));
 						$controlador->post($pathParams, $queryParams, $body, $usuario);
 						die();
 					case 'DELETE':
 						$controlador->delete($pathParams, $queryParams, $usuario);
 						die();
 					case 'PUT':
-						$body = json_decode(file_get_contents('php://input'));
 						$controlador->put($pathParams, $queryParams, $body, $usuario);
 						die();
 					default:

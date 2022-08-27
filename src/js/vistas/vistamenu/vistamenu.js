@@ -35,7 +35,11 @@ export class VistaMenu extends Vista{
 	verAlumnosProfesor(){
 		this.limpiar()
 		this.verUsuario()
-		this.verTitulo('Lista Alumnos')
+		//this.verTitulo('Lista Alumnos')
+		let h1 = document.createElement('h1')
+		this.base.appendChild(h1)
+		h1.appendChild(document.createTextNode('Lista de Alumnos'))
+		h1.appendChild(this.crearIconoAyuda('Muestra la lista de alumnos que tienen tareas registradas de los módulos asignados al profesor'))
 		this.verLogout(2);
 		this.verAcercaDe()
 	}
@@ -152,13 +156,18 @@ export class VistaMenu extends Vista{
 		@param callback {Function} Función que se llamará al pulsar el icono.
 		@return {HTMLElement} Elemento HTML (img) que forma el icono.
 	**/
-	crearIcono(imagen, orden, titulo, callback){
+	crearIcono(imagen, orden = null, titulo, callback = null){
 		let icono = document.createElement('img')
 		icono.setAttribute('src', 'iconos/' + imagen)
 		icono.setAttribute('title', titulo)
 		icono.classList.add('icono')
-		icono.style.order = orden
-		icono.onclick = callback
+		if (orden)
+			icono.style.order = orden
+		if (callback)
+			icono.onclick = callback
 		return icono
+	}
+	crearIconoAyuda(texto){
+		return this.crearIcono('help.svg', null, texto)
 	}
 }

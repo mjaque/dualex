@@ -228,7 +228,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\DAOAlumno\u003A\u003AverAlumnosPorProfesor\u0028\u0029",
             "name": "verAlumnosPorProfesor",
-            "summary": "Devuelve\u0020un\u0020array\u0020de\u0020alumnos\u0020de\u0020un\u0020profesor.",
+            "summary": "Devuelve\u0020un\u0020array\u0020de\u0020alumnos\u0020de\u0020un\u0020profesor\u0020que\u0020tengan\u0020tareas\u0020registradas.",
             "url": "classes/DAOAlumno.html#method_verAlumnosPorProfesor"
         },                {
             "fqsen": "\\DAOTarea",
@@ -258,7 +258,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\DAOTarea\u003A\u003Ainsertar\u0028\u0029",
             "name": "insertar",
-            "summary": "",
+            "summary": "Inserta\u0020una\u0020nueva\u0020tarea.",
             "url": "classes/DAOTarea.html#method_insertar"
         },                {
             "fqsen": "\\DAOTarea\u003A\u003Amodificar\u0028\u0029",
@@ -325,6 +325,16 @@ Search.appendIndex(
             "name": "verPeriodo",
             "summary": "Devuelve\u0020un\u0020array\u0020con\u0020el\u0020nombre\u0020del\u0020periodo\u0020indicado.",
             "url": "classes/DAOInforme.html#method_verPeriodo"
+        },                {
+            "fqsen": "\\Log",
+            "name": "Log",
+            "summary": "Servicio\u0020de\u0020log.",
+            "url": "classes/Log.html"
+        },                {
+            "fqsen": "\\Log\u003A\u003Aregistrar\u0028\u0029",
+            "name": "registrar",
+            "summary": "Registra\u0020una\u0020operaci\u00F3n\u0020en\u0020el\u0020log\u0020de\u0020base\u0020de\u0020datos.",
+            "url": "classes/Log.html#method_registrar"
         },                {
             "fqsen": "\\",
             "name": "\\",

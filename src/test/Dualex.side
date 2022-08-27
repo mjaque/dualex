@@ -1397,11 +1397,12 @@
       "id": "3ff179b6-f198-4be2-9bfd-164361e50ecc",
       "comment": "",
       "command": "assertText",
-      "target": "css=div:nth-child(3) > .modulo",
+      "target": "css=.modulo:nth-child(1)",
       "targets": [
-        ["css=div:nth-child(3) > .modulo", "css:finder"],
-        ["xpath=//div[@id='divAlumnos']/div[3]/span", "xpath:idRelative"],
-        ["xpath=//div[3]/span", "xpath:position"]
+        ["css=.modulo:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='divAlumnos']/div[2]/span", "xpath:idRelative"],
+        ["xpath=//div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'PRFB')]", "xpath:innerText"]
       ],
       "value": "PRFB"
     }, {
@@ -1901,12 +1902,12 @@
       "id": "e4237e23-aafd-47d1-a1e9-4d5bb639f30e",
       "comment": "",
       "command": "click",
-      "target": "css=div:nth-child(3) .icono:nth-child(2)",
+      "target": "css=.icono:nth-child(2)",
       "targets": [
-        ["css=div:nth-child(3) .icono:nth-child(2)", "css:finder"],
-        ["xpath=(//img[@title='informe'])[2]", "xpath:img"],
-        ["xpath=//div[@id='divAlumnos']/div[3]/span[3]/img[2]", "xpath:idRelative"],
-        ["xpath=//div[3]/span[3]/img[2]", "xpath:position"]
+        ["css=.icono:nth-child(2)", "css:finder"],
+        ["xpath=//img[@title='informe']", "xpath:img"],
+        ["xpath=//div[@id='divAlumnos']/div[2]/span[3]/img[2]", "xpath:idRelative"],
+        ["xpath=//span[3]/img[2]", "xpath:position"]
       ],
       "value": ""
     }, {
