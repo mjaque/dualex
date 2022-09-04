@@ -89,6 +89,9 @@
 				$controlador = new Informe();
 				break;
 			case 'actividad':
+				require_once('./controladores/actividad.php');
+				$controlador = new Actividad();
+				break;
 			case 'calificacion':
 			case 'periodo':
 				require_once('./controladores/general.php');

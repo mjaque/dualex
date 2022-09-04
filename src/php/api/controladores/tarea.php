@@ -149,7 +149,6 @@ class Tarea{
 		$modulo['titulo'] = $elemento['modulo_titulo'];
 		$modulo['color_fondo'] = $elemento['color_fondo'];
 		$modulo['color_letra'] = $elemento['color_letra'];
-		$modulo['icono'] = $elemento['icono'];
 		return $modulo;
 	}
 	/**

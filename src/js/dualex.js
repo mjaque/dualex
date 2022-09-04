@@ -193,10 +193,11 @@ class DualEx{
 	}
 	/**
 		Devuelve la lista de actividades definidas.
+		@param idCiclo {Number} Identificador del ciclo.
 		@return {Promise} Promesa de resolución de la petición.
 	**/
-	verActividades(){
-		return this.modelo.getActividades()
+	verActividades(idCiclo){
+		return this.modelo.getActividades(idCiclo)
 	}
 	/**
 		Devuelve la lista de calificaciones definidas.

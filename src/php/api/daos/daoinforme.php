@@ -14,21 +14,23 @@ class DAOInforme{
 		@return Un array de arrays con los datos de cada tarea.
 	**/
 	public static function verValoracion($idAlumno, $idPeriodo, $idProfesor){
-		$sql  = 'SELECT CONCAT(Actividad.id, ".-", Actividad.titulo) AS titulo, ';
+		$sql  = 'SELECT CONCAT(Actividad.orden, ".-", Actividad.titulo) AS titulo, ';
 		$sql .= 'ROUND(( ';
 		$sql .= 'SELECT AVG((Tarea.calificacion + Calificacion.valor)/2) FROM Tarea '; 
 		$sql .= 'JOIN Calificacion ON Tarea.id_calificacion_empresa = Calificacion.id ';
 		$sql .= 'JOIN Actividad_Tarea ON Tarea.id = Actividad_Tarea.id_tarea ';
-		$sql .= 'WHERE id_alumno = :id_alumno ';
+		$sql .= 'WHERE id_alumno = :id_alumno1 ';
 		$sql .= 'AND Actividad_Tarea.id_actividad = Actividad.id ';
 		$sql .= 'AND Tarea.fecha BETWEEN ';
 		$sql .= '(SELECT fecha_inicio from Periodo WHERE id = :id_periodo1) AND ';
 		$sql .= '(SELECT fecha_fin from Periodo WHERE id = :id_periodo2) ';
 		$sql .= ')) as calificacion ';
 		$sql .= 'FROM `Actividad` ';
-		$sql .= 'ORDER BY Actividad.id';
-		
-		$params = array('id_alumno' => $idAlumno, 'id_periodo1' => $idPeriodo, 'id_periodo2' => $idPeriodo);
+		$sql .= 'WHERE Actividad.id_ciclo = ';
+		$sql .= '(SELECT id_ciclo FROM Alumno WHERE Alumno.id = :id_alumno2) ';
+		$sql .= 'ORDER BY Actividad.orden';
+
+		$params = array('id_alumno1' => $idAlumno, 'id_alumno2' => $idAlumno, 'id_periodo1' => $idPeriodo, 'id_periodo2' => $idPeriodo);
 
 		return BD::seleccionar($sql, $params);
 	}
@@ -46,16 +48,18 @@ class DAOInforme{
  		$sql .= 'JOIN Calificacion ON Tarea.id_calificacion_empresa = Calificacion.id ';
  		$sql .= 'JOIN Actividad_Tarea ON Tarea.id = Actividad_Tarea.id_tarea ';
 		$sql .= 'JOIN Actividad_Modulo ON Actividad_Tarea.id_actividad = Actividad_Modulo.id_actividad ';
-		$sql .= 'WHERE id_alumno = :id_alumno ';
+		$sql .= 'WHERE id_alumno = :id_alumno1 ';
 		$sql .= 'AND Actividad_Modulo.id_modulo = Modulo.id ';
 		$sql .= 'AND Tarea.fecha BETWEEN ';
 		$sql .= '(SELECT fecha_inicio from Periodo WHERE id = :id_periodo1) AND ';
 		$sql .= '(SELECT fecha_fin from Periodo WHERE id = :id_periodo2) ';
 		$sql .= 'GROUP BY id_modulo),1) AS calificacion ';
 		$sql .= 'FROM Modulo ';
-		$sql .= 'ORDER BY Modulo.codigo ';
+		$sql .= 'WHERE Modulo.id_ciclo = ';
+		$sql .= '(SELECT id_ciclo FROM Alumno WHERE Alumno.id = :id_alumno2) ';
+		$sql .= 'ORDER BY Modulo.orden ';
 
-		$params = array('id_alumno' => $idAlumno, 'id_periodo1' => $idPeriodo, 'id_periodo2' => $idPeriodo);
+		$params = array('id_alumno1' => $idAlumno, 'id_alumno2' => $idAlumno, 'id_periodo1' => $idPeriodo, 'id_periodo2' => $idPeriodo);
 
 		return BD::seleccionar($sql, $params);
 	}

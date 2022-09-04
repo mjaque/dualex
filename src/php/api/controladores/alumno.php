@@ -22,10 +22,6 @@ class Alumno{
 							die();
 				}
 				$resultado = DAOAlumno::verAlumnosPorProfesor($usuario->id);
-				if (count($resultado) > 0)
-					$resultado = $this->agruparModulos($resultado);
-				//El resultado tiene una fila por alumno y módulo. Debemos agruparlo.
-				
 			}
 			else{
 				$id = $pathParams[0];

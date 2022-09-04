@@ -326,13 +326,6 @@
       "targets": [],
       "value": ""
     }, {
-      "id": "046dad3a-1730-40e5-8b75-e8d0454cf077",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "655x629",
-      "targets": [],
-      "value": ""
-    }, {
       "id": "732db155-43b9-4dba-92f5-1391989924c2",
       "comment": "",
       "command": "click",
@@ -391,22 +384,39 @@
       "target": "xpath=//div[@id='divAlumnos' and contains(@style, 'display: block')]",
       "targets": [],
       "value": ""
+    }, {
+      "id": "d4f99a44-ee1d-40a7-a1c8-2af4e54492fc",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=div:nth-child(4) > .ciclo",
+      "targets": [
+        ["css=div:nth-child(4) > .ciclo", "css:finder"],
+        ["xpath=//div[@id='divAlumnos']/div[4]/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'MI')]", "xpath:innerText"]
+      ],
+      "value": "MI"
+    }, {
+      "id": "7e5fa081-34ef-4d15-ad91-fdf795cfb2f8",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=div:nth-child(4) > .alumno",
+      "targets": [
+        ["css=div:nth-child(4) > .alumno", "css:finder"],
+        ["xpath=//div[@id='divAlumnos']/div[4]/span[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div[4]/span[2]", "xpath:position"],
+        ["xpath=//span[contains(.,'Alumno 5')]", "xpath:innerText"]
+      ],
+      "value": "Alumno 5"
     }]
   }, {
     "id": "24a9fbf5-380d-4362-817a-d3b67b5c43bd",
     "name": "Alta Tarea",
     "commands": [{
-      "id": "ab75a5c6-71fe-4820-a71a-254bd3968f0b",
+      "id": "9bf367be-55d4-4179-9879-54536944bc06",
       "comment": "",
       "command": "open",
       "target": "http://localhost/dualex/src/index.html",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "06845998-1606-4ab6-9340-7532f139049d",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "655x631",
       "targets": [],
       "value": ""
     }, {
@@ -446,12 +456,12 @@
       "id": "8100e341-c39e-442d-bc96-cb0c2a60ef8e",
       "comment": "",
       "command": "click",
-      "target": "css=#divMenu > .icono:nth-child(2)",
+      "target": "css=.icono:nth-child(3)",
       "targets": [
-        ["css=#divMenu > .icono:nth-child(2)", "css:finder"],
+        ["css=.icono:nth-child(3)", "css:finder"],
         ["xpath=//img[@title='nueva tarea']", "xpath:img"],
         ["xpath=//div[@id='divMenu']/img", "xpath:idRelative"],
-        ["xpath=//img", "xpath:position"]
+        ["xpath=//div[5]/img", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -548,13 +558,6 @@
       ],
       "value": ""
     }, {
-      "id": "15d4b32a-5f88-4fbb-a4da-2bb6e47e694b",
-      "comment": "",
-      "command": "runScript",
-      "target": "window.scrollTo(0,0)",
-      "targets": [],
-      "value": ""
-    }, {
       "id": "f0746e54-6345-4c55-8656-1dc0527f8cbd",
       "comment": "",
       "command": "assertText",
@@ -589,13 +592,6 @@
       "targets": [],
       "value": ""
     }, {
-      "id": "5050386a-8248-4e5c-bbcd-d1a8872afc7f",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "675x633",
-      "targets": [],
-      "value": ""
-    }, {
       "id": "45ed097f-eed1-42ce-9115-557e5f4cc5a6",
       "comment": "",
       "command": "waitForElementVisible",
@@ -622,17 +618,10 @@
     "id": "170f279c-875f-4a17-8f85-d3f15897499a",
     "name": "Borrar Tarea",
     "commands": [{
-      "id": "06d2865a-f007-4c3f-8e09-5475175fd1f3",
+      "id": "c6707e35-c5dc-408b-9bf0-d5fb318c2a65",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/dualex/src/",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "689d2362-dbd9-46fd-8b31-beedf3f770ec",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "634x641",
+      "target": "http://localhost/dualex/src/index.html",
       "targets": [],
       "value": ""
     }, {
@@ -757,10 +746,10 @@
     "id": "a625f535-b8fc-4a05-91d4-d25447113dad",
     "name": "Consultar Tarea Alumno",
     "commands": [{
-      "id": "2a198b27-45bb-4b73-bd80-e80525d58442",
+      "id": "330fedd2-4d13-4edd-99be-278892568b1e",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/dualex/src/",
+      "target": "http://localhost/dualex/src/index.html",
       "targets": [],
       "value": ""
     }, {
@@ -795,13 +784,6 @@
         ["xpath=//optgroup/option", "xpath:position"],
         ["xpath=//option[contains(.,'alumno1')]", "xpath:innerText"]
       ],
-      "value": ""
-    }, {
-      "id": "1c1f6b72-17d9-4a55-b1e3-e06ee861569a",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "867x646",
-      "targets": [],
       "value": ""
     }, {
       "id": "001fda88-5c10-4981-af04-3588ecd252c6",
@@ -978,7 +960,7 @@
       "id": "8a9d3a51-ed21-4855-90d4-e8d342cee039",
       "comment": "",
       "command": "click",
-      "target": "css=#divMenu > .icono:nth-child(2)",
+      "target": "xpath=//img[@title='volver']",
       "targets": [
         ["css=#divMenu > .icono:nth-child(2)", "css:finder"],
         ["xpath=//img[@title='volver']", "xpath:img"],
@@ -991,10 +973,10 @@
     "id": "a8885f67-504d-4e36-933d-4cf90be9f227",
     "name": "Modificar Tarea Alumno",
     "commands": [{
-      "id": "597d5781-df80-431a-9771-a77771fe5fa9",
+      "id": "ecbafb7a-d6db-41f4-bb51-607537dd569c",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/dualex/src/",
+      "target": "http://localhost/dualex/src/index.html",
       "targets": [],
       "value": ""
     }, {
@@ -1021,25 +1003,12 @@
       "id": "b9911a5e-e910-45a6-9fd8-3f38254aa64e",
       "comment": "",
       "command": "click",
-      "target": "css=optgroup:nth-child(2) > option:nth-child(1)",
+      "target": "css=#tarea_2 .icono:nth-child(1)",
       "targets": [
-        ["css=optgroup:nth-child(2) > option:nth-child(1)", "css:finder"],
-        ["xpath=//option[@value='alumno1.guadalupe@alumnado.fundacionloyola.net']", "xpath:attributes"],
-        ["xpath=//select[@id='testlogin']/optgroup/option", "xpath:idRelative"],
-        ["xpath=//optgroup/option", "xpath:position"],
-        ["xpath=//option[contains(.,'alumno1')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "b23822d9-16b3-49d4-bbdc-afdb24bee4d8",
-      "comment": "",
-      "command": "click",
-      "target": "css=div:nth-child(2) .icono:nth-child(1)",
-      "targets": [
-        ["css=div:nth-child(2) .icono:nth-child(1)", "css:finder"],
-        ["xpath=(//img[@title='editar'])[2]", "xpath:img"],
-        ["xpath=//div[@id='divTareas']/div[2]/div/img", "xpath:idRelative"],
-        ["xpath=//div[2]/div/img", "xpath:position"]
+        ["css=#tarea_2 .icono:nth-child(1)", "css:finder"],
+        ["xpath=//img[@title='editar']", "xpath:img"],
+        ["xpath=//div[@id='tarea_2']/div/img", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/img", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -1187,30 +1156,30 @@
       "id": "22dc6915-c644-45aa-a77e-4fab51e08012",
       "comment": "",
       "command": "click",
-      "target": "css=div:nth-child(2) .icono:nth-child(1)",
+      "target": "css=#tarea_2 .icono:nth-child(1)",
       "targets": [
-        ["css=div:nth-child(2) .icono:nth-child(1)", "css:finder"],
-        ["xpath=(//img[@title='editar'])[2]", "xpath:img"],
-        ["xpath=//div[@id='divTareas']/div[2]/div/img", "xpath:idRelative"],
-        ["xpath=//div[2]/div/img", "xpath:position"]
+        ["css=#tarea_2 .icono:nth-child(1)", "css:finder"],
+        ["xpath=//img[@title='editar']", "xpath:img"],
+        ["xpath=//div[@id='tarea_2']/div/img", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/img", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "0af3db61-af84-419d-b81a-a72905bedd0b",
+      "id": "b442230e-a453-424f-955e-0908ea876944",
       "comment": "",
-      "command": "assertChecked",
-      "target": "css=div:nth-child(2) > input",
+      "command": "waitForElementVisible",
+      "target": "css=div:nth-child(20) > label",
       "targets": [
-        ["css=div:nth-child(1) > input", "css:finder"],
-        ["xpath=//input[@type='checkbox']", "xpath:attributes"],
-        ["xpath=//div[@id='divTarea']/fieldset/div/div/input", "xpath:idRelative"],
-        ["xpath=//div/input", "xpath:position"]
+        ["css=div:nth-child(20) > label", "css:finder"],
+        ["xpath=//div[@id='divTarea']/fieldset/div/div[20]/label", "xpath:idRelative"],
+        ["xpath=//div[20]/label", "xpath:position"],
+        ["xpath=//label[contains(.,'20. Diagnosticar averías, realizando las intervenciones correctivas')]", "xpath:innerText"]
       ],
-      "value": ""
+      "value": "30000"
     }, {
       "id": "f4d9e062-b5fa-4b0a-bd19-3c610c1d6a1d",
       "comment": "",
-      "command": "assertChecked",
+      "command": "assertNotChecked",
       "target": "css=div:nth-child(2) > input",
       "targets": [
         ["css=div:nth-child(2) > input", "css:finder"],
@@ -1222,7 +1191,7 @@
     }, {
       "id": "54eb4f21-8bb9-4f2d-b64a-66ecbdfc744f",
       "comment": "",
-      "command": "assertNotChecked",
+      "command": "assertChecked",
       "target": "css=div:nth-child(18) > input",
       "targets": [
         ["css=div:nth-child(18) > input", "css:finder"],
@@ -1308,17 +1277,36 @@
       ],
       "value": ""
     }, {
+      "id": "0edf73bd-c1d7-40cf-8310-b1499e204f41",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#divMensaje > span:nth-child(2)",
+      "targets": [
+        ["css=#divMensaje > span:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='divMensaje']/span[2]", "xpath:idRelative"],
+        ["xpath=//span[2]", "xpath:position"],
+        ["xpath=//span[contains(.,'La tarea se modificó correctamente')]", "xpath:innerText"]
+      ],
+      "value": "La tarea se modificó correctamente"
+    }, {
       "id": "23262c52-d0d8-4e9f-bbfe-9d940c71ea23",
       "comment": "",
       "command": "click",
-      "target": "xpath=//div[@id='divTareas']/div[2]/div/img",
+      "target": "css=#tarea_2 .icono",
       "targets": [
-        ["css=div:nth-child(2) .icono", "css:finder"],
+        ["css=#tarea_1 .icono", "css:finder"],
         ["xpath=//img[@title='consultar']", "xpath:img"],
-        ["xpath=//div[@id='divTareas']/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[@id='tarea_1']/div/img", "xpath:idRelative"],
         ["xpath=//div[2]/div/img", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "d83dd377-26c6-4c3b-9906-a9edf47e5466",
+      "comment": "",
+      "command": "waitForElementNotEditable",
+      "target": "xpath=//div[@id='divTarea']/label[4]/select",
+      "targets": [],
+      "value": "30000"
     }, {
       "id": "ef316d78-35f2-4050-bdce-9c4600a5b31f",
       "comment": "",
@@ -1339,13 +1327,6 @@
       "comment": "",
       "command": "open",
       "target": "http://localhost/dualex/src/",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "a9fe7f7e-f2cc-40f4-86d0-197f0f5902b2",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "659x702",
       "targets": [],
       "value": ""
     }, {
@@ -1385,7 +1366,7 @@
       "id": "e49f2a5d-a761-4a13-85f5-e750f6c6500d",
       "comment": "",
       "command": "assertText",
-      "target": "css=.alumno:nth-child(3)",
+      "target": "xpath=//span[contains(.,'Alumno 1')]",
       "targets": [
         ["css=.alumno:nth-child(3)", "css:finder"],
         ["xpath=//div[@id='divAlumnos']/div/span[3]", "xpath:idRelative"],
@@ -1397,24 +1378,24 @@
       "id": "3ff179b6-f198-4be2-9bfd-164361e50ecc",
       "comment": "",
       "command": "assertText",
-      "target": "css=.modulo:nth-child(1)",
+      "target": "css=.ciclo:nth-child(1)",
       "targets": [
         ["css=.modulo:nth-child(1)", "css:finder"],
         ["xpath=//div[@id='divAlumnos']/div[2]/span", "xpath:idRelative"],
         ["xpath=//div[2]/span", "xpath:position"],
         ["xpath=//span[contains(.,'PRFB')]", "xpath:innerText"]
       ],
-      "value": "PRFB"
+      "value": "ME"
     }, {
       "id": "8166ba5d-5195-46d5-9f9d-36ea67720166",
       "comment": "",
       "command": "click",
-      "target": "css=.iconos:nth-child(4) > .icono:nth-child(1)",
+      "target": "css=div:nth-child(2) .icono:nth-child(1)",
       "targets": [
-        ["css=.iconos:nth-child(4) > .icono:nth-child(1)", "css:finder"],
+        ["css=div:nth-child(2) .icono:nth-child(1)", "css:finder"],
         ["xpath=//img[@title='tareas']", "xpath:img"],
-        ["xpath=//div[@id='divAlumnos']/div/span[4]/img", "xpath:idRelative"],
-        ["xpath=//span[4]/img", "xpath:position"]
+        ["xpath=//div[@id='divAlumnos']/div[2]/span[3]/img", "xpath:idRelative"],
+        ["xpath=//span[3]/img", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -1433,36 +1414,36 @@
       "id": "fcfde321-2773-40e6-a185-7c793749272e",
       "comment": "",
       "command": "click",
-      "target": "css=#divMenu > .icono:nth-child(2)",
+      "target": "css=#tarea_2 .icono:nth-child(1)",
       "targets": [
-        ["css=#divMenu > .icono:nth-child(2)", "css:finder"],
-        ["xpath=//img[@title='volver']", "xpath:img"],
-        ["xpath=//div[@id='divMenu']/img", "xpath:idRelative"],
-        ["xpath=//img", "xpath:position"]
+        ["css=#tarea_2 .icono:nth-child(1)", "css:finder"],
+        ["xpath=//img[@title='editar']", "xpath:img"],
+        ["xpath=//div[@id='tarea_2']/div/img", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/img", "xpath:position"]
       ],
       "value": ""
     }, {
       "id": "4bae9f4e-0ee6-41e2-bcf4-861801517beb",
       "comment": "",
       "command": "click",
-      "target": "css=.iconos:nth-child(4) > .icono:nth-child(1)",
+      "target": "css=div:nth-child(2) > input",
       "targets": [
-        ["css=.iconos:nth-child(4) > .icono:nth-child(1)", "css:finder"],
-        ["xpath=//img[@title='tareas']", "xpath:img"],
-        ["xpath=//div[@id='divAlumnos']/div/span[4]/img", "xpath:idRelative"],
-        ["xpath=//span[4]/img", "xpath:position"]
+        ["css=div:nth-child(2) > input", "css:finder"],
+        ["xpath=(//input[@type='checkbox'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/fieldset/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
       ],
       "value": ""
     }, {
       "id": "4507fd45-e302-4dde-9e6a-a587db2a9496",
       "comment": "",
       "command": "click",
-      "target": "css=div:nth-child(1) > .iconos:nth-child(1) > .icono:nth-child(1)",
+      "target": "css=div:nth-child(3) > input",
       "targets": [
-        ["css=div:nth-child(1) > .iconos:nth-child(1) > .icono:nth-child(1)", "css:finder"],
-        ["xpath=//img[@title='editar']", "xpath:img"],
-        ["xpath=//div[@id='divTareas']/div/div/img", "xpath:idRelative"],
-        ["xpath=//div/div/img", "xpath:position"]
+        ["css=div:nth-child(3) > input", "css:finder"],
+        ["xpath=(//input[@type='checkbox'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='divTarea']/fieldset/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -1749,14 +1730,9 @@
     }, {
       "id": "95a25973-7272-4e53-a738-0e587f0d040f",
       "comment": "",
-      "command": "assertText",
+      "command": "waitForText",
       "target": "css=#divMenu > h1",
-      "targets": [
-        ["css=#divMenu > h1", "css:finder"],
-        ["xpath=//div[@id='divMenu']/h1", "xpath:idRelative"],
-        ["xpath=//h1", "xpath:position"],
-        ["xpath=//h1[contains(.,'Tareas de Alumno 1')]", "xpath:innerText"]
-      ],
+      "targets": [],
       "value": "Tareas de Alumno 1"
     }]
   }, {
@@ -1813,7 +1789,7 @@
       "id": "06ded382-a9cb-4324-a7b9-34b1f9eaff98",
       "comment": "",
       "command": "click",
-      "target": "css=.iconos:nth-child(4) > .icono:nth-child(2)",
+      "target": "xpath=//img[@title='informe']",
       "targets": [
         ["css=.iconos:nth-child(4) > .icono:nth-child(2)", "css:finder"],
         ["xpath=//img[@title='informe']", "xpath:img"],
@@ -1845,6 +1821,18 @@
         ["xpath=//div[@id='divInforme']/div[5]/p/strong/span", "xpath:idRelative"],
         ["xpath=//strong/span", "xpath:position"],
         ["xpath=//span[contains(.,'Test Pruebas')]", "xpath:innerText"]
+      ],
+      "value": "Mecatrónica Industrial"
+    }, {
+      "id": "d02969b3-84cb-46df-ad2b-1a02524e34ff",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=p:nth-child(1) > strong > span",
+      "targets": [
+        ["css=p:nth-child(1) > strong > span", "css:finder"],
+        ["xpath=//div[@id='divInforme']/div[5]/p/strong/span", "xpath:idRelative"],
+        ["xpath=//div[5]/p/strong/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Antonio Portero')]", "xpath:innerText"]
       ],
       "value": "Antonio Portero"
     }]

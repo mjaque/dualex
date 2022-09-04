@@ -57,8 +57,16 @@ export class VistaAlumnos extends Vista{
 	crearDivAlumno(alumno){
 		let div = document.createElement('div')
 		this.base.appendChild(div)
-		//TODO: Falta incluir el icono de ! (pendiente de evaluación de tareas
-		alumno.modulos.forEach(this.crearSpanModulo.bind(this, div))
+	
+		//Creamos el span del Ciclo
+		let span = document.createElement('span')
+		div.appendChild(span)
+		span.classList.add('ciclo')
+		span.textContent = alumno.codigo
+		span.setAttribute('title', alumno.titulo)
+		span.style.backgroundColor = alumno.color_fondo
+		span.style.color = alumno.color_letra
+
 		let spanAlumno = document.createElement('span')
 		div.appendChild(spanAlumno)
 		spanAlumno.classList.add('alumno')

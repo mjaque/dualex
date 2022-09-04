@@ -44,8 +44,9 @@ export class VistaMensaje extends Vista{
 		this.base.className = `vistamensaje ${nivel}`
 		this.spanMensaje.textContent = mensaje
 		this.base.style.display = 'block'
-		//Quitamos el mensaje a los 5 segundos
-		setTimeout(this.cerrar.bind(this), 5000)
+		if (nivel != VistaMensaje.ERROR)
+			//Quitamos el mensaje a los 5 segundos
+			setTimeout(this.cerrar.bind(this), 5000)
 	}
 	
 }

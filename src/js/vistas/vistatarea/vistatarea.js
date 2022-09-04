@@ -43,7 +43,6 @@ export class VistaTarea extends Vista{
 		this.tarea = null;
 		
 		//Cargamos los valores	
-		this.cargarActividades()
 		this.cargarCalificaciones()
 	}
 	/**
@@ -96,16 +95,21 @@ export class VistaTarea extends Vista{
 		@param tarea {Tarea} Información de la tarea que se quiere mostrar (solo en edición).
 	**/
 	mostrar(ver, tarea = null){
-		this.limpiar()
-		this.deshabilitar(false)
-		for(let input of this.divActividades.getElementsByTagName('input'))
-			input.checked = false
-		this.iTitulo.focus()
+		if (ver){
+			this.limpiar()
+			this.deshabilitar(false)
+			for(let input of this.divActividades.getElementsByTagName('input'))
+				input.checked = false
+			this.iTitulo.focus()
 
-		if (tarea)
-			this.setTarea(tarea)
-		else
-			this.tarea = null
+			if (tarea)
+				this.cargarActividades(tarea.id_ciclo)
+					.then(() => this.setTarea(tarea))
+			else{
+				this.cargarActividades(this.controlador.getUsuario().idCiclo)
+				this.tarea = null
+			}
+		}
 		super.mostrar(ver)
 	}
 	/**
@@ -121,25 +125,27 @@ export class VistaTarea extends Vista{
 		this.iCalificacion.value = ''
 	}
 	/**
-		Carga la lista de Actividades.
+		Carga la lista de Actividades de un ciclo.
+		@param idCiclo {Number} Identificador del ciclo.
+		@return Promise
 	**/
-	cargarActividades(){
-		this.controlador.verActividades()
-		.then(actividades => {
-			this.eliminarHijos(this.divActividades)
-			for(let actividad of actividades){
-				let div = document.createElement('div')
-				this.divActividades.appendChild(div)
-				let input = document.createElement('input')
-				div.appendChild(input)
-				input.setAttribute('type', 'checkbox')
-				input.setAttribute('data-idActividad', actividad.id)
-				let label = document.createElement('label')
-				div.appendChild(label)
-				label.textContent = actividad.id + '. ' + actividad.titulo
-				label.setAttribute('title', actividad.descripcion)
-			}
-		})
+	cargarActividades(idCiclo){
+		return this.controlador.verActividades(idCiclo)
+			.then(actividades => {
+				this.eliminarHijos(this.divActividades)
+				for(let actividad of actividades){
+					let div = document.createElement('div')
+					this.divActividades.appendChild(div)
+					let input = document.createElement('input')
+					div.appendChild(input)
+					input.setAttribute('type', 'checkbox')
+					input.setAttribute('data-idActividad', actividad.id)
+					let label = document.createElement('label')
+					div.appendChild(label)
+					label.textContent = actividad.orden + '. ' + actividad.titulo
+					label.setAttribute('title', actividad.descripcion)
+				}
+			})
 	}
 	/**
 		Carga la lista de Calificaciones.

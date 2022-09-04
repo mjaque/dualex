@@ -336,6 +336,26 @@ Search.appendIndex(
             "summary": "Registra\u0020una\u0020operaci\u00F3n\u0020en\u0020el\u0020log\u0020de\u0020base\u0020de\u0020datos.",
             "url": "classes/Log.html#method_registrar"
         },                {
+            "fqsen": "\\Actividad",
+            "name": "Actividad",
+            "summary": "",
+            "url": "classes/Actividad.html"
+        },                {
+            "fqsen": "\\Actividad\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Devuelve\u0020la\u0020lista\u0020de\u0020actividades\u0020de\u0020un\u0020ciclo.",
+            "url": "classes/Actividad.html#method_get"
+        },                {
+            "fqsen": "\\DAOActividad",
+            "name": "DAOActividad",
+            "summary": "DAO\u0020de\u0020Actividad.",
+            "url": "classes/DAOActividad.html"
+        },                {
+            "fqsen": "\\DAOActividad\u003A\u003Aver\u0028\u0029",
+            "name": "ver",
+            "summary": "Devuelve\u0020un\u0020array\u0020de\u0020actividades\u0020de\u0020un\u0020ciclo\u0020ordenadas.",
+            "url": "classes/DAOActividad.html#method_ver"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
