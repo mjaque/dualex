@@ -64,7 +64,19 @@ export class VistaInforme extends Vista{
 		for(let dato of datos){
 			let div1 = document.createElement('div')
 			div.appendChild(div1)
-			div1.textContent = dato.titulo
+			div1.appendChild(document.createTextNode(dato.titulo))
+			if (dato.modulos)
+				//Ponemos los módulos de la actividad
+				for(let modulo of dato.modulos){
+					let span = document.createElement('span')
+					div1.appendChild(span)
+					span.classList.add('modulo')
+					span.textContent = modulo.codigo
+					span.setAttribute('title', modulo.titulo)
+					span.style.backgroundColor = modulo.color_fondo
+					span.style.color = modulo.color_letra
+				}
+			//Ponemos la calificación
 			let div2 = document.createElement('div')
 			div.appendChild(div2)
 			div2.textContent = dato.calificacion

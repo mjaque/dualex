@@ -71,6 +71,12 @@
 .vistainforme tbody:nth-child(2){
 	text-align: center;
 }
+.vistainforme .modulo{
+	font-size: 0.8rem;
+	margin: 0 0.3rem;
+	padding: 0.2rem;
+	border-radius: 0.2rem;
+}
 @page {
 	margin: 0; /* Quita el encabezado y pie que pone el navegador */
 	size: A4;
@@ -96,5 +102,17 @@
 	}
 	.informe textarea, .informe input[type='text']{
 		border: none;
+	}
+	.vistainforme .modulo{
+		font-size: 0.5rem;
+		margin: 0 0.2rem;
+		padding: 0 0.2rem;
+		background-color: none !important;	
+	}
+	.vistainforme .modulo::before{
+		content: "(";
+	}
+	.vistainforme .modulo::after{
+		content: ")";
 	}
 }

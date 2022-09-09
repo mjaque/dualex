@@ -1,8 +1,3 @@
-DELETE FROM Ciclo;
-INSERT INTO Ciclo (id, codigo, titulo, color_fondo, color_letra) VALUES 
-(1, 'ME', 'Mecatrónica Industrial', '#0000FF', '#FFFFFF'),
-(2, 'MI', 'Mantenimiento Industrial', '#FF3344', '#FFFFFF');
-
 DELETE FROM Usuario;
 INSERT INTO Usuario (id, nombre, apellidos, email) VALUES
 (1, 'Antonio', 'Portero', 'aportero@fundacionloyola.es'),
@@ -10,33 +5,52 @@ INSERT INTO Usuario (id, nombre, apellidos, email) VALUES
 (3, 'Manuel', 'Molano', 'mmolano@fundacionloyola.es'),
 (4, 'Antonio', 'Sánchez', 'asanchez@fundacionloyola.es'),
 (5, 'Pedro', 'Risco', 'prisco@fundacionloyola.es'),
-(6, 'Miguel', 'Jaque', 'mjaque@fundacionloyola.es'),
+(6, 'José Antonio', 'Hernández', 'jahernandez@fundacionloyola.es'),
+(7, 'Tamara', 'Mora', 'tmora@fundacionloyola.es'),
+(8, 'Mariano', 'Fuentes', 'mfuentes@fundacionloyola.es'),
+(9, 'Bonifacio', 'Durán', 'bduran@fundacionloyola.es'),
 (10, 'Alumno', '1', 'alumno1.guadalupe@alumnado.fundacionloyola.net'),
 (11, 'Alumno', '2', 'alumno2.guadalupe@alumnado.fundacionloyola.net'),
 (12, 'Alumno', '3', 'alumno3.guadalupe@alumnado.fundacionloyola.net'),
 (13, 'Alumno', '4', 'alumno4.guadalupe@alumnado.fundacionloyola.net'),
-(14, 'Alumno', '5', 'alumno5.guadalupe@alumnado.fundacionloyola.net');
+(14, 'Alumno', '5', 'alumno5.guadalupe@alumnado.fundacionloyola.net'),
+(42, 'Miguel', 'Jaque', 'mjaque@fundacionloyola.es');
+
+DELETE FROM Profesor;
+INSERT INTO Profesor (id) VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (42);
+
+DELETE FROM Ciclo;
+INSERT INTO Ciclo (id, codigo, titulo, id_profesor, color_fondo, color_letra) VALUES 
+(1, 'MI', 'Mecatrónica Industrial', 42, '#0000FF', '#FFFFFF'),
+(2, 'EMV', 'Electromecánica de Vehículos', 42, '#00FF00', '#FFFFFF'),
+(3, 'ME', 'Mantenimiento Electromecánico', 42, '#FF3344', '#FFFFFF');
 
 DELETE FROM Alumno;
 INSERT INTO Alumno (id, id_ciclo) VALUES (10,1), (11,1), (12,1), (13,1), (14,2);
 
-DELETE FROM Profesor;
-INSERT INTO Profesor (id) VALUES (1), (2), (3), (4), (5), (6);
-
 DELETE FROM Modulo;
 INSERT INTO Modulo (id, id_ciclo, orden, codigo, titulo, color_fondo, color_letra) VALUES
-(1, 1, 1, 'PRFB', 'Procesos de Fabricación', '#0000FF', '#FFFFFF'),
+(1, 1, 1, 'PRF', 'Procesos de Fabricación', '#0000FF', '#FFFFFF'),
 (2, 1, 2, 'SMEC', 'Sistemas Mecánicos',  '#FF00FF', '#FFFFFF'),
 (3, 1, 3, 'SHYN', 'Sistemas Hidráulicos y Neumáticos',  '#00FFFF', '#FFFFFF'),
 (4, 1, 4, 'CSM', 'Configuración de Sistemas Mecatrónicos',  '#FFFF00', '#000000'),
-(5, 1, 5, 'SEYE', 'Sistemas Eléctricos y Electrónicos',  '#FFFF00', '#000000'),
-(6, 1, 6, 'SSM', 'Simulación de Sistemas Mecatrónicos',  '#FFFF00', '#000000'),
-(7, 1, 7, 'IS', 'Integración de Sistemas',  '#FFFF00', '#000000'),
-(8, 2, 1, '???', 'Módulo 1 de Ciclo 2',  '#FFFF00', '#000000');
+(5, 1, 5, 'SEYE', 'Sistemas Eléctricos y Electrónicos',  '#CD853F', '#000000'),
+(6, 1, 6, 'SSM', 'Simulación de Sistemas Mecatrónicos',  '#B0E0E6', '#000000'),
+(7, 1, 7, 'IS', 'Integración de Sistemas',  '#6B8E23', '#000000'),
+(8, 2, 1, 'MOT', 'Motores',  '#696969', '#000000'),
+(9, 2, 2, 'STF', '?',  '#00FA9A', '#000000'),
+(10, 2, 3, 'CEAV', '?',  '#228B22', '#000000'),
+(11, 2, 4, 'CFSD', '?',  '#F5DEB3', '#000000'),
+(12, 2, 5, 'SCA', '?',  '#9400D3', '#000000'),
+(13, 2, 6, 'SSC', '?',  '#FFE4B5', '#000000'),
+(14, 2, 7, 'SAM', '?',  '#3CB371', '#000000'),
+(15, 3, 1, 'MMEE', '?',  '#B22222', '#000000'),
+(16, 3, 2, 'MMLA', '?',  '#7FFF00', '#000000'),
+(17, 3, 3, 'MMM', '?',  '#DAA520', '#000000');
 
 DELETE FROM Modulo_Profesor;
 INSERT INTO Modulo_Profesor(id_modulo, id_profesor) VALUES
-(1, 1), (2, 1), (3, 2), (3, 3), (4, 4), (5, 3), (5, 2), (6, 5), (7, 3), (8, 1);
+(1, 1), (2, 1), (3, 2), (3, 3), (4, 4), (5, 3), (5, 2), (6, 5), (7, 3), (8, 6), (9, 6), (10, 6), (11, 7), (11, 8), (12, 7), (12, 4), (13, 8), (14, 8), (15, 9), (15, 3), (16, 3), (17, 1);
 
 DELETE FROM Actividad;
 INSERT INTO Actividad (id, id_ciclo, orden, titulo, descripcion) VALUES

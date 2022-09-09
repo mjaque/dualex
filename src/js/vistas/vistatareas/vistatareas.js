@@ -112,7 +112,6 @@ export class VistaTareas extends Vista{
 	crearSpanModulo(div, modulo, index, array){
 		let span = document.createElement('span')
 		div.appendChild(span)
-		//TODO: falta incluir el icono del módulo.
 		span.classList.add('modulo')
 		span.textContent = modulo.codigo
 		span.setAttribute('title', modulo.titulo)

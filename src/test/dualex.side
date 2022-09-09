@@ -388,7 +388,7 @@
       "id": "d4f99a44-ee1d-40a7-a1c8-2af4e54492fc",
       "comment": "",
       "command": "assertText",
-      "target": "css=div:nth-child(4) > .ciclo",
+      "target": "xpath=//span[contains(.,'MI')]",
       "targets": [
         ["css=div:nth-child(4) > .ciclo", "css:finder"],
         ["xpath=//div[@id='divAlumnos']/div[4]/span", "xpath:idRelative"],
@@ -400,14 +400,14 @@
       "id": "7e5fa081-34ef-4d15-ad91-fdf795cfb2f8",
       "comment": "",
       "command": "assertText",
-      "target": "css=div:nth-child(4) > .alumno",
+      "target": "css=.alumno",
       "targets": [
-        ["css=div:nth-child(4) > .alumno", "css:finder"],
-        ["xpath=//div[@id='divAlumnos']/div[4]/span[2]", "xpath:idRelative"],
-        ["xpath=//div[7]/div[4]/span[2]", "xpath:position"],
-        ["xpath=//span[contains(.,'Alumno 5')]", "xpath:innerText"]
+        ["css=.alumno", "css:finder"],
+        ["xpath=//div[@id='divAlumnos']/div[2]/span[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/span[2]", "xpath:position"],
+        ["xpath=//span[contains(.,'Alumno 1')]", "xpath:innerText"]
       ],
-      "value": "Alumno 5"
+      "value": "Alumno 1"
     }]
   }, {
     "id": "24a9fbf5-380d-4362-817a-d3b67b5c43bd",
@@ -796,7 +796,7 @@
         ["xpath=//div[5]/div/span", "xpath:position"],
         ["xpath=//span[contains(.,'PRFB')]", "xpath:innerText"]
       ],
-      "value": "PRFB"
+      "value": "PRF"
     }, {
       "id": "f3ee8dbf-046c-4e67-a6d2-9d6097502673",
       "comment": "",

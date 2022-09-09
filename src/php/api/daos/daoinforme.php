@@ -14,7 +14,7 @@ class DAOInforme{
 		@return Un array de arrays con los datos de cada tarea.
 	**/
 	public static function verValoracion($idAlumno, $idPeriodo, $idProfesor){
-		$sql  = 'SELECT CONCAT(Actividad.orden, ".-", Actividad.titulo) AS titulo, ';
+		$sql  = 'SELECT Actividad.orden, CONCAT(Actividad.orden, ".-", Actividad.titulo) AS titulo, ';
 		$sql .= 'ROUND(( ';
 		$sql .= 'SELECT AVG((Tarea.calificacion + Calificacion.valor)/2) FROM Tarea '; 
 		$sql .= 'JOIN Calificacion ON Tarea.id_calificacion_empresa = Calificacion.id ';
@@ -24,11 +24,14 @@ class DAOInforme{
 		$sql .= 'AND Tarea.fecha BETWEEN ';
 		$sql .= '(SELECT fecha_inicio from Periodo WHERE id = :id_periodo1) AND ';
 		$sql .= '(SELECT fecha_fin from Periodo WHERE id = :id_periodo2) ';
-		$sql .= ')) as calificacion ';
+		$sql .= ')) as calificacion, ';
+		$sql .= 'Modulo.codigo AS modulo_codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
 		$sql .= 'FROM `Actividad` ';
+		$sql .= 'JOIN Actividad_Modulo ON Actividad.id = Actividad_Modulo.id_actividad ';
+		$sql .= 'JOIN Modulo ON Actividad_Modulo.id_modulo = Modulo.id ';
 		$sql .= 'WHERE Actividad.id_ciclo = ';
 		$sql .= '(SELECT id_ciclo FROM Alumno WHERE Alumno.id = :id_alumno2) ';
-		$sql .= 'ORDER BY Actividad.orden';
+		$sql .= 'ORDER BY Actividad.orden, Modulo.orden';
 
 		$params = array('id_alumno1' => $idAlumno, 'id_alumno2' => $idAlumno, 'id_periodo1' => $idPeriodo, 'id_periodo2' => $idPeriodo);
 
