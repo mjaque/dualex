@@ -151,7 +151,7 @@ class DualEx{
 		this.modelo.getInformeAlumno(alumno, periodo)
 			.then(informe => {
 				this.vistaMenu.verInforme(alumno)
-				this.vistaInforme.cargar(alumno, informe, this.#usuario)
+				this.vistaInforme.cargar(alumno, informe)
 				this.ocultarVistas()
 				this.vistaInforme.mostrar(true)
 			})

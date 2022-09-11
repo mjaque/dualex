@@ -23,6 +23,7 @@ class Informe{
 		$resultado['valoracion'] = $this->agruparModulos($resultado['valoracion']);
 		$resultado['evaluacion'] = DAOInforme::verEvaluacion($queryParams['id_alumno'], $queryParams['id_periodo'], $usuario->id);
 		$resultado['periodo'] = DAOInforme::verPeriodo($queryParams['id_periodo'])[0]['nombre'];
+		$resultado['coordinador'] = DAOInforme::verCoordinador($queryParams['id_alumno']);
 
 		$json = json_encode($resultado);
 		header('Content-type: application/json; charset=utf-8');

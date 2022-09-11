@@ -82,15 +82,6 @@ CREATE TABLE Actividad_Modulo(
 	FOREIGN KEY (id_modulo) REFERENCES Modulo (id) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS Alumno_Modulo;
-CREATE TABLE Alumno_Modulo(
-	id_alumno INT UNSIGNED,
-	id_modulo INT UNSIGNED,
-	PRIMARY KEY (id_alumno, id_modulo),
-	FOREIGN KEY (id_alumno) REFERENCES Alumno (id) ON DELETE CASCADE,
-	FOREIGN KEY (id_modulo) REFERENCES Modulo (id) ON DELETE CASCADE
-);
-
 DROP TABLE IF EXISTS Calificacion;
 CREATE TABLE Calificacion(
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -147,6 +138,3 @@ CREATE TABLE Log(
 	body TEXT
 );
 
--- Tablas antiguas
-DROP TABLE IF EXISTS dualex;	
-DROP TABLE IF EXISTS Alumno_Modulo;	

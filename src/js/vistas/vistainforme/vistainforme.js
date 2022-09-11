@@ -22,7 +22,7 @@ export class VistaInforme extends Vista{
 	iniciar(){
 		//Cogemos referencias a los elementos del interfaz
 		this.sAlumno = this.doc.querySelector("span[data-informe='alumno']")
-		this.sProfesor = this.doc.querySelector("span[data-informe='profesor']")
+		this.sCoordinador = this.doc.querySelector("span[data-informe='coordinador']")
 		this.sCiclo = this.doc.querySelector("span[data-informe='ciclo']")
 		this.sPeriodo = this.doc.querySelector("span[data-informe='periodo']")
 		this.divValoracion = this.doc.querySelector('.grid1')
@@ -37,11 +37,10 @@ export class VistaInforme extends Vista{
 		Carga los datos del informe en la vista.
 		@param alumno {Alumno} Datos del alumno.
 		@param informe {Informe} Datos del informe.
-		@param profesor {Profesor} Datos del profesor.
 	**/
-	cargar(alumno, informe, profesor){
+	cargar(alumno, informe){
 		this.sAlumno.textContent = `${alumno.nombre} ${alumno.apellidos}`
-		this.sProfesor.textContent = `${profesor.nombre} ${profesor.apellidos}`
+		this.sCoordinador.textContent = informe.coordinador
 		this.sCiclo.textContent = alumno.titulo
 		this.sPeriodo.textContent = informe.periodo
 		

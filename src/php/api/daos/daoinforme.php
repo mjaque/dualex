@@ -80,4 +80,19 @@ class DAOInforme{
 
 		return BD::seleccionar($sql, $params);
 	}
+	/**
+		Devuelve un texto con el nombre del coordinado asignado al ciclo en el que está matriculado el alumno.
+		@param $idAlumno Identificador del alumno.
+		@return Texto con el nombre completo del coordinador.
+	**/
+	public static function verCoordinador($idAlumno){
+		$sql  = 'SELECT CONCAT(Usuario.nombre, " ", Usuario.apellidos) AS coordinador ';
+		$sql .= 'FROM Usuario ';
+		$sql .= 'JOIN Ciclo ON Ciclo.id_profesor = Usuario.id ';
+		$sql .= 'WHERE Ciclo.id IN (SELECT Alumno.id_ciclo FROM Alumno WHERE Alumno.id = :id_alumno) ';
+
+		$params = array('id_alumno' => $idAlumno);
+
+		return BD::seleccionar($sql, $params)[0]['coordinador'];
+	}
 }
