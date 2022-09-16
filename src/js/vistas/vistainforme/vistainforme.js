@@ -27,6 +27,9 @@ export class VistaInforme extends Vista{
 		this.sPeriodo = this.doc.querySelector("span[data-informe='periodo']")
 		this.divValoracion = this.doc.querySelector('.grid1')
 		this.divEvaluacion = this.doc.querySelector('.grid3')
+		this.inputTexts = this.doc.querySelectorAll('input[type="text"]')
+		this.inputRadios = this.doc.querySelectorAll('input[type="radio"]')
+		this.textAreas = this.doc.querySelectorAll('textarea')
 
 		//Asociamos eventos
 
@@ -39,6 +42,7 @@ export class VistaInforme extends Vista{
 		@param informe {Informe} Datos del informe.
 	**/
 	cargar(alumno, informe){
+		this.borrar()
 		this.sAlumno.textContent = `${alumno.nombre} ${alumno.apellidos}`
 		this.sCoordinador.textContent = informe.coordinador
 		this.sCiclo.textContent = alumno.titulo
@@ -46,6 +50,25 @@ export class VistaInforme extends Vista{
 		
 		this._crearGrid(informe.valoracion, this.divValoracion)
 		this._crearGrid(informe.evaluacion, this.divEvaluacion)
+	}
+	/**
+		Borra los campos del informe para evitar que se muestren los del informe anterior.
+		Los grids se borran en el método _crearGrid.
+	**/
+	borrar(){
+		this.sAlumno.textContent = ''
+		this.sCoordinador.textContent = ''
+		this.sCiclo.textContent = ''
+		this.sPeriodo.textContent = ''
+		
+		for (let input of this.inputTexts)
+			input.value = ''
+
+		for (let input of this.inputRadios)
+			input.checked = false
+
+		for (let textarea of this.textAreas)
+			textarea.value = ''
 	}
 	/**
 		Cambia los input de texto y los textarea para mostrarlos como texto (no como inputs ni textareas).
