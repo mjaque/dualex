@@ -41,9 +41,6 @@ export class VistaTarea extends Vista{
 
 		//Referencia a la tarea que se está mostrando
 		this.tarea = null;
-		
-		//Cargamos los valores	
-		this.cargarCalificaciones()
 	}
 	/**
 		Carga en la vista la información de una tarea.
@@ -58,7 +55,10 @@ export class VistaTarea extends Vista{
 		this.taEvaluacion.value = tarea.evaluacion
 		this.iCalificacion.value = tarea.calificacion
 		//Seleccionamos la calificación de la empresa
-		this.sCalificacion.value = tarea.id_calificacion_empresa
+		this.cargarCalificaciones()
+			.then(respuesta => {
+				this.sCalificacion.value = tarea.id_calificacion_empresa
+			})
 		//Marcamos las actividades de la tarea
 		for(let actividad of tarea.actividades)
 			this.divActividades.querySelector('input[data-idActividad="' + actividad.id + '"').checked = true
@@ -150,9 +150,10 @@ export class VistaTarea extends Vista{
 	/**
 		Carga la lista de Calificaciones.
 		@param calificaciones {Calificaciones[]} Array de Calificaciones definidas.
+		@return Promise de la petición.
 	**/
 	cargarCalificaciones(calificaciones){
-		this.controlador.verCalificaciones()
+		return this.controlador.verCalificaciones()
 		.then(calificaciones => {
 			this.eliminarHijos(this.sCalificacion, 2)
 			for(let calificacion of calificaciones){
@@ -160,7 +161,10 @@ export class VistaTarea extends Vista{
 				this.sCalificacion.appendChild(option)
 				option.setAttribute('value', calificacion.id)
 				option.setAttribute('title', calificacion.descripcion)
-				option.textContent = calificacion.titulo
+				if (this.controlador.getUsuario().rol == 'profesor')
+					option.textContent = calificacion.titulo + ' (' + calificacion.valor + ')' 
+				else
+					option.textContent = calificacion.titulo
 			}
 		})
 	}
