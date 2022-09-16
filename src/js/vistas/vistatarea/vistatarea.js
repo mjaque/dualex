@@ -58,16 +58,16 @@ export class VistaTarea extends Vista{
 		this.cargarCalificaciones()
 			.then(respuesta => {
 				this.sCalificacion.value = tarea.id_calificacion_empresa
+				if (this.controlador.getUsuario().rol == 'alumno'){
+					this.iCalificacion.disabled = true
+					this.taEvaluacion.disabled = true
+				if (tarea.id_calificacion_empresa || tarea.calificacion)
+					this.deshabilitar(true)
+		}
 			})
 		//Marcamos las actividades de la tarea
 		for(let actividad of tarea.actividades)
 			this.divActividades.querySelector('input[data-idActividad="' + actividad.id + '"').checked = true
-		if (this.controlador.getUsuario().rol == 'alumno'){
-			this.iCalificacion.disabled = true
-			this.taEvaluacion.disabled = true
-			if (tarea.id_calificacion_empresa || tarea.calificacion)
-				this.deshabilitar(true)
-		}
 	}
 	/**
 		Cambia la capacidad de editar los campos de la vista (para el alumno).
@@ -108,6 +108,7 @@ export class VistaTarea extends Vista{
 			else{
 				this.cargarActividades(this.controlador.getUsuario().idCiclo)
 				this.tarea = null
+				this.cargarCalificaciones()
 			}
 		}
 		super.mostrar(ver)
@@ -199,11 +200,8 @@ export class VistaTarea extends Vista{
 					tarea.actividades.push(iActividad.getAttribute('data-idActividad'))
 			tarea.idCalificacionEmpresa = this.sCalificacion.value
 			tarea.comentarioCalificacionEmpresa = this.taComentarioCalificacionEmpresa.value
-
-			if (this.controlador.getUsuario().rol == 'profesor'){
-				tarea.evaluacion = this.taEvaluacion.value
-				tarea.calificacion = this.iCalificacion.value
-			}
+			tarea.evaluacion = this.taEvaluacion.value
+			tarea.calificacion = this.iCalificacion.value
 			
 			if (this.tarea){
 				tarea.id = this.tarea.id
