@@ -37,7 +37,27 @@ INSERT INTO Usuario (id, nombre, apellidos, email) VALUES
 (16, 'Alumno6', 'EMV', 'alumno6.guadalupe@alumnado.fundacionloyola.net'),
 (17, 'Alumno7', 'ME', 'alumno7.guadalupe@alumnado.fundacionloyola.net'),
 (18, 'Alumno8', 'ME', 'alumno8.guadalupe@alumnado.fundacionloyola.net'),
-(19, 'Alumno9', 'ME', 'alumno9.guadalupe@alumnado.fundacionloyola.net');
+(19, 'Alumno9', 'ME', 'alumno9.guadalupe@alumnado.fundacionloyola.net'),
+
+(100, 'Díaz Mellado', 'Carmen', 'carmendiazmellado.guadalupe@alumnado.fundacionloyola.net'),
+(101, 'Ángel', 'Pintiado Caro', 'apintiadocaro.guadalupe@alumnado.fundacionloyola.net'),
+(102, 'Manuel', 'Llera González', 'manuellleragonzalez.guadalupe@alumnado.fundacionloyola.net'),
+(103, 'Jesús María', 'González Galán', 'jesusmariagonzalezgalan.guadalupe@alumnado.fundacionloyola.net'),
+(104, 'Pablo', 'Mimbrero González', 'pablomimbrerogonzalez.guadalupe@alumnado.fundacionloyola.net'),
+(105, 'Daniel', 'Merino Sánchez', 'danielmerinosanchez.guadalupe@alumnado.fundacionloyola.net'),
+(106, 'Estaban José', 'Méndez Díaz', 'estebanjosemendezdiaz.guadalupe@alumnado.fundacionloyola.net'),
+
+(107, 'Hugo', 'Bartol Cortés', 'hugobartolcortes.guadalupe@alumnado.fundacionloyola.net'),
+(108, 'Alfonso', 'de la Concepción Chaparro', 'alfonsodelaconcepcionchaparro.guadalupe@alumnado.fundacionloyola.net'),
+(109, 'Roberto', 'Guerrero López', 'robertoguerrerolopez.guadalupe@alumnado.fundacionloyola.net'),
+(110, 'Francisco José', 'Hernández Fernández', 'franciscojosehernandezfernandez.guadalupe@alumnado.fundacionloyola.net'),
+(111, 'Brian', 'Hernández Holguera', 'brianhernandezholguera.guadalupe@alumnado.fundacionloyola.net'),
+(112, 'Antonio', 'Méndez García', 'antoniomendezgarcia.guadalupe@alumnado.fundacionloyola.net'),
+(113, 'Fernando', 'Moreno Rico', 'fernandomorenorico.guadalupe@alumnado.fundacionloyola.net'),
+(114, 'Javier', 'Rodríguez Carnerero', 'javierrodriguezcarnerero.guadalupe@alumnado.fundacionloyola.net'),
+(115, 'Néstor', 'Sopa Perera', 'nestorsopaperera.guadalupe@alumnado.fundacionloyola.net'),
+(116, 'Mario', 'Torres Ruíz', 'mariotorresruiz.guadalupe@alumnado.fundacionloyola.net');
+-- (1, '', '', '.guadalupe@alumnado.fundacionloyola.net'),
 
 INSERT INTO Profesor (id) VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9);
 
@@ -46,7 +66,10 @@ INSERT INTO Ciclo (id, codigo, titulo, id_profesor, color_fondo, color_letra) VA
 (2, 'EMV', 'Electromecánica de Vehículos', 6, '#00FF00', '#FFFFFF'),
 (3, 'ME', 'Mantenimiento Electromecánico', 9, '#FF3344', '#FFFFFF');
 
-INSERT INTO Alumno (id, id_ciclo) VALUES (11,1), (12,1), (13,1), (14,2), (15,2), (16,2), (17,3), (18,3), (19,3) ;
+INSERT INTO Alumno (id, id_ciclo) VALUES (11,1), (12,1), (13,1), (14,2), (15,2), (16,2), (17,3), (18,3), (19,3),
+(100,1),(101,1),(102,1),(103,1),(104,1),(105,1),(106,1),
+(107,2),(108,2),(109,2),(110,2),(111,2),(112,2),(113,2),(114,2),(115,2),(116,2)
+ ;
 
 INSERT INTO Modulo (id, id_ciclo, orden, codigo, titulo, color_fondo, color_letra) VALUES
 (1, 1, 1, 'PRFB', 'Procesos de Fabricación', '#0000FF', '#FFFFFF'),
@@ -70,7 +93,7 @@ INSERT INTO Modulo (id, id_ciclo, orden, codigo, titulo, color_fondo, color_letr
 (17, 3, 3, 'MMM', 'Montaje y Mantenimiento Mecánico',  '#DAA520', '#000000');
 
 INSERT INTO Modulo_Profesor(id_modulo, id_profesor) VALUES
-(1, 1), (2, 1), (3, 2), (3, 3), (4, 4), (5, 3), (5, 2), (6, 5), (7, 3), (8, 6), (9, 6), (10, 6), (11, 7), (11, 8), (12, 7), (12, 4), (13, 8), (14, 8), (15, 9), (15, 3), (16, 3), (17, 1);
+(1, 1), (2, 1), (3, 2), (3, 3), (4, 4), (5, 3), (5, 2), (6, 5), (7, 3), (8, 6), (9, 6), (10, 6), (11, 7), (11, 8), (12, 7), (12, 4), (13, 8), (14, 8), (15, 9), (15, 8), (16, 3), (17, 1);
 
 INSERT INTO Actividad (id, id_ciclo, orden, titulo, descripcion) VALUES
 (1, 1, 1, 'Aplicar reglamentos y normativa referidos a la Prevención de Riesgos Laborales', ''), 
@@ -121,11 +144,30 @@ necesarias para eliminar la disfuncionalidad y restablecer el funcionamiento', '
 (37, 2, 17, 'Reparación del circuito de carga y arranque del vehículo', ''),
 (38, 2, 18, 'Reparación o sustitución de equipos de sonido e imagen del vehículo', ''),
 (39, 2, 19, 'Reparación o sustitución de lunas y de sistemas de seguridad del vehículo. Desmontaje y montaje de elementos de chasis y/o carrocería', ''),
-(40, 2, 20, 'Mantenimiento y reparación  de vehículos híbridos y eléctricos', '');
+(40, 2, 20, 'Mantenimiento y reparación  de vehículos híbridos y eléctricos', ''),
+
+(41, 3, 1, 'Identifica montajes en base a PLCs en una máquina, equipo o línea de producción automatizada para el control de esta. Analizando el conexionado, sugiriendo mejoras y, reproduce y/o elabora sencillos programas de implementación, y su posible comprobación y mantenimiento para su correcto funcionamiento', ''),
+(42, 3, 2, 'Identifica la posibilidad de Integrar un manipulador y/o un robot en el montaje global de una máquina, equipo o línea de producción automatizada controlada por PLC, instalándolo, conexionándolo y realizando sencillos programas para su posible implementación.', ''),
+(43, 3, 3, 'Analiza las comunicaciones industriales en el montaje global de una máquina, equipo o línea de producción automatizada controlada por PLC, realizando propuestas y esquemas de instalación y conexionando sus componentes físicos, así como posibles mejoras', ''),
+(44, 3, 4, 'Diagnostica y propone actuaciones para la detección averías en los sistemas de producción automáticos, identificando la naturaleza de la avería, proponiendo y/o realizando las intervenciones correctivas para eliminar la disfuncionalidad y restablecer su funcionamiento.', ''),
+(45, 3, 5, 'Colaborar en las tareas de montaje e instalación de equipos y circuitos eléctricos/electrónicos para maquinaria y equipo industrial a partir de planos y especificaciones técnicas..', ''),
+(46, 3, 6, 'Participar en las tareas de reparación por sustitución de elementos de los sistemas eléctrico y electrónico y de los circuitos eléctricos estableciendo el proceso de desmontaje/montaje de acuerdo con instrucciones técnica.', ''),
+(47, 3, 7, 'Participar en el análisis del estado de los elementos electrónicos de potencia, mando, adquisición de datos, unidades de mando y señalización eléctrica/electrónica y de tratamiento de la información realizando mediciones y comprobaciones, utilizando instrucciones técnicas y procedimientos establecidos e informando de los resultados al superior.', ''),
+(48, 3, 8, 'Participar en el análisis de los croquis de los circuitos y de los elementos de los sistemas eléctrico y electrónico e información de sus características y especificaciones técnicas a partir de los datos recogidos de los propios sistemas y de la documentación técnica disponible de la máquina para su reconstrucción o reparación.', ''),
+(49, 3, 9, 'Aplicar reglamentos y normativa referidos a la Prevención de
+Riesgos Laborales', ''),
+(50, 3, 10, 'Participar en las tareas de montaje de equipos e instalaciones, estableciendo las etapas, fijando los recursos y aplicando las normas de seguridad.', ''),
+(51, 3, 11, 'Colaborar en la puesta en servicio de los equipos, siguiendo los procedimientos establecidos', ''),
+(52, 3, 12, 'Realizar operaciones de mantenimiento preventivo en los equipos industriales siguiendo los planes establecidos en la empresa.', ''),
+(53, 3, 13, 'Colaborar en el diagnóstico y reparación de averías y disfunciones de los equipos mecánicos, aplicando técnicas y procedimientos de mantenimiento correctivo.', ''),
+(54, 3, 14, 'Reparación de elementos mediante técnicas de mecanizado manual (roscado, taladrado).', ''),
+(55, 3, 15, 'Reparación de elementos mediante soldadura eléctrica.', ''),
+(56, 3, 16, 'Identificación, reparación y/o sustitución de elementos de unión no soldados (roscas, remaches, pasadores).', '');
 
 INSERT INTO Actividad_Modulo (id_actividad, id_modulo) VALUES
 (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7), (2,1),(2,6),(2,7), (3,1),(3,6),(3,7), (4,1),(4,7), (5,2),(5,7), (6,2),(6,7), (7,2),(7,7), (8,1),(8,2),(8,3),(8,4),(8,5), (9,2),(9,3),(9,5), (10,2),(10,3),(10,5), (11,5), (12,2),(12,5),(12,7), (13,2),(13,5), (14,2),(14,3), (15,3),(15,7), (16,3),(16,7), (17,4), (18,2), (18,4),
-(21, 9), (21,14), (22,9),(23,14),(24,14),(25,14),(26,14),(27,11),(28,11),(29,9),(30,9),(31,9),(32,11),(33,8),(33,14),(34,8),(34,12),(34,11),(34,10),(34,9),(34,14),(34,13),(35,13),(36,10),(36,13),(37,12),(38,13),(39,13),(40,8),(40,12),(40,11),(40,10),(40,9),(40,14),(40,13)
+(21, 9), (21,14), (22,9),(23,14),(24,14),(25,14),(26,14),(27,11),(28,11),(29,9),(30,9),(31,9),(32,11),(33,8),(33,14),(34,8),(34,12),(34,11),(34,10),(34,9),(34,14),(34,13),(35,13),(36,10),(36,13),(37,12),(38,13),(39,13),(40,8),(40,12),(40,11),(40,10),(40,9),(40,14),(40,13),
+(41,16),(42,16),(43,16),(44,16),(45,15),(46,15),(47,15),(48,15),(49,17),(50,17),(51,17),(52,17),(53,17),(54,17),(55,17),(56,17)
 ;
 
 INSERT INTO Periodo (id, nombre, fecha_inicio, fecha_fin) VALUES

@@ -67,8 +67,8 @@ CREATE TABLE Actividad(
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	id_ciclo INT UNSIGNED,
 	orden INT UNSIGNED COMMENT 'Orden en el que aparecerán en la app y el informe',
-	titulo VARCHAR(256),
-	descripcion VARCHAR(256),
+	titulo VARCHAR(1024),
+	descripcion TEXT,
 	FOREIGN KEY (id_ciclo) REFERENCES Ciclo (id) ON DELETE CASCADE,
 	UNIQUE INDEX (id_ciclo, orden)
 );
