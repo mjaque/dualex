@@ -23,6 +23,7 @@ export class VistaInforme extends Vista{
 		//Cogemos referencias a los elementos del interfaz
 		this.sAlumno = this.doc.querySelector("span[data-informe='alumno']")
 		this.sCoordinador = this.doc.querySelector("span[data-informe='coordinador']")
+		this.sGrado = this.doc.querySelector("span[data-informe='grado']")
 		this.sCiclo = this.doc.querySelector("span[data-informe='ciclo']")
 		this.sPeriodo = this.doc.querySelector("span[data-informe='periodo']")
 		this.divValoracion = this.doc.querySelector('.grid1')
@@ -45,6 +46,7 @@ export class VistaInforme extends Vista{
 		this.borrar()
 		this.sAlumno.textContent = `${alumno.nombre} ${alumno.apellidos}`
 		this.sCoordinador.textContent = informe.coordinador
+		this.sGrado.textContent = informe.grado
 		this.sCiclo.textContent = alumno.titulo
 		this.sPeriodo.textContent = informe.periodo
 		

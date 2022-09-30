@@ -34,6 +34,7 @@ CREATE TABLE Ciclo(
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	codigo VARCHAR(256),
 	titulo VARCHAR(256),
+	grado ENUM ('Grado Superior', 'Grado Medio'),
 	id_profesor INT UNSIGNED COMMENT 'Coordinador del ciclo',
 	color_fondo VARCHAR(256) DEFAULT '#0000FF',
 	color_letra VARCHAR(256) DEFAULT '#FFFFFF',
