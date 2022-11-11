@@ -163,7 +163,7 @@ class DAOTarea{
 			$sql = 'UPDATE Tarea SET titulo = :titulo, descripcion = :descripcion , fecha = :fecha, id_calificacion_empresa = :idCalificacionEmpresa, ';
 			$sql .= 'comentario_calificacion_empresa = :comentarioCalificacionEmpresa ';
 			$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno ';
-			$sql .= ' AND Tarea.id_calificacion_empresa IS NULL AND Tarea.calificacion IS NULL AND Tarea.evaluacion IS NULL';
+			$sql .= ' AND Tarea.id_calificacion_empresa IS NULL AND Tarea.calificacion IS NULL';
 		
 			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'idAlumno'=>$usuario->id);
 		}
@@ -206,7 +206,7 @@ class DAOTarea{
 	**/
 	public static function borrar($idTarea, $usuario){
 		$sql = 'DELETE FROM Tarea ';
-		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno AND Tarea.id_calificacion_empresa IS NULL AND Tarea.calificacion IS NULL AND Tarea.evaluacion IS NULL';
+		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno AND Tarea.id_calificacion_empresa IS NULL AND Tarea.calificacion IS NULL';
 		
 		$params = array('id'=>$idTarea, 'idAlumno'=>$usuario->id);
 
