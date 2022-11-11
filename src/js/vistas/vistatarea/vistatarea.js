@@ -108,6 +108,8 @@ export class VistaTarea extends Vista{
 			else{
 				this.cargarActividades(this.controlador.getUsuario().idCiclo)
 				this.tarea = null
+				let hoy = new Date()
+				this.iFecha.value = hoy.toLocaleDateString('en-CA')
 				this.cargarCalificaciones()
 			}
 		}
