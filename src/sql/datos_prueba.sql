@@ -108,11 +108,11 @@ INSERT INTO Tarea (id, id_alumno, titulo, descripcion, fecha) VALUES
 (7, 13, 'Tarea 13.5', 'Descripción de la tarea 13.5', '2023-02-22'),
 (8, 15, 'Tarea 14.1', 'Descripción de la tarea 14.1', '2023-02-22');
 
-UPDATE Tarea SET id_calificacion_empresa = 1, calificacion = 7 WHERE id = 3;
-UPDATE Tarea SET id_calificacion_empresa = 2, calificacion = 8 WHERE id = 4;
-UPDATE Tarea SET id_calificacion_empresa = 3, calificacion = 6 WHERE id = 5;
-UPDATE Tarea SET id_calificacion_empresa = 4, calificacion = 4 WHERE id = 6;
-UPDATE Tarea SET id_calificacion_empresa = 2, calificacion = 6 WHERE id = 7;
+UPDATE Tarea SET id_calificacion_empresa = 1 WHERE id = 3;
+UPDATE Tarea SET id_calificacion_empresa = 2 WHERE id = 4;
+UPDATE Tarea SET id_calificacion_empresa = 3 WHERE id = 5;
+UPDATE Tarea SET id_calificacion_empresa = 4 WHERE id = 6;
+UPDATE Tarea SET id_calificacion_empresa = 2 WHERE id = 7;
 
 INSERT INTO Actividad_Tarea (id_actividad, id_tarea) VALUES
 (1, 1), (2, 1), (2, 2), (5,2), (14, 3), (14, 4), (16, 5), (17, 6), (18, 7), (21,8);

@@ -84,6 +84,7 @@ class Tarea{
 			$tarea->calificacion = null;
 
     	$id = DAOTarea::modificar($tarea, $usuario);
+print_r($tarea);
     	//Respuesta a un PUT
     	header('HTTP/1.1 200 Ok');
     	die();
@@ -100,6 +101,36 @@ class Tarea{
     	header('HTTP/1.1 200 Ok');
     	die();
   	}
+	/**
+		Procesa un array de tareas x modulos para crear arrays de módulos.
+		@params $tareas {[Tareas]} Array de tareas con una fila por módulo de la tarea y otra por actividad.
+		@return {[Tareas]} Array de tareas con un campo de array que agrupa todos sus módulos y actividades.
+	**/
+	function agruparPorModulos($tareas){
+		if (count($tareas) == 0) return [];
+		
+		$resultado = [];
+
+		for($i = 0; $i < count($tareas); $i++){
+			//Vemos si la tarea ya está en los resultados
+			for ($j = 0; $j < count($resultado); $j++)
+				if ($resultado[$j]['id'] == $tareas[$i]['id'])
+					break;
+			if ($j == count($resultado)){	//La tarea no está en el resultado
+				$tareas[$i]['modulos'] = [];
+				$tareas[$i]['actividades'] = [];
+				array_push($resultado, $tareas[$i]);
+			}
+
+			//Vemos si el módulo ya está en el resultado
+			for($k = 0; $k < count($resultado[$j]['modulos']); $k++)
+				if ($resultado[$j]['modulos'][$k]['id'] == $tareas[$i]['id_modulo'])
+					break;
+			if ($k == count($resultado[$j]['modulos']))	//El módulo no está en los resultados
+				array_push($resultado[$j]['modulos'], $this->verModulo($tareas[$i]));
+		}
+		return $resultado;
+	}
 	/**
 		Procesa un array de tareas x módulo y actividades para crear arrays de módulos y actividades.
 		@params $tareas {[Tareas]} Array de tareas con una fila por módulo de la tarea y otra por actividad.
@@ -147,6 +178,8 @@ class Tarea{
 		$modulo['id'] = $elemento['id_modulo'];
 		$modulo['codigo'] = $elemento['codigo'];
 		$modulo['titulo'] = $elemento['modulo_titulo'];
+		$modulo['calificacion'] = $elemento['modulo_calificacion'];
+		$modulo['evaluacion'] = $elemento['modulo_evaluacion'];
 		$modulo['color_fondo'] = $elemento['color_fondo'];
 		$modulo['color_letra'] = $elemento['color_letra'];
 		return $modulo;

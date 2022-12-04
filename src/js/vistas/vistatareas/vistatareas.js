@@ -51,7 +51,7 @@ export class VistaTareas extends Vista{
 		let divIconos = document.createElement('div')
 		div.appendChild(divIconos)
 		divIconos.classList.add('iconos')
-		if ((tarea.calificacion_empresa != null || tarea.calificacion != null) && this.controlador.getUsuario().rol == 'alumno'){
+		if ((tarea.calificacion_empresa != null || tarea.calificacion_profesor != null) && this.controlador.getUsuario().rol == 'alumno'){
 			let iconoConsultar = document.createElement('img')
 			divIconos.appendChild(iconoConsultar)
 			iconoConsultar.classList.add('icono')
@@ -81,7 +81,7 @@ export class VistaTareas extends Vista{
 		spanTarea.classList.add('tarea')
 		//Si es profesor, ponemos el aviso de tarea pendiente de corrección
 		if (this.controlador.getUsuario().rol == 'profesor'){
-			if (!tarea.calificacion){
+			if (!tarea.calificacion_profesor){
 				let spanAviso = document.createElement('span')
 				spanTarea.appendChild(spanAviso)
 				spanAviso.classList.add('tarea_pendiente')
@@ -94,12 +94,12 @@ export class VistaTareas extends Vista{
 			texto += tarea.calificacion_empresa
 		else
 			texto += 'Sin calificación de empresa'
-		if (tarea.calificacion)
-			texto += ' - ' + tarea.calificacion
-		else
-			texto += ' - Sin calificación del profesor'
+		//Formamos las calificaciones de cada módulo para la tarea
+		let calificaciones = []
+		for(let modulo of tarea.modulos)
+			calificaciones.push(modulo.calificacion)
+		texto += ' - Calificaciones Profesores: (' + calificaciones.join(',') + ')'
 		spanTarea.appendChild(document.createTextNode(texto))
-
 	}
 	//TODO: DRY con vistaalumnos.js
 	/**

@@ -26,7 +26,8 @@ export class VistaTarea extends Vista{
 		this.divActividades = this.doc.querySelector('fieldset div')
 		this.sCalificacion = this.doc.getElementsByTagName('select')[0]
 		this.taComentarioCalificacionEmpresa = this.doc.getElementsByTagName('textarea')[1]
-		this.divBotones = this.doc.querySelector('body > div')
+		this.divEvaluaciones = this.doc.querySelectorAll('body > div')[0]
+		this.divBotones = this.doc.querySelectorAll('body > div')[1]
 		this.taEvaluacion = this.doc.getElementsByTagName('textarea')[2]
 		this.iCalificacion = this.doc.querySelectorAll('input[type=number]')[0]
 		this.btnCancelar = this.doc.getElementsByTagName('button')[0]
@@ -52,8 +53,6 @@ export class VistaTarea extends Vista{
 		this.iFecha.value = tarea.fecha
 		this.taDescripcion.value = tarea.descripcion
 		this.taComentarioCalificacionEmpresa.value = tarea.comentario_calificacion_empresa
-		this.taEvaluacion.value = tarea.evaluacion
-		this.iCalificacion.value = tarea.calificacion
 		//Seleccionamos la calificación de la empresa
 		this.cargarCalificaciones()
 			.then(respuesta => {
@@ -61,13 +60,44 @@ export class VistaTarea extends Vista{
 				if (this.controlador.getUsuario().rol == 'alumno'){
 					this.iCalificacion.disabled = true
 					this.taEvaluacion.disabled = true
-				if (tarea.id_calificacion_empresa || tarea.calificacion)
-					this.deshabilitar(true)
-		}
+					if (tarea.id_calificacion_empresa || tarea.calificacion)
+						this.deshabilitar(true)
+				}
 			})
+		//Creamos el interfaz para mostrar las evaluaciones de los módulos
+		while (this.divEvaluaciones.firstChild)
+			this.divEvaluaciones.firstChild.remove()
+		for(let modulo of tarea.modulos){
+			let p = document.createElement('p')
+			this.divEvaluaciones.appendChild(p)
+			this.crearSpanModulo(p, modulo)
+			let evaluacion = ' Sin calificar'
+			if (modulo.calificacion)
+				evaluacion = ' ' + modulo.calificacion + ' ' + modulo.evaluacion
+			p.appendChild(document.createTextNode(evaluacion))
+		}
+		//this.taEvaluacion.value = tarea.evaluacion
+		//this.iCalificacion.value = tarea.calificacion
 		//Marcamos las actividades de la tarea
 		for(let actividad of tarea.actividades)
 			this.divActividades.querySelector('input[data-idActividad="' + actividad.id + '"').checked = true
+	}
+	/**
+		Crea el span asociado a un módulo y lo añade al div.
+		@param div {DivElement} Elemento div al que se añadirá el span.
+		@param alumno {Modulo} Datos del módulo.
+		@param index {Number} Índice del alumno en el array.
+		@param array {Array} Array de alumnos.
+		TODO: Refactorizar con vistatareas.js
+	**/
+	crearSpanModulo(div, modulo, index, array){
+		let span = document.createElement('span')
+		div.appendChild(span)
+		span.classList.add('modulo')
+		span.textContent = modulo.codigo
+		span.setAttribute('title', modulo.titulo)
+		span.style.backgroundColor = modulo.color_fondo
+		span.style.color = modulo.color_letra
 	}
 	/**
 		Cambia la capacidad de editar los campos de la vista (para el alumno).
@@ -126,6 +156,8 @@ export class VistaTarea extends Vista{
 		this.taComentarioCalificacionEmpresa.value = ''
 		this.taEvaluacion.value = ''
 		this.iCalificacion.value = ''
+		while (this.divEvaluaciones.firstChild)
+			this.divEvaluaciones.firstChild.remove()
 	}
 	/**
 		Carga la lista de Actividades de un ciclo.
