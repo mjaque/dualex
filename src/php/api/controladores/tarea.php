@@ -83,7 +83,18 @@ class Tarea{
 		if ($tarea->calificacion === "")
 			$tarea->calificacion = null;
 
-    	$id = DAOTarea::modificar($tarea, $usuario);
+    	DAOTarea::modificar($tarea, $usuario);
+
+		//Preparamos el mensaje para el alumno
+		$alumno = DAOTarea::verAlumnoDeTarea($tarea->id)[0];
+		$mensaje = [];
+		$mensaje['para'] = $alumno['email'];
+		$mensaje['titulo'] = '[DUALEX] Se ha actualizado la tarea '.$tarea->titulo;
+		$mensaje['cuerpo'] = $usuario->nombre.' '.$usuario->apellidos.' ha actualizado la tarea: '.$tarea->titulo.'.';
+		$cabeceras = "From: dualex@fundacionloyola.net";
+
+		mail ($mensaje['para'], $mensaje['titulo'], $mensaje['cuerpo'], $cabeceras);
+		
     	//Respuesta a un PUT
     	header('HTTP/1.1 200 Ok');
     	die();

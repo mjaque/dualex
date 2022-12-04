@@ -212,4 +212,20 @@ class DAOTarea{
 
 		$idNuevo = BD::borrar($sql, $params);
 	}
+	/**
+		Ver alumno de tarea. 
+		Devuelve los datos de un alumno a partir del identificador de tarea.
+		@param idTarea {Number} Identificador de la tarea
+		@return {Alumno} Datos del alumno que dio de alta la tarea.
+	**/
+	public static function verAlumnoDeTarea($idTarea){
+		$sql  = 'SELECT Usuario.nombre, Usuario.apellidos, Usuario.email ';
+		$sql .= 'FROM Usuario ';
+		$sql .= 'JOIN Alumno ON Usuario.id = Alumno.id ';
+		$sql .= 'WHERE Alumno.id = (SELECT id_alumno FROM Tarea WHERE id = :id_tarea) ';
+		
+		$params = array('id_tarea' => $idTarea);
+
+		return BD::seleccionar($sql, $params);
+	}
 }

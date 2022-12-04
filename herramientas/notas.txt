@@ -26,3 +26,7 @@ Merge
 git checkout main		//Volvemos a main
 git merge nueva_rama	//A ver si puede hacer fast-forward
 git branch -d nueva_rama	//para borrar la rama...
+-------------------------------------------------
+Instalación de dependencias con composer
+Desde el directorio /src/php/api, ejecutar:
+	composer require google/apiclient

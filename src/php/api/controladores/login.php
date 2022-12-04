@@ -1,6 +1,7 @@
 <?php
 /**
 	Controlador de autenticación.
+	Ref: https://developers.google.com/identity/gsi/web/guides/verify-google-id-token
 **/
 
 require_once 'vendor/autoload.php';

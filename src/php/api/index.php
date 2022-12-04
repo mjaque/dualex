@@ -124,7 +124,7 @@
 			die();
 		}
 	}catch(Throwable $excepcion){	//Throwable (interfaz) incluye Error y Exception
-		header('HTTP/1.1 500 Internal Server Error');
+		header('HTTP/1.1 500 Internal Server Error 1');
 		echo $excepcion;
 		die();
 	}
