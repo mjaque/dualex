@@ -124,7 +124,6 @@ class DAOTarea{
 		@return id {Integer} Identificador de la tarea insertada.
 	**/
 	public static function insertar($tarea, $usuario){
-TODO: Hay que insertar también en Actividad_Modulo_Tarea (voy por aquí)
 		if (!BD::iniciarTransaccion())
 			throw new Exception('No es posible iniciar la transacción.');
 		$sql = 'INSERT INTO Tarea (id_alumno, titulo, descripcion , fecha, id_calificacion_empresa, comentario_calificacion_empresa) ';
@@ -143,6 +142,14 @@ TODO: Hay que insertar también en Actividad_Modulo_Tarea (voy por aquí)
 //echo $sql;
 			BD::insertar($sql);
 		}
+
+		//Insertamos la relación con Módulo cogiendo la menor de las actividades
+		$sql  = 'INSERT INTO Actividad_Modulo_Tarea (id_actividad, id_modulo, id_tarea) ';
+		$sql .= 'SELECT MIN(id_actividad), id_modulo, :id_tarea1 AS id_tarea FROM Actividad_Modulo WHERE id_actividad IN ';
+		$sql .= '(SELECT id_actividad FROM `Actividad_Tarea` WHERE id_tarea = :id_tarea2) GROUP BY id_modulo, id_tarea';
+		$params = array('id_tarea1' => $idNuevo, 'id_tarea2' => $idNuevo);
+		BD::insertar($sql, $params);
+//echo $sql;
 
 		if (!BD::commit())
 			throw new Exception('No se pudo confirmar la transacción.');
