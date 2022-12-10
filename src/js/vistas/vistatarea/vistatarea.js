@@ -28,8 +28,6 @@ export class VistaTarea extends Vista{
 		this.taComentarioCalificacionEmpresa = this.doc.getElementsByTagName('textarea')[1]
 		this.divEvaluaciones = this.doc.querySelectorAll('body > div')[0]
 		this.divBotones = this.doc.querySelectorAll('body > div')[1]
-		this.taEvaluacion = this.doc.getElementsByTagName('textarea')[2]
-		this.iCalificacion = this.doc.querySelectorAll('input[type=number]')[0]
 		this.btnCancelar = this.doc.getElementsByTagName('button')[0]
 		this.btnAceptar = this.doc.getElementsByTagName('button')[1]
 
@@ -58,8 +56,6 @@ export class VistaTarea extends Vista{
 			.then(respuesta => {
 				this.sCalificacion.value = tarea.id_calificacion_empresa
 				if (this.controlador.getUsuario().rol == 'alumno'){
-					this.iCalificacion.disabled = true
-					this.taEvaluacion.disabled = true
 					if (tarea.id_calificacion_empresa || tarea.calificacion)
 						this.deshabilitar(true)
 				}
@@ -71,13 +67,22 @@ export class VistaTarea extends Vista{
 			let p = document.createElement('p')
 			this.divEvaluaciones.appendChild(p)
 			this.crearSpanModulo(p, modulo)
-			let evaluacion = ' Sin calificar'
-			if (modulo.calificacion)
-				evaluacion = ' ' + modulo.calificacion + ' ' + modulo.evaluacion
-			p.appendChild(document.createTextNode(evaluacion))
+			if (this.controlador.getUsuario().rol == 'alumno'){
+				let evaluacion = ' Sin calificar'
+				if (modulo.calificacion)
+					evaluacion = ' ' + modulo.calificacion + ' ' + modulo.evaluacion
+				p.appendChild(document.createTextNode(evaluacion))
+			}
+			if (this.controlador.getUsuario().rol == 'profesor'){
+				let iCalificacion = document.createElement('input')
+				p.appendChild(iCalificacion)
+				iCalificacion.setAttribute('type', 'number')
+				iCalificacion.modulo = modulo	
+				let taEvaluacion = document.createElement('textarea')
+				p.appendChild(itEvaluacion)
+				taEvaluacion.modulo = modulo	
+			}
 		}
-		//this.taEvaluacion.value = tarea.evaluacion
-		//this.iCalificacion.value = tarea.calificacion
 		//Marcamos las actividades de la tarea
 		for(let actividad of tarea.actividades)
 			this.divActividades.querySelector('input[data-idActividad="' + actividad.id + '"').checked = true
@@ -108,8 +113,6 @@ export class VistaTarea extends Vista{
 		this.iFecha.disabled = deshabilitar
 		this.taDescripcion.disabled = deshabilitar
 		this.taComentarioCalificacionEmpresa.disabled = deshabilitar
-		this.taEvaluacion.disabled = deshabilitar
-		this.iCalificacion.disabled = deshabilitar
 		this.sCalificacion.disabled = deshabilitar
 		for(let input of this.divActividades.getElementsByTagName('input'))
 			input.disabled = deshabilitar
@@ -154,8 +157,6 @@ export class VistaTarea extends Vista{
 		this.taDescripcion.value = ''
 		this.sCalificacion.selectedIndex = 0
 		this.taComentarioCalificacionEmpresa.value = ''
-		this.taEvaluacion.value = ''
-		this.iCalificacion.value = ''
 		while (this.divEvaluaciones.firstChild)
 			this.divEvaluaciones.firstChild.remove()
 	}
@@ -234,8 +235,6 @@ export class VistaTarea extends Vista{
 					tarea.actividades.push(iActividad.getAttribute('data-idActividad'))
 			tarea.idCalificacionEmpresa = this.sCalificacion.value
 			tarea.comentarioCalificacionEmpresa = this.taComentarioCalificacionEmpresa.value
-			tarea.evaluacion = this.taEvaluacion.value
-			tarea.calificacion = this.iCalificacion.value
 			
 			if (this.tarea){
 				tarea.id = this.tarea.id

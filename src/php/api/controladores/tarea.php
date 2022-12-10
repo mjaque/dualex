@@ -80,8 +80,6 @@ class Tarea{
 		//Control de valores nulos
 		if ($tarea->idCalificacionEmpresa === "null")
 			$tarea->idCalificacionEmpresa = null;
-		if ($tarea->calificacion === "")
-			$tarea->calificacion = null;
 
     	$id = DAOTarea::modificar($tarea, $usuario);
 print_r($tarea);
@@ -138,7 +136,6 @@ print_r($tarea);
 	**/
 	function agruparPorModulosYActividades($tareas){
 		if (count($tareas) == 0) return [];
-		
 		$resultado = [];
 
 		for($i = 0; $i < count($tareas); $i++){

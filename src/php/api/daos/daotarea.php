@@ -41,7 +41,7 @@ class DAOTarea{
 	**/
 	public static function verTareaDeAlumno($idTarea, $idAlumno){
 		$sql	= 'SELECT Tarea.id AS id, Tarea.titulo AS titulo, Tarea.descripcion AS descripcion, Tarea.fecha ';
-		$sql .= ', Tarea.id_calificacion_empresa, Tarea.comentario_calificacion_empresa, Tarea.calificacion, Tarea.evaluacion ';
+		$sql .= ', Tarea.id_calificacion_empresa, Tarea.comentario_calificacion_empresa ';
 		$sql .= ', Calificacion.titulo AS calificacion_empresa ';
 		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
 		$sql .= ', Modulo.id AS id_modulo, Modulo.id_ciclo AS id_ciclo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
@@ -70,10 +70,11 @@ class DAOTarea{
 	**/
 	public static function verTareasDeAlumnoComoProfesor($id_alumno, $id_profesor){
 		$sql  = 'SELECT Tarea.id AS id, Tarea.titulo AS titulo, Tarea.descripcion AS descripcion, Tarea.fecha ';
-		$sql .= ', Tarea.id_calificacion_empresa, Tarea.comentario_calificacion_empresa, Tarea.calificacion, Tarea.evaluacion ';
+		$sql .= ', Tarea.id_calificacion_empresa, Tarea.comentario_calificacion_empresa ';
 		$sql .= ', Calificacion.titulo AS calificacion_empresa ';
 		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
 		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
+		$sql .= ', Actividad_Modulo_Tarea.calificacion AS modulo_calificacion, Actividad_Modulo_Tarea.evaluacion AS modulo_evaluacion ';
 		$sql .= ', Alumno.id_ciclo AS id_ciclo ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'JOIN Alumno ON Alumno.id = Tarea.id_alumno ';
@@ -83,6 +84,7 @@ class DAOTarea{
 		$sql .= 'LEFT JOIN Actividad_Modulo ON Actividad_Modulo.id_actividad = Actividad.id ';
 		$sql .= 'LEFT JOIN Modulo ON Modulo.id = Actividad_Modulo.id_modulo ';
 		$sql .= 'LEFT JOIN Modulo_Profesor ON Modulo.id = Modulo_Profesor.id_modulo ';
+		$sql .= 'JOIN Actividad_Modulo_Tarea ON (Actividad_Modulo_Tarea.id_actividad = Actividad.id AND Actividad_Modulo_Tarea.id_modulo = Modulo.id AND Actividad_Modulo_Tarea.id_tarea = Tarea.id) ';
 		$sql .= 'WHERE Alumno.id = :id_alumno ';
 		$sql .= 'AND Modulo_Profesor.id_profesor = :id_profesor ';
 		$sql .= 'ORDER BY Tarea.fecha DESC ';
@@ -99,10 +101,11 @@ class DAOTarea{
 	**/
 	public static function verTareaDeAlumnoComoProfesor($idTarea, $idProfesor){
 		$sql	= 'SELECT Tarea.id AS id, Tarea.titulo AS titulo, Tarea.descripcion AS descripcion, Tarea.fecha, Tarea.id_alumno ';
-		$sql .= ', Tarea.id_calificacion_empresa, Tarea.comentario_calificacion_empresa, Tarea.calificacion, Tarea.evaluacion ';
+		$sql .= ', Tarea.id_calificacion_empresa, Tarea.comentario_calificacion_empresa ';
 		$sql .= ', Calificacion.titulo AS calificacion_empresa ';
 		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
 		$sql .= ', Modulo.id AS id_modulo, Modulo.id_ciclo AS id_ciclo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
+		$sql .= ', Actividad_Modulo_Tarea.calificacion AS modulo_calificacion, Actividad_Modulo_Tarea.evaluacion AS modulo_evaluacion ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
 		$sql .= 'LEFT JOIN Actividad_Tarea ON Actividad_Tarea.id_tarea = Tarea.id ';
@@ -110,6 +113,7 @@ class DAOTarea{
 		$sql .= 'LEFT JOIN Actividad_Modulo ON Actividad_Modulo.id_actividad = Actividad.id ';
 		$sql .= 'LEFT JOIN Modulo ON Modulo.id = Actividad_Modulo.id_modulo ';
 		$sql .= 'LEFT JOIN Modulo_Profesor ON Modulo.id = Modulo_Profesor.id_modulo ';
+		$sql .= 'JOIN Actividad_Modulo_Tarea ON (Actividad_Modulo_Tarea.id_actividad = Actividad.id AND Actividad_Modulo_Tarea.id_modulo = Modulo.id AND Actividad_Modulo_Tarea.id_tarea = Tarea.id) ';
 		$sql .= 'WHERE Modulo_Profesor.id_profesor = :id_profesor AND Tarea.id = :id_tarea ';
 		$sql .= 'ORDER BY Actividad.titulo, Tarea.titulo ';
 		
@@ -143,11 +147,13 @@ class DAOTarea{
 			BD::insertar($sql);
 		}
 
-		//Insertamos la relación con Módulo cogiendo la menor de las actividades
+		//Insertamos la relación con Módulo y Actividad
 		$sql  = 'INSERT INTO Actividad_Modulo_Tarea (id_actividad, id_modulo, id_tarea) ';
-		$sql .= 'SELECT MIN(id_actividad), id_modulo, :id_tarea1 AS id_tarea FROM Actividad_Modulo WHERE id_actividad IN ';
-		$sql .= '(SELECT id_actividad FROM `Actividad_Tarea` WHERE id_tarea = :id_tarea2) GROUP BY id_modulo, id_tarea';
-		$params = array('id_tarea1' => $idNuevo, 'id_tarea2' => $idNuevo);
+		$sql .= 'SELECT Actividad_Modulo.id_actividad, id_modulo, id_tarea ';
+		$sql .= 'FROM Actividad_Modulo ';
+		$sql .= 'JOIN Actividad_Tarea ON Actividad_Modulo.id_actividad = Actividad_Tarea.id_actividad ';
+		$sql .= 'WHERE id_tarea = :id_tarea';
+		$params = array('id_tarea' => $idNuevo);
 		BD::insertar($sql, $params);
 //echo $sql;
 
@@ -177,7 +183,8 @@ class DAOTarea{
 			$sql = 'UPDATE Tarea SET titulo = :titulo, descripcion = :descripcion , fecha = :fecha, id_calificacion_empresa = :idCalificacionEmpresa, ';
 			$sql .= 'comentario_calificacion_empresa = :comentarioCalificacionEmpresa ';
 			$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno ';
-			$sql .= ' AND Tarea.id_calificacion_empresa IS NULL AND Tarea.calificacion IS NULL';
+			$sql .= ' AND Tarea.id_calificacion_empresa IS NULL ';
+			$sql .= ' AND Tarea.id NOT IN (SELECT DISTINCT id_tarea FROM Actividad_Modulo_Tarea WHERE calificacion IS NOT NULL) '; 
 		
 			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'idAlumno'=>$usuario->id);
 		}
@@ -209,6 +216,16 @@ class DAOTarea{
 			BD::insertar($sql);
 		}
 
+		//Insertamos la relación con Módulo y Actividad
+		//TODO: refactorizar con DaoTarea.insertar
+		$sql  = 'INSERT INTO Actividad_Modulo_Tarea (id_actividad, id_modulo, id_tarea) ';
+		$sql .= 'SELECT Actividad_Modulo.id_actividad, id_modulo, id_tarea ';
+		$sql .= 'FROM Actividad_Modulo ';
+		$sql .= 'JOIN Actividad_Tarea ON Actividad_Modulo.id_actividad = Actividad_Tarea.id_actividad ';
+		$sql .= 'WHERE id_tarea = :id_tarea';
+		$params = array('id_tarea' => $tarea->id);
+		BD::insertar($sql, $params);
+
 		if (!BD::commit())
 			throw new Exception('No se pudo confirmar la transacción.');
 	}
@@ -220,7 +237,8 @@ class DAOTarea{
 	**/
 	public static function borrar($idTarea, $usuario){
 		$sql = 'DELETE FROM Tarea ';
-		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno AND Tarea.id_calificacion_empresa IS NULL AND Tarea.calificacion IS NULL';
+		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno AND Tarea.id_calificacion_empresa IS NULL ';
+		$sql .= 'AND Tarea.id NOT IN (SELECT DISTINCT id_tarea FROM Actividad_Modulo_Tarea WHERE calificacion IS NOT NULL) '; 
 		
 		$params = array('id'=>$idTarea, 'idAlumno'=>$usuario->id);
 
