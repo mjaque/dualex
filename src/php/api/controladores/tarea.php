@@ -5,6 +5,8 @@
 require_once('./daos/daotarea.php');
 
 class Tarea{
+	public static $email_aviso = false;
+
 	/**
 		Devuelve la lista de tareas.
 		Si recibe el parámetro con el valor 'alumno', devuelve la lista de tareas del alumno.
@@ -80,9 +82,24 @@ class Tarea{
 		//Control de valores nulos
 		if ($tarea->idCalificacionEmpresa === "null")
 			$tarea->idCalificacionEmpresa = null;
+		for ($i = 0; $i < count($tarea->evaluaciones); $i++)
+			if ($tarea->evaluaciones[$i]->calificacion === "")
+				$tarea->evaluaciones[$i]->calificacion = null;
 
     	$id = DAOTarea::modificar($tarea, $usuario);
-print_r($tarea);
+
+		if (self::$email_aviso){
+			//Preparamos el mensaje para el alumno
+			$alumno = DAOTarea::verAlumnoDeTarea($tarea->id)[0];
+			$mensaje = [];
+			$mensaje['para'] = $alumno['email'];
+			$mensaje['titulo'] = '[DUALEX] Se ha actualizado la tarea '.$tarea->titulo;
+			$mensaje['cuerpo'] = $usuario->nombre.' '.$usuario->apellidos.' ha actualizado la tarea: '.$tarea->titulo.'.';
+			$cabeceras = "From: dualex@fundacionloyola.net";
+
+			mail ($mensaje['para'], $mensaje['titulo'], $mensaje['cuerpo'], $cabeceras);
+		}
+
     	//Respuesta a un PUT
     	header('HTTP/1.1 200 Ok');
     	die();

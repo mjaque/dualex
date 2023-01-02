@@ -171,13 +171,13 @@ class DAOTarea{
 		if (!BD::iniciarTransaccion())
 			throw new Exception('No es posible iniciar la transacción.');
 
+		//Actualizamos la información básica (Tarea)
 		if ($usuario->rol == 'profesor'){
 			$sql = 'UPDATE Tarea SET titulo = :titulo, descripcion = :descripcion , fecha = :fecha, id_calificacion_empresa = :idCalificacionEmpresa, ';
 			$sql .= 'comentario_calificacion_empresa = :comentarioCalificacionEmpresa ';
-			$sql .= ', calificacion = :calificacion, evaluacion = :evaluacion '; 
 			$sql .= 'WHERE Tarea.id = :id';
 		
-			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'evaluacion' => $tarea->evaluacion, 'calificacion' => $tarea->calificacion);
+			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa);
 		}
 		if ($usuario->rol == 'alumno'){
 			$sql = 'UPDATE Tarea SET titulo = :titulo, descripcion = :descripcion , fecha = :fecha, id_calificacion_empresa = :idCalificacionEmpresa, ';
@@ -188,44 +188,65 @@ class DAOTarea{
 		
 			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'idAlumno'=>$usuario->id);
 		}
-	
 		//print_r($params);die($sql);
-
 		$idNuevo = BD::actualizar($sql, $params);
 
-		//Borramos sus actividades
+		//Vemos si la tarea está calificada.
+		$sql = 'SELECT COUNT(*) AS count FROM Actividad_Modulo_Tarea WHERE id_tarea = :id AND calificacion IS NOT NULL';
+		$params = array('id' => $tarea->id);
+		$resultado = BD::seleccionar($sql, $params)[0]['count'];
+
+		//Si ya está calificado en algún módulo, no se pueden cambiar las actividades
+		if ($resultado == 0){
+			//Actualizamos las relaciones N:M, solo si no están calificadas
+			//Borramos sus actividades
+			if ($usuario->rol == 'profesor'){
+				$sql = 'DELETE FROM Actividad_Tarea WHERE id_tarea = :id';
+				$params = array('id' => $tarea->id);
+			}
+			if ($usuario->rol == 'alumno'){
+				$sql = 'DELETE FROM Actividad_Tarea WHERE Actividad_Tarea.id_tarea = :id AND id_tarea IN (SELECT id FROM Tarea WHERE Tarea.id_alumno = :idAlumno)';
+				$params = array('id' => $tarea->id, 'idAlumno' => $usuario->id);
+			}
+			BD::borrar($sql, $params);
+
+			//Las volvemos a insertar
+			if (count($tarea->actividades) > 0){
+				$sql = 'INSERT INTO Actividad_Tarea (id_actividad, id_tarea) VALUES ';
+				$values = array();
+				for ($i = 0; $i < count($tarea->actividades); $i++)
+					array_push($values, '('.$tarea->actividades[$i].', '.$tarea->id.')');
+
+				$sql .= join(",", $values);
+
+				BD::insertar($sql);
+			}
+
+			//Insertamos la relación con Módulo y Actividad
+			//TODO: refactorizar con DaoTarea.insertar
+			$sql  = 'INSERT INTO Actividad_Modulo_Tarea (id_actividad, id_modulo, id_tarea) ';
+			$sql .= 'SELECT Actividad_Modulo.id_actividad, id_modulo, id_tarea ';
+			$sql .= 'FROM Actividad_Modulo ';
+			$sql .= 'JOIN Actividad_Tarea ON Actividad_Modulo.id_actividad = Actividad_Tarea.id_actividad ';
+			$sql .= 'WHERE id_tarea = :id_tarea';
+			$params = array('id_tarea' => $tarea->id);
+			BD::insertar($sql, $params);
+		}
+		
+		//Si es profesor, actualizamos con las calificaciones de sus módulos
 		if ($usuario->rol == 'profesor'){
-			$sql = 'DELETE FROM Actividad_Tarea WHERE id_tarea = :id';
-			$params = array('id' => $tarea->id);
+			for ($i = 0; $i  < count($tarea->evaluaciones); $i++){
+				$sql  = 'UPDATE Actividad_Modulo_Tarea SET calificacion = :calificacion, evaluacion = :comentario ';
+				$sql .= 'WHERE id_tarea = :id_tarea AND id_modulo = :id_modulo';
+				$params = array(
+					'calificacion' => $tarea->evaluaciones[$i]->calificacion, 
+					'comentario' => $tarea->evaluaciones[$i]->comentario,
+					'id_tarea' => $tarea->id,
+					'id_modulo' => $tarea->evaluaciones[$i]->id
+				);
+				$idNuevo = BD::actualizar($sql, $params);
+			}
 		}
-		if ($usuario->rol == 'alumno'){
-			$sql = 'DELETE FROM Actividad_Tarea WHERE id_tarea = :id AND id_tarea IN (SELECT id FROM Tarea WHERE Tarea.id_alumno = :idAlumno)';
-			$params = array('id' => $tarea->id, 'idAlumno' => $usuario->id);
-		}
-		BD::borrar($sql, $params);
-
-		//Las volvemos a insertar
-		if (count($tarea->actividades) > 0){
-			$sql = 'INSERT INTO Actividad_Tarea (id_actividad, id_tarea) VALUES ';
-			$values = array();
-			for ($i = 0; $i < count($tarea->actividades); $i++)
-				array_push($values, '('.$tarea->actividades[$i].', '.$tarea->id.')');
-
-			$sql .= join(",", $values);
-
-			BD::insertar($sql);
-		}
-
-		//Insertamos la relación con Módulo y Actividad
-		//TODO: refactorizar con DaoTarea.insertar
-		$sql  = 'INSERT INTO Actividad_Modulo_Tarea (id_actividad, id_modulo, id_tarea) ';
-		$sql .= 'SELECT Actividad_Modulo.id_actividad, id_modulo, id_tarea ';
-		$sql .= 'FROM Actividad_Modulo ';
-		$sql .= 'JOIN Actividad_Tarea ON Actividad_Modulo.id_actividad = Actividad_Tarea.id_actividad ';
-		$sql .= 'WHERE id_tarea = :id_tarea';
-		$params = array('id_tarea' => $tarea->id);
-		BD::insertar($sql, $params);
-
 		if (!BD::commit())
 			throw new Exception('No se pudo confirmar la transacción.');
 	}

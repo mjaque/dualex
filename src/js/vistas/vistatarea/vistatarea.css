@@ -64,3 +64,6 @@
 .vistatarea > div:nth-of-type(1) p {
 	line-height: 2rem;
 }
+.vistatarea div.alto{
+	line-height: 1.5rem;
+}

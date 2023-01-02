@@ -16,3 +16,17 @@ ALTER TABLE Tarea DROP COLUMN calificacion;
 ALTER TABLE Tarea DROP COLUMN evaluacion;
 
 
+INSERT INTO Actividad_Modulo_Tarea (id_actividad, id_modulo, id_tarea) 
+SELECT Actividad_Modulo.id_actividad, Actividad_Modulo.id_modulo, Tarea.id AS id_tarea
+FROM Tarea
+JOIN Actividad_Tarea ON Tarea.id = Actividad_Tarea.id_tarea
+JOIN Actividad_Modulo ON Actividad_Tarea.id_actividad = Actividad_Modulo.id_actividad  
+ORDER BY `id_tarea`  ASC
+
+SELECT Tarea.id AS id_tarea
+FROM Tarea
+JOIN Actividad_Tarea ON Tarea.id = Actividad_Tarea.id_tarea
+JOIN Actividad_Modulo ON Actividad_Tarea.id_actividad = Actividad_Modulo.id_actividad  
+GROUP BY(Tarea.id)
+HAVING COUNT(Actividad_Modulo.id_modulo) = 1
+

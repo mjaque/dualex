@@ -58,29 +58,40 @@ export class VistaTarea extends Vista{
 				if (this.controlador.getUsuario().rol == 'alumno'){
 					if (tarea.id_calificacion_empresa || tarea.calificacion)
 						this.deshabilitar(true)
+					for (let modulo of tarea.modulos)
+						if(modulo.calificacion)
+							this.deshabilitar(true) 
 				}
+				else
+					for (let modulo of tarea.modulos)
+						if(modulo.calificacion)
+							this.deshabilitarActividades(true) 
 			})
 		//Creamos el interfaz para mostrar las evaluaciones de los módulos
 		while (this.divEvaluaciones.firstChild)
 			this.divEvaluaciones.firstChild.remove()
 		for(let modulo of tarea.modulos){
-			let p = document.createElement('p')
-			this.divEvaluaciones.appendChild(p)
-			this.crearSpanModulo(p, modulo)
+			let div = document.createElement('div')
+			this.divEvaluaciones.appendChild(div)
+			div.classList.add('alto')
+			this.crearSpanModulo(div, modulo)
 			if (this.controlador.getUsuario().rol == 'alumno'){
 				let evaluacion = ' Sin calificar'
 				if (modulo.calificacion)
 					evaluacion = ' ' + modulo.calificacion + ' ' + modulo.evaluacion
-				p.appendChild(document.createTextNode(evaluacion))
+				div.appendChild(document.createTextNode(evaluacion))
 			}
 			if (this.controlador.getUsuario().rol == 'profesor'){
 				let iCalificacion = document.createElement('input')
-				p.appendChild(iCalificacion)
+				div.appendChild(iCalificacion)
+				iCalificacion.value = modulo.calificacion
 				iCalificacion.setAttribute('type', 'number')
-				iCalificacion.modulo = modulo	
+				div.modulo = modulo	
+				div.appendChild(document.createElement('br'))
 				let taEvaluacion = document.createElement('textarea')
-				p.appendChild(itEvaluacion)
-				taEvaluacion.modulo = modulo	
+				div.appendChild(taEvaluacion)
+				taEvaluacion.value = modulo.evaluacion
+				taEvaluacion.setAttribute('placeholder', 'Comentario de evaluación de ' + modulo.titulo)
 			}
 		}
 		//Marcamos las actividades de la tarea
@@ -114,12 +125,19 @@ export class VistaTarea extends Vista{
 		this.taDescripcion.disabled = deshabilitar
 		this.taComentarioCalificacionEmpresa.disabled = deshabilitar
 		this.sCalificacion.disabled = deshabilitar
-		for(let input of this.divActividades.getElementsByTagName('input'))
-			input.disabled = deshabilitar
+		this.deshabilitarActividades(deshabilitar)
 		if (deshabilitar)
 			this.divBotones.style.display = 'none'
 		else
 			this.divBotones.style.display = 'block'
+	}
+	/**
+		Deshabilita la modificación de actividades
+		@param deshabilitar {Boolean} True para deshabilitar los campos.
+	**/
+	deshabilitarActividades(deshabilitar){
+		for(let input of this.divActividades.getElementsByTagName('input'))
+			input.disabled = deshabilitar
 	}
 	/**
 		Muestra u oculta.
@@ -235,6 +253,17 @@ export class VistaTarea extends Vista{
 					tarea.actividades.push(iActividad.getAttribute('data-idActividad'))
 			tarea.idCalificacionEmpresa = this.sCalificacion.value
 			tarea.comentarioCalificacionEmpresa = this.taComentarioCalificacionEmpresa.value
+			tarea.evaluaciones = []
+			for(let divEvaluacion of this.divEvaluaciones.getElementsByTagName('div')){
+				let calificacion = divEvaluacion.getElementsByTagName('input')[0].value
+				let comentario = divEvaluacion.getElementsByTagName('textarea')[0].value
+				let evaluacion = {
+					'id': divEvaluacion.modulo.id,
+					'calificacion': calificacion,
+					'comentario': comentario
+				}
+				tarea.evaluaciones.push(evaluacion)
+			}
 			
 			if (this.tarea){
 				tarea.id = this.tarea.id

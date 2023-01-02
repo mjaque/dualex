@@ -51,15 +51,15 @@ export class VistaTareas extends Vista{
 		let divIconos = document.createElement('div')
 		div.appendChild(divIconos)
 		divIconos.classList.add('iconos')
-		if ((tarea.calificacion_empresa != null || tarea.calificacion_profesor != null) && this.controlador.getUsuario().rol == 'alumno'){
-			let iconoConsultar = document.createElement('img')
-			divIconos.appendChild(iconoConsultar)
-			iconoConsultar.classList.add('icono')
-			iconoConsultar.setAttribute('title', 'consultar')
-			iconoConsultar.setAttribute('src', 'iconos/visibility.svg')
-			iconoConsultar.onclick = this.pulsarConsultar.bind(this, tarea)
+		let editable = true
+		if (this.controlador.getUsuario().rol == 'alumno'){
+			for (let modulo of tarea.modulos)
+				if(modulo.calificacion)
+					editable = false
+			if (tarea.calificacion_empresa != null || tarea.calificacion_profesor != null)
+				editable = false
 		}
-		else{
+		if(editable){
 			let iconoEditar = document.createElement('img')
 			divIconos.appendChild(iconoEditar)
 			iconoEditar.classList.add('icono')
@@ -73,6 +73,14 @@ export class VistaTareas extends Vista{
 			iconoEliminar.setAttribute('title', 'eliminar')
 			iconoEliminar.setAttribute('src', 'iconos/delete.svg')
 			iconoEliminar.onclick = this.pulsarEliminar.bind(this, tarea)
+		}
+		else{
+			let iconoConsultar = document.createElement('img')
+			divIconos.appendChild(iconoConsultar)
+			iconoConsultar.classList.add('icono')
+			iconoConsultar.setAttribute('title', 'consultar')
+			iconoConsultar.setAttribute('src', 'iconos/visibility.svg')
+			iconoConsultar.onclick = this.pulsarConsultar.bind(this, tarea)
 		}
 		//TODO: Código de colores para las tareas en función de su evaluación.
 		tarea.modulos.forEach(this.crearSpanModulo.bind(this, div))
