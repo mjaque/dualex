@@ -53,7 +53,7 @@ class DAOTarea{
 		$sql .= 'LEFT JOIN Actividad ON Actividad_Tarea.id_actividad = Actividad.id ';
 		$sql .= 'LEFT JOIN Actividad_Modulo ON Actividad_Modulo.id_actividad = Actividad.id ';
 		$sql .= 'LEFT JOIN Modulo ON Modulo.id = Actividad_Modulo.id_modulo ';
-		$sql .= 'JOIN Actividad_Modulo_Tarea ON (Actividad.id = Actividad_Modulo_Tarea.id_actividad AND Modulo.id = Actividad_Modulo_Tarea.id_modulo AND Tarea.id = Actividad_Modulo_Tarea.id_tarea) ';
+		$sql .= 'LEFT JOIN Actividad_Modulo_Tarea ON (Actividad.id = Actividad_Modulo_Tarea.id_actividad AND Modulo.id = Actividad_Modulo_Tarea.id_modulo AND Tarea.id = Actividad_Modulo_Tarea.id_tarea) ';
 		$sql .= 'WHERE Tarea.id_alumno = :id_alumno AND Tarea.id = :id_tarea ';
 		$sql .= 'ORDER BY Actividad.titulo, Tarea.titulo ';
 		
@@ -149,11 +149,12 @@ class DAOTarea{
 
 		//Insertamos la relación con Módulo y Actividad
 		$sql  = 'INSERT INTO Actividad_Modulo_Tarea (id_actividad, id_modulo, id_tarea) ';
-		$sql .= 'SELECT Actividad_Modulo.id_actividad, id_modulo, id_tarea ';
+		$sql .= 'SELECT Actividad_Modulo.id_actividad, id_modulo, :id_tarea1 ';
 		$sql .= 'FROM Actividad_Modulo ';
 		$sql .= 'JOIN Actividad_Tarea ON Actividad_Modulo.id_actividad = Actividad_Tarea.id_actividad ';
-		$sql .= 'WHERE id_tarea = :id_tarea';
-		$params = array('id_tarea' => $idNuevo);
+		$sql .= 'WHERE id_tarea = :id_tarea2';
+
+		$params = array('id_tarea1' => $idNuevo, 'id_tarea2' => $idNuevo);
 		BD::insertar($sql, $params);
 //echo $sql;
 

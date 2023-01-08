@@ -254,15 +254,17 @@ export class VistaTarea extends Vista{
 			tarea.idCalificacionEmpresa = this.sCalificacion.value
 			tarea.comentarioCalificacionEmpresa = this.taComentarioCalificacionEmpresa.value
 			tarea.evaluaciones = []
-			for(let divEvaluacion of this.divEvaluaciones.getElementsByTagName('div')){
-				let calificacion = divEvaluacion.getElementsByTagName('input')[0].value
-				let comentario = divEvaluacion.getElementsByTagName('textarea')[0].value
-				let evaluacion = {
-					'id': divEvaluacion.modulo.id,
-					'calificacion': calificacion,
-					'comentario': comentario
+			if (this.controlador.getUsuario().rol == 'profesor'){
+				for(let divEvaluacion of this.divEvaluaciones.getElementsByTagName('div')){
+					let calificacion = divEvaluacion.getElementsByTagName('input')[0].value
+					let comentario = divEvaluacion.getElementsByTagName('textarea')[0].value
+					let evaluacion = {
+						'id': divEvaluacion.modulo.id,
+						'calificacion': calificacion,
+						'comentario': comentario
+					}
+					tarea.evaluaciones.push(evaluacion)
 				}
-				tarea.evaluaciones.push(evaluacion)
 			}
 			
 			if (this.tarea){

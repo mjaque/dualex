@@ -10,7 +10,9 @@ CREATE TABLE Actividad_Modulo_Tarea(
 	FOREIGN KEY (id_actividad, id_tarea) REFERENCES Actividad_Tarea (id_actividad, id_tarea) ON DELETE CASCADE,
 	FOREIGN KEY (id_actividad, id_modulo) REFERENCES Actividad_Modulo (id_actividad, id_modulo) ON DELETE CASCADE
 );
-
+-- Solo permitimos una calificación por tarea y módulo
+CREATE UNIQUE INDEX
+ON Actividad_Modulo_Tarea(id_modulo, id_tarea);
 
 ALTER TABLE Tarea DROP COLUMN calificacion;
 ALTER TABLE Tarea DROP COLUMN evaluacion;
