@@ -33,11 +33,11 @@ export class Modelo{
 	}
 	/**
 		Devuelve la lista de actividades definidas.
-		@param idCiclo {Number} Identificador del ciclo.
+		@param idCurso {Number} Identificador del curso.
 		@return {Promise} Devuelve la promesa asociada a la petición.
 	**/
-	getActividades(idCiclo){
-		return Rest.get('actividad',[idCiclo])
+	getActividades(idCurso){
+		return Rest.get('actividad',[idCurso])
 	}
 	/**
 		Devuelve la lista de calificaciones definidas.

@@ -154,10 +154,10 @@ export class VistaTarea extends Vista{
 			this.iTitulo.focus()
 
 			if (tarea)
-				this.cargarActividades(tarea.id_ciclo)
+				this.cargarActividades(tarea.id_curso)
 					.then(() => this.setTarea(tarea))
 			else{
-				this.cargarActividades(this.controlador.getUsuario().idCiclo)
+				this.cargarActividades(this.controlador.getUsuario().idCurso)
 				this.tarea = null
 				let hoy = new Date()
 				this.iFecha.value = hoy.toLocaleDateString('en-CA')
@@ -179,12 +179,12 @@ export class VistaTarea extends Vista{
 			this.divEvaluaciones.firstChild.remove()
 	}
 	/**
-		Carga la lista de Actividades de un ciclo.
-		@param idCiclo {Number} Identificador del ciclo.
+		Carga la lista de Actividades de un curso.
+		@param idCurso {Number} Identificador del curso.
 		@return Promise
 	**/
-	cargarActividades(idCiclo){
-		return this.controlador.verActividades(idCiclo)
+	cargarActividades(idCurso){
+		return this.controlador.verActividades(idCurso)
 			.then(actividades => {
 				this.eliminarHijos(this.divActividades)
 				for(let actividad of actividades){

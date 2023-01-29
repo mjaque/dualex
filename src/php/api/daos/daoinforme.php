@@ -13,11 +13,12 @@ class DAOInforme{
 		@param $idProfesor Identificador del profesor.
 		@return Un array de arrays con los datos de cada tarea.
 	**/
-	public static function verValoracion($idAlumno, $idPeriodo, $idProfesor){
-		$sql  = 'SELECT Actividad.orden, CONCAT(Actividad.orden, ".-", Actividad.titulo) AS titulo, ';
+	public static function verValoracion_old($idAlumno, $idPeriodo, $idProfesor){
+		$sql  = 'SELECT Actividad_Curso.orden, CONCAT(Actividad_Curso.orden, ".-", Actividad.titulo) AS titulo, ';
 		$sql .= 'ROUND((AVG(calificacion) + AVG(Calificacion.valor))/2, 1) as calificacion ';
 		//$sql .= 'Modulo.codigo AS modulo_codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
 		$sql .= 'FROM `Actividad` ';
+		$sql .= 'LEFT JOIN Actividad_Curso ON Actividad.id = Actividad_Curso.id_actividad ';
 		$sql .= 'LEFT JOIN Actividad_Modulo ON Actividad.id = Actividad_Modulo.id_actividad ';
 		$sql .= 'LEFT JOIN Actividad_Modulo_Tarea ON (Actividad.id = Actividad_Modulo_Tarea.id_actividad AND Actividad_Modulo.id_modulo = Actividad_Modulo_Tarea.id_modulo) ';
 		$sql .= 'LEFT JOIN Tarea ON Actividad_Modulo_Tarea.id_tarea = Tarea.id ';
@@ -25,28 +26,53 @@ class DAOInforme{
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
 		//$sql .= 'LEFT JOIN Modulo ON Modulo.id = Actividad_Modulo.id_modulo ';
 		$sql .= 'WHERE ';
-		//Solo los módulos del ciclo del alumno 
-		$sql .= 'Actividad.id_ciclo = (SELECT id_ciclo FROM Alumno WHERE Alumno.id = :id_alumno) ';
+		//Solo los módulos del curso del alumno 
+		$sql .= 'Actividad_Curso.id_curso = (SELECT id_curso FROM Alumno WHERE Alumno.id = :id_alumno) ';
 		//Solo las tareas del periodo seleccionado
 		$sql .= 'AND ((Tarea.fecha BETWEEN ';
 		$sql .= '	(SELECT fecha_inicio from Periodo WHERE id = :id_periodo1) AND ';
 		$sql .= '	(SELECT fecha_fin from Periodo WHERE id = :id_periodo2) ) ';
 		$sql .= '	OR Tarea.fecha IS NULL) '; //Para mantener el left join y que salgan todas las actividades
-		$sql .= 'GROUP BY Actividad.id ';
-		$sql .= 'ORDER BY Actividad.orden';
+		$sql .= 'GROUP BY Actividad.id, Actividad_Curso.orden ';
+		$sql .= 'ORDER BY Actividad_Curso.orden';
 
 		$params = array('id_alumno' => $idAlumno, 'id_periodo1' => $idPeriodo, 'id_periodo2' => $idPeriodo);
 
 		return BD::seleccionar($sql, $params);
 	}
+	public static function verValoracion($idAlumno, $idPeriodo, $idProfesor){
+		$sql = 'SELECT Actividad_Curso.orden, CONCAT(Actividad_Curso.orden, ".-", Actividad.titulo) AS titulo, ';
+		$sql .= 'ROUND ( ((SELECT AVG(calificacion) ';
+		$sql .= 'FROM Actividad_Modulo_Tarea ';
+		$sql .= 'WHERE Actividad_Modulo_Tarea.id_actividad = Actividad.id ';
+		$sql .= 'AND Actividad_Modulo_Tarea.id_tarea IN (SELECT Tarea.id FROM Tarea WHERE Tarea.fecha BETWEEN   (SELECT fecha_inicio from Periodo WHERE id = :id_periodo1) AND  (SELECT fecha_fin from Periodo WHERE id = :id_periodo2)) ';
+		$sql .= 'GROUP BY id_actividad) + ';
+		$sql .= '(SELECT AVG(Calificacion.valor) ';
+		$sql .= 'FROM Tarea ';
+		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
+		$sql .= 'LEFT JOIN Actividad_Modulo_Tarea ON Tarea.id = Actividad_Modulo_Tarea.id_tarea ';
+		$sql .= 'WHERE Actividad_Modulo_Tarea.id_actividad = Actividad.id ';
+		$sql .= 'AND Actividad_Modulo_Tarea.id_tarea IN (SELECT Tarea.id FROM Tarea WHERE Tarea.fecha BETWEEN   (SELECT fecha_inicio from Periodo WHERE id = :id_periodo3) AND  (SELECT fecha_fin from Periodo WHERE id = :id_periodo4))  ';
+		$sql .= 'GROUP BY id_actividad ';
+		$sql .= '))/2,1) as calificacion ';
+ 		$sql .= 'FROM `Actividad`  ';
+ 		$sql .= 'LEFT JOIN Actividad_Curso ON Actividad.id = Actividad_Curso.id_actividad  ';
+ 		$sql .= 'WHERE Actividad_Curso.id_curso = (SELECT id_curso FROM Alumno WHERE Alumno.id = :id_alumno) ';
+ 		$sql .= 'ORDER BY Actividad_Curso.orden ';
+
+		$params = array('id_alumno' => $idAlumno, 'id_periodo1' => $idPeriodo, 'id_periodo2' => $idPeriodo, 'id_periodo3' => $idPeriodo, 'id_periodo4' => $idPeriodo);
+
+		return BD::seleccionar($sql, $params);
+	}
 	public static function verModulos($idAlumno, $idPeriodo, $idProfesor){
-		$sql  = 'SELECT Actividad.orden AS actividad_orden, Modulo.codigo AS modulo_codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
+		$sql  = 'SELECT Actividad_Curso.orden AS actividad_orden, Modulo.codigo AS modulo_codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
 		$sql .= 'FROM `Actividad` ';
+		$sql .= 'LEFT JOIN Actividad_Curso ON Actividad.id = Actividad_Curso.id_actividad ';
 		$sql .= 'LEFT JOIN Actividad_Modulo ON Actividad.id = Actividad_Modulo.id_actividad ';
 		$sql .= 'LEFT JOIN Modulo ON Modulo.id = Actividad_Modulo.id_modulo ';
 		$sql .= 'WHERE ';
-		$sql .= 'Actividad.id_ciclo = (SELECT id_ciclo FROM Alumno WHERE Alumno.id = :id_alumno) ';
-		$sql .= 'ORDER BY Actividad.orden, Modulo.orden';
+		$sql .= 'Actividad_Curso.id_curso = (SELECT id_curso FROM Alumno WHERE Alumno.id = :id_alumno) ';
+		$sql .= 'ORDER BY Actividad_Curso.orden, Modulo.orden';
 
 		$params = array('id_alumno' => $idAlumno);
 
@@ -69,8 +95,8 @@ class DAOInforme{
 		$sql .= 'LEFT JOIN Tarea ON Tarea.id = Actividad_Modulo_Tarea.id_tarea ';
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
 		$sql .= 'WHERE ';
-		//Solo los módulos del ciclo del alumno 
-		//Actividad.id_ciclo = (SELECT id_ciclo FROM Alumno WHERE Alumno.id = :id_alumno) 
+		//Solo los módulos del curso del alumno 
+		//Actividad_Curso.id_curso = (SELECT id_curso FROM Alumno WHERE Alumno.id = :id_alumno) 
 		$sql .= 'Tarea.id_alumno = :id_alumno ';
 		//Solo las tareas del periodo seleccionado
 		$sql .= 'AND ((Tarea.fecha BETWEEN ';
@@ -101,7 +127,7 @@ class DAOInforme{
 		return BD::seleccionar($sql, $params);
 	}
 	/**
-		Devuelve un texto con el nombre del coordinado asignado al ciclo en el que está matriculado el alumno.
+		Devuelve un texto con el nombre del coordinado asignado al curso en el que está matriculado el alumno.
 		@param $idAlumno Identificador del alumno.
 		@return Texto con el nombre completo del coordinador.
 	**/
@@ -109,8 +135,8 @@ class DAOInforme{
 		$sql  = 'SELECT CONCAT(Usuario.nombre, " ", Usuario.apellidos) AS coordinador, ';
 		$sql .= 'grado ';
 		$sql .= 'FROM Usuario ';
-		$sql .= 'JOIN Ciclo ON Ciclo.id_profesor = Usuario.id ';
-		$sql .= 'WHERE Ciclo.id IN (SELECT Alumno.id_ciclo FROM Alumno WHERE Alumno.id = :id_alumno) ';
+		$sql .= 'JOIN Curso ON Curso.id_profesor = Usuario.id ';
+		$sql .= 'WHERE Curso.id IN (SELECT Alumno.id_curso FROM Alumno WHERE Alumno.id = :id_alumno) ';
 
 		$params = array('id_alumno' => $idAlumno);
 

@@ -111,8 +111,6 @@ INSERT INTO Actividad_Tarea (id_actividad, id_tarea) VALUES
 INSERT INTO Periodo (id, nombre, fecha_inicio, fecha_fin) VALUES
 (1, 'Periodo 1', '2022-09-01', '2022-12-31'), (2, 'Periodo 2', '2023-01-01', '2023-04-30');
 
--- Solo una calificación por modulo y tarea
 INSERT INTO Actividad_Modulo_Tarea (id_actividad, id_modulo, id_tarea, calificacion) VALUES
--- (1,1,1,5),(1,2,1,6),(2,2,1,6),(2,3,1,7),(1,1,2,2),(1,2,2,3),(3,1,2,2),(3,2,2,3),(3,4,2,4);
-(1,1,1,5),(1,2,1,6),(2,3,1,7),(1,1,2,2),(1,2,2,3),(3,4,2,4);
+(1,1,1,5),(1,2,1,6),(2,2,1,6),(2,3,1,7),(1,1,2,2),(1,2,2,3),(3,1,2,2),(3,2,2,3),(3,4,2,4);
 

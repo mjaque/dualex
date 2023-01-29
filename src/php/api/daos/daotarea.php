@@ -44,7 +44,8 @@ class DAOTarea{
 		$sql .= ', Tarea.id_calificacion_empresa, Tarea.comentario_calificacion_empresa ';
 		$sql .= ', Calificacion.titulo AS calificacion_empresa ';
 		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
-		$sql .= ', Modulo.id AS id_modulo, Modulo.id_ciclo AS id_ciclo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
+		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
+		$sql .= ', Curso_Modulo.id_curso AS id_curso ';
 		$sql .= ', Actividad_Modulo_Tarea.calificacion AS modulo_calificacion ';
 		$sql .= ', Actividad_Modulo_Tarea.evaluacion AS modulo_evaluacion ';
 		$sql .= 'FROM Tarea ';
@@ -53,6 +54,7 @@ class DAOTarea{
 		$sql .= 'LEFT JOIN Actividad ON Actividad_Tarea.id_actividad = Actividad.id ';
 		$sql .= 'LEFT JOIN Actividad_Modulo ON Actividad_Modulo.id_actividad = Actividad.id ';
 		$sql .= 'LEFT JOIN Modulo ON Modulo.id = Actividad_Modulo.id_modulo ';
+		$sql .= 'LEFT JOIN Curso_Modulo ON Modulo.id = Curso_Modulo.id_modulo ';
 		$sql .= 'LEFT JOIN Actividad_Modulo_Tarea ON (Actividad.id = Actividad_Modulo_Tarea.id_actividad AND Modulo.id = Actividad_Modulo_Tarea.id_modulo AND Tarea.id = Actividad_Modulo_Tarea.id_tarea) ';
 		$sql .= 'WHERE Tarea.id_alumno = :id_alumno AND Tarea.id = :id_tarea ';
 		$sql .= 'ORDER BY Actividad.titulo, Tarea.titulo ';
@@ -75,7 +77,7 @@ class DAOTarea{
 		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
 		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
 		$sql .= ', Actividad_Modulo_Tarea.calificacion AS modulo_calificacion, Actividad_Modulo_Tarea.evaluacion AS modulo_evaluacion ';
-		$sql .= ', Alumno.id_ciclo AS id_ciclo ';
+		$sql .= ', Alumno.id_curso AS id_curso ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'JOIN Alumno ON Alumno.id = Tarea.id_alumno ';
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
@@ -104,7 +106,8 @@ class DAOTarea{
 		$sql .= ', Tarea.id_calificacion_empresa, Tarea.comentario_calificacion_empresa ';
 		$sql .= ', Calificacion.titulo AS calificacion_empresa ';
 		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
-		$sql .= ', Modulo.id AS id_modulo, Modulo.id_ciclo AS id_ciclo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
+		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
+		$sql .= ', Curso_Modulo.id_curso AS id_curso ';
 		$sql .= ', Actividad_Modulo_Tarea.calificacion AS modulo_calificacion, Actividad_Modulo_Tarea.evaluacion AS modulo_evaluacion ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
@@ -112,6 +115,7 @@ class DAOTarea{
 		$sql .= 'LEFT JOIN Actividad ON Actividad_Tarea.id_actividad = Actividad.id ';
 		$sql .= 'LEFT JOIN Actividad_Modulo ON Actividad_Modulo.id_actividad = Actividad.id ';
 		$sql .= 'LEFT JOIN Modulo ON Modulo.id = Actividad_Modulo.id_modulo ';
+		$sql .= 'LEFT JOIN Curso_Modulo ON Modulo.id = Curso_Modulo.id_modulo ';
 		$sql .= 'LEFT JOIN Modulo_Profesor ON Modulo.id = Modulo_Profesor.id_modulo ';
 		$sql .= 'JOIN Actividad_Modulo_Tarea ON (Actividad_Modulo_Tarea.id_actividad = Actividad.id AND Actividad_Modulo_Tarea.id_modulo = Modulo.id AND Actividad_Modulo_Tarea.id_tarea = Tarea.id) ';
 		$sql .= 'WHERE Modulo_Profesor.id_profesor = :id_profesor AND Tarea.id = :id_tarea ';

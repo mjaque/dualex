@@ -18,10 +18,10 @@ class DAOUsuario{
 		$usuario = new Usuario();
 		$usuario->email = $email;
 
-		$sql  = 'SELECT Alumno.id, Alumno.id_ciclo, Usuario.nombre, Usuario.apellidos, Ciclo.titulo as ciclo ';
+		$sql  = 'SELECT Alumno.id, Alumno.id_curso, Usuario.nombre, Usuario.apellidos, Curso.titulo as curso ';
 		$sql .= 'FROM Alumno ';
 		$sql .= 'JOIN Usuario ON Usuario.id = Alumno.id ';
-		$sql .= 'JOIN Ciclo ON Alumno.id_ciclo = Ciclo.id  ';
+		$sql .= 'JOIN Curso ON Alumno.id_curso = Curso.id  ';
 		$sql .= 'WHERE email = :email';
 
 		$params = array('email' => $email);
@@ -32,8 +32,8 @@ class DAOUsuario{
 			$usuario->rol = 'alumno';
 			$usuario->nombre = $resultado[0]['nombre'];
 			$usuario->apellidos = $resultado[0]['apellidos'];
-			$usuario->idCiclo = $resultado[0]['id_ciclo'];
-			$usuario->ciclo = $resultado[0]['ciclo'];
+			$usuario->idCurso = $resultado[0]['id_curso'];
+			$usuario->curso = $resultado[0]['curso'];
 		}
 		else{
 			$sql = 'SELECT Profesor.id, Usuario.nombre, Usuario.apellidos FROM Profesor JOIN Usuario ON Usuario.id = Profesor.id WHERE email = :email';
