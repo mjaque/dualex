@@ -14,7 +14,7 @@ class DAOActividad{
 		$sql .= 'FROM Actividad ';
 		$sql .= 'JOIN Actividad_Curso ON Actividad_Curso.id_actividad = Actividad.id ';
 		$sql .= 'WHERE Actividad_Curso.id_curso = :id_curso ';
-		$sql .= 'ORDER BY Actividad_Curso.id_curso ASC ';
+		$sql .= 'ORDER BY Actividad_Curso.orden ASC ';
 		
 		$params = array('id_curso' => $idCurso);
 
