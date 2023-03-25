@@ -13,8 +13,8 @@ class Actividad{
 		@return {Array[Array[String]]}
 	**/
 	function get($pathParams, $queryParams, $usuario){
-		$idCiclo = $pathParams[0];
-		$resultado = DAOActividad::ver($idCiclo);
+		$idCurso = $pathParams[0];
+		$resultado = DAOActividad::ver($idCurso);
 		$json = json_encode($resultado);
 		header('Content-type: application/json; charset=utf-8');
 		header('HTTP/1.1 200 OK');

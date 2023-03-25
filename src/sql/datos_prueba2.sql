@@ -96,27 +96,21 @@ INSERT INTO Actividad (id, id_ciclo, orden, titulo, descripcion) VALUES
 (21, 2, 1, 'Actividad 1 del Módulo 2', ''); 
 
 INSERT INTO Actividad_Modulo (id_actividad, id_modulo) VALUES
-(1, 1),(2, 1),(3, 1),(4, 1),(5, 2),(6, 2),(7, 2),(8, 2),(9, 2),(10, 2),(11, 3),(12, 3),(13, 3),(13, 4),(14, 5),(15, 5),(16, 4),(16, 6),(17, 7),(18, 7),(19, 7),(20, 7),(21,8);
+(1,1),(1,2),(2,2),(2,3),(3,1),(3,2),(3,4);
 
 INSERT INTO Tarea (id, id_alumno, titulo, descripcion, fecha) VALUES
-(1, 10, 'Tarea 10.1', 'Descripción de la tarea 10.1', '2022-06-21'),
-(2, 10, 'Tarea 10.2', 'Descripción de la tarea 10.2', '2022-06-22'),
-(3, 13, 'Tarea 13.1', 'Descripción de la tarea 13.1', '2022-10-22'),
-(4, 13, 'Tarea 13.3', 'Descripción de la tarea 13.2', '2022-11-22'),
-(5, 13, 'Tarea 13.3', 'Descripción de la tarea 13.3', '2022-12-22'),
-(6, 13, 'Tarea 13.4', 'Descripción de la tarea 13.4', '2023-01-22'),
-(7, 13, 'Tarea 13.5', 'Descripción de la tarea 13.5', '2023-02-22'),
-(8, 15, 'Tarea 14.1', 'Descripción de la tarea 14.1', '2023-02-22');
+(1, 10, 'T1', '', '2022-12-21'),
+(2, 10, 'T2', '', '2022-12-22');
 
-UPDATE Tarea SET id_calificacion_empresa = 1 WHERE id = 3;
-UPDATE Tarea SET id_calificacion_empresa = 2 WHERE id = 4;
-UPDATE Tarea SET id_calificacion_empresa = 3 WHERE id = 5;
-UPDATE Tarea SET id_calificacion_empresa = 4 WHERE id = 6;
-UPDATE Tarea SET id_calificacion_empresa = 2 WHERE id = 7;
+UPDATE Tarea SET id_calificacion_empresa = 1 WHERE id = 1;
+UPDATE Tarea SET id_calificacion_empresa = 4 WHERE id = 2;
 
 INSERT INTO Actividad_Tarea (id_actividad, id_tarea) VALUES
-(1, 1), (2, 1), (2, 2), (5,2), (14, 3), (14, 4), (16, 5), (17, 6), (18, 7), (21,8);
+(1, 1), (2, 1),(1,2),(3,2);
 
 INSERT INTO Periodo (id, nombre, fecha_inicio, fecha_fin) VALUES
 (1, 'Periodo 1', '2022-09-01', '2022-12-31'), (2, 'Periodo 2', '2023-01-01', '2023-04-30');
+
+INSERT INTO Actividad_Modulo_Tarea (id_actividad, id_modulo, id_tarea, calificacion) VALUES
+(1,1,1,5),(1,2,1,6),(2,2,1,6),(2,3,1,7),(1,1,2,2),(1,2,2,3),(3,1,2,2),(3,2,2,3),(3,4,2,4);
 

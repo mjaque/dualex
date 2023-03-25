@@ -6,16 +6,17 @@
 
 class DAOActividad{
 	/**
-		Devuelve un array de actividades de un ciclo ordenadas.
+		Devuelve un array de actividades de un curso ordenadas.
 		@return Un array de arrays con los datos de cada actividad.
 	**/
-	public static function ver($idCiclo){
-		$sql  = 'SELECT Actividad.id, Actividad.id_ciclo, Actividad.orden, Actividad.titulo, Actividad.descripcion ';
+	public static function ver($idCurso){
+		$sql  = 'SELECT Actividad.id, Actividad_Curso.id_curso, Actividad_Curso.orden, Actividad.titulo, Actividad.descripcion ';
 		$sql .= 'FROM Actividad ';
-		$sql .= 'WHERE Actividad.id_ciclo = :id_ciclo ';
-		$sql .= 'ORDER BY Actividad.id_ciclo ASC ';
+		$sql .= 'JOIN Actividad_Curso ON Actividad_Curso.id_actividad = Actividad.id ';
+		$sql .= 'WHERE Actividad_Curso.id_curso = :id_curso ';
+		$sql .= 'ORDER BY Actividad_Curso.orden ASC ';
 		
-		$params = array('id_ciclo' => $idCiclo);
+		$params = array('id_curso' => $idCurso);
 
 		return BD::seleccionar($sql, $params);
 	}

@@ -51,6 +51,7 @@ export class VistaInforme extends Vista{
 		this.sPeriodo.textContent = informe.periodo
 		
 		this._crearGrid(informe.valoracion, this.divValoracion)
+		this._anadirModulos(informe.modulos, this.divValoracion)
 		this._crearGrid(informe.evaluacion, this.divEvaluacion)
 	}
 	/**
@@ -81,15 +82,16 @@ export class VistaInforme extends Vista{
 			elemento.remove()
 		}
 	}
-	_crearGrid(datos, div){
+	_crearGrid(informe, div){
 		//Mejor si primero lo borramos
 		while(div.children.length > 0)
 			div.lastChild.remove()
-		for(let dato of datos){
+		for(let dato of informe){
 			let div1 = document.createElement('div')
 			div.appendChild(div1)
+			div1.setAttribute('id', 'divInformeActividad_' + dato.orden)
 			div1.appendChild(document.createTextNode(dato.titulo))
-			if (dato.modulos)
+			/*if (dato.modulos)
 				//Ponemos los módulos de la actividad
 				for(let modulo of dato.modulos){
 					let span = document.createElement('span')
@@ -100,10 +102,23 @@ export class VistaInforme extends Vista{
 					span.style.backgroundColor = modulo.color_fondo
 					span.style.color = modulo.color_letra
 				}
+			*/
 			//Ponemos la calificación
 			let div2 = document.createElement('div')
 			div.appendChild(div2)
 			div2.textContent = dato.calificacion
+		}
+	}
+	_anadirModulos(modulos, div){
+		for(let modulo of modulos){
+			let divActividad = document.getElementById('divInformeActividad_' + modulo.actividad_orden) 
+			let span = document.createElement('span')
+			divActividad.appendChild(span)
+			span.classList.add('modulo')
+			span.textContent = modulo.modulo_codigo
+			span.setAttribute('title', modulo.modulo_titulo)
+			span.style.backgroundColor = modulo.color_fondo
+			span.style.color = modulo.color_letra
 		}
 	}
 }

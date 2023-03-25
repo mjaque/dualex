@@ -18,9 +18,10 @@
 	margin: 0.3rem;
 }
 .vistatarea .modulo{
-	padding: 0.3rem 1rem;
+	padding: 0.2rem 0.3rem;
 	border: 1px solid grey;
-	border-radius: 0.4rem;
+	border-radius: 0.3rem;
+	font-size: 0.8rem;
 }
 .vistatarea label, .vistatarea legend{
 	font-weight: bold;
@@ -36,7 +37,7 @@
 .vistatarea select{
 	margin: 0.5rem;
 }
-.vistatarea > div{
+.vistatarea > div:nth-of-type(2){
 	text-align: right;
 }
 
@@ -59,4 +60,10 @@
 }
 .vistatarea button:nth-child(2){
 	background-color: blue;
+}
+.vistatarea > div:nth-of-type(1) p {
+	line-height: 2rem;
+}
+.vistatarea div.alto{
+	line-height: 1.5rem;
 }

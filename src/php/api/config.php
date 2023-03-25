@@ -11,5 +11,6 @@
 		'clave' => 'dualex',
 		'bd' => 'dualex',
 		'algoritmo_encriptacion' => 'aes-256-ctr',
-		'clave_encriptacion' => 'Clave de encriptación'
+		'clave_encriptacion' => 'Clave de encriptación',
+		'email_aviso' => false
 	);

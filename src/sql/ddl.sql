@@ -104,8 +104,6 @@ CREATE TABLE Tarea(
 	fecha DATE COMMENT 'Fecha de realización de la tarea',
 	id_calificacion_empresa INT UNSIGNED COMMENT 'Calificación del tutor de empresa',
 	comentario_calificacion_empresa TEXT,
-	calificacion INT UNSIGNED COMMENT 'Calificación del profesor.',
-	evaluacion TEXT COMMENT 'Evaluación del profesor',
 	FOREIGN KEY (id_alumno) REFERENCES Alumno (id) ON DELETE CASCADE,
 	FOREIGN KEY (id_calificacion_empresa) REFERENCES Calificacion (id) ON DELETE RESTRICT
 );
@@ -117,6 +115,18 @@ CREATE TABLE Actividad_Tarea(
 	PRIMARY KEY (id_actividad, id_tarea),
 	FOREIGN KEY (id_actividad) REFERENCES Actividad (id) ON DELETE CASCADE,
 	FOREIGN KEY (id_tarea) REFERENCES Tarea (id) ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS Actividad_Modulo_Tarea;
+CREATE TABLE Actividad_Modulo_Tarea(
+	id_actividad INT UNSIGNED COMMENT 'Cualquier actividad del módulo relacionada con la tarea',
+	id_modulo INT UNSIGNED,
+	id_tarea INT UNSIGNED,
+	calificacion INT UNSIGNED COMMENT 'Calificación del profesor.',
+	evaluacion TEXT COMMENT 'Evaluación del profesor',
+	PRIMARY KEY (id_actividad, id_modulo, id_tarea),
+	FOREIGN KEY (id_actividad, id_tarea) REFERENCES Actividad_Tarea (id_actividad, id_tarea) ON DELETE CASCADE,
+	FOREIGN KEY (id_actividad, id_modulo) REFERENCES Actividad_Modulo (id_actividad, id_modulo) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Periodo;

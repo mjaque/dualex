@@ -16,13 +16,14 @@
 	}
 
 	try{
-		require_once('./servicios/bd.php');
-
 		//Inyección de dependencias
+		require_once('./servicios/bd.php');
 		BD::$host = $config['host'];
 		BD::$bd = $config['bd'];
 		BD::$usuario = $config['usuario'];
 		BD::$clave = $config['clave'];
+		require_once('./controladores/tarea.php');
+		Tarea::$email_aviso = $config['email_aviso'];
 
 		//Peticiones especiales de depuración
 		if ($config['debug']){

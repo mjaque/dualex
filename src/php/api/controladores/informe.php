@@ -20,7 +20,9 @@ class Informe{
 		}
 		$resultado = [];
 		$resultado['valoracion'] = DAOInforme::verValoracion($queryParams['id_alumno'], $queryParams['id_periodo'], $usuario->id);
-		$resultado['valoracion'] = $this->agruparModulos($resultado['valoracion']);
+		$resultado['modulos'] = DAOInforme::verModulos($queryParams['id_alumno'], $queryParams['id_periodo'], $usuario->id);
+
+		//$resultado['valoracion'] = $this->agruparModulos($resultado['valoracion']);
 		$resultado['evaluacion'] = DAOInforme::verEvaluacion($queryParams['id_alumno'], $queryParams['id_periodo'], $usuario->id);
 		$resultado['periodo'] = DAOInforme::verPeriodo($queryParams['id_periodo'])[0]['nombre'];
 		$temp = DAOInforme::verCoordinadorYCiclo($queryParams['id_alumno']);
