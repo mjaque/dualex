@@ -37,27 +37,8 @@ INSERT INTO Usuario (id, nombre, apellidos, email) VALUES
 (16, 'Alumno6', 'EMV', 'alumno6.guadalupe@alumnado.fundacionloyola.net'),
 (17, 'Alumno7', 'ME', 'alumno7.guadalupe@alumnado.fundacionloyola.net'),
 (18, 'Alumno8', 'ME', 'alumno8.guadalupe@alumnado.fundacionloyola.net'),
-(19, 'Alumno9', 'ME', 'alumno9.guadalupe@alumnado.fundacionloyola.net'),
-
-(100, 'Díaz Mellado', 'Carmen', 'carmendiazmellado.guadalupe@alumnado.fundacionloyola.net'),
-(101, 'Ángel', 'Pintiado Caro', 'apintiadocaro.guadalupe@alumnado.fundacionloyola.net'),
-(102, 'Manuel', 'Llera González', 'manuellleragonzalez.guadalupe@alumnado.fundacionloyola.net'),
-(103, 'Jesús María', 'González Galán', 'jesusmariagonzalezgalan.guadalupe@alumnado.fundacionloyola.net'),
-(104, 'Pablo', 'Mimbrero González', 'pablomimbrerogonzalez.guadalupe@alumnado.fundacionloyola.net'),
-(105, 'Daniel', 'Merino Sánchez', 'danielmerinosanchez.guadalupe@alumnado.fundacionloyola.net'),
-(106, 'Estaban José', 'Méndez Díaz', 'estebanjosemendezdiaz.guadalupe@alumnado.fundacionloyola.net'),
-
-(107, 'Hugo', 'Bartol Cortés', 'hugobartolcortes.guadalupe@alumnado.fundacionloyola.net'),
-(108, 'Alfonso', 'de la Concepción Chaparro', 'alfonsodelaconcepcionchaparro.guadalupe@alumnado.fundacionloyola.net'),
-(109, 'Roberto', 'Guerrero López', 'robertoguerrerolopez.guadalupe@alumnado.fundacionloyola.net'),
-(110, 'Francisco José', 'Hernández Fernández', 'franciscojosehernandezfernandez.guadalupe@alumnado.fundacionloyola.net'),
-(111, 'Brian', 'Hernández Holguera', 'brianhernandezholguera.guadalupe@alumnado.fundacionloyola.net'),
-(112, 'Antonio', 'Méndez García', 'antoniomendezgarcia.guadalupe@alumnado.fundacionloyola.net'),
-(113, 'Fernando', 'Moreno Rico', 'fernandomorenorico.guadalupe@alumnado.fundacionloyola.net'),
-(114, 'Javier', 'Rodríguez Carnerero', 'javierrodriguezcarnerero.guadalupe@alumnado.fundacionloyola.net'),
-(115, 'Néstor', 'Sopa Perera', 'nestorsopaperera.guadalupe@alumnado.fundacionloyola.net'),
-(116, 'Mario', 'Torres Ruíz', 'mariotorresruiz.guadalupe@alumnado.fundacionloyola.net');
--- (1, '', '', '.guadalupe@alumnado.fundacionloyola.net'),
+(19, 'Alumno9', 'ME', 'alumno9.guadalupe@alumnado.fundacionloyola.net')
+;
 
 INSERT INTO Profesor (id) VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9);
 
