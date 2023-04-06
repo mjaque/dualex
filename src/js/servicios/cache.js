@@ -6,14 +6,14 @@ self.addEventListener('install', (e) => {
       '/dualex/css/reset.css',
       '/dualex/js/dualex.js',
       '/dualex/js/modelos/modelo.js',
-      '/dualex/iconos/logout.svg',
-    ])),
+      '/dualex/iconos/logout.svg'
+    ]))
   )
 })
 
 self.addEventListener('fetch', (e) => {
-  console.log(e.request.url);
+  console.log(e.request.url)
   e.respondWith(
-    caches.match(e.request).then((response) => response || fetch(e.request)),
-  );
-});
+    caches.match(e.request).then((response) => response || fetch(e.request))
+  )
+})
