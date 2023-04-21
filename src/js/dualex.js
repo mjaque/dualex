@@ -16,7 +16,7 @@ import { VistaTareas } from './vistas/vistatareas/vistatareas.js'
 // Detalle de Tarea
 import { VistaTarea } from './vistas/vistatarea/vistatarea.js'
 // Listado de Alumnos
-import { VistaAlumnos } from './vistas/vistaalumnos/vistaalumnos.js'
+import { VistaAlumnos } from './vistas/vistaalumnos.js'
 // Informe de Alumno
 import { VistaInforme } from './vistas/vistainforme/vistainforme.js'
 // Créditos

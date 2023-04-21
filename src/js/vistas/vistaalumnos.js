@@ -1,29 +1,22 @@
 /**
   Vista con el listado de alumnos de un profesor.
 **/
-import { Vista } from '../vista.js'
-import { VistaMenuContexto } from '../vistamenucontexto/vistamenucontexto.js'
+import { VistaMenuContexto } from './vistamenucontexto.js'
 
-export class VistaAlumnos extends Vista {
+export class VistaAlumnos{
   /**
     Constructor de la clase.
     @param {Object} controlador Controlador de la vista.
     @param {Node} base Nodo al que se añadirá la vista.
   **/
   constructor (controlador, base) {
-    super(controlador)
+    this.controlador = controlador
     this.base = base
-    this.base.classList.add(this.getNombreClase())
+    this.display = 'block'
     this.callback = null // Función que se llamará al cerrar el diálogo.
-  }
-
-  /**
-    Inicia la vista.
-    Obtiene las referencias a los elementos del interfaz, captura los eventos, transfiere la plantilla al documento principal...
-  **/
-  iniciar () {
+   
     // Creamos la subvista del menú de contexto
-    this.vistaMenuContexto = new VistaMenuContexto(this, this.doc.getElementsByTagName('div')[0])
+    this.vistaMenuContexto = new VistaMenuContexto(this, this.base.getElementsByTagName('div')[0])
     this.controlador.verPeriodos()
       .then(periodos => {
         const opciones = []
@@ -37,16 +30,15 @@ export class VistaAlumnos extends Vista {
 
     // Asociamos eventos
     window.addEventListener('click', this.ocultarMenuContexto.bind(this))
-
-    super.transferir(this.base, this.doc)
-    super.cargarCSS(`${this.getNombreClase()}.css`)
   }
 
   /**
     Carga los alumnos.
   **/
   cargar (alumnos) {
-    this.eliminarHijos(this.base, 1)
+    //Eliminamos los hijos, menos el primero
+    while (this.base.childNodes.length > 1) { this.base.removeChild(this.base.childNodes.item(1)) }
+
     if (!alumnos) { this.base.appendChild(document.createTextNode('No tiene alumnos en sus módulos.')) } else { alumnos.forEach(this.crearDivAlumno.bind(this)) }
   }
 
@@ -142,6 +134,18 @@ export class VistaAlumnos extends Vista {
     Oculta el menú de contexto.
   **/
   ocultarMenuContexto () {
-    this.vistaMenuContexto.mostrar(false)
+    this.vistaMenuContexto.base.style.display = 'none'
+  }
+
+  /**
+    Muestra u oculta la vista.
+    @param mostrar {boolean} True para mostrar, false para ocultar.
+    @param modo {String} Valor del atributo display de CSS para mostrar la vista. Por defecto será el atributo display de la vista o 'block'.
+  **/
+  mostrar (mostrar = true, modo) {
+    if (!modo) {
+      if (!this.display) { modo = 'block' } else { modo = this.display }
+    }
+    if (mostrar) { this.base.style.display = modo } else { this.base.style.display = 'none' }
   }
 }

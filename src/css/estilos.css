@@ -71,3 +71,53 @@ legend{
 #divGoogleLogin{
 	margin: 0.5rem;
 }
+
+/* Reglas de VistaAlumnos */
+#divAlumnos {
+	max-width: 90%;
+	margin: 1rem;
+ 	padding: 2rem;
+}
+#divAlumnos>div {
+	border-bottom: 1px solid lightgrey;
+	height: 1.3rem;
+	margin-bottom: 0.7rem;
+}
+#divAlumnos .ciclo{
+	border-radius: 0.5rem;
+	padding: 0.1rem 0.3rem;
+	margin: 0 0.2rem;
+	cursor: help;
+}
+#divAlumnos .iconos{
+	float: right;
+}
+#divAlumnos .icono{
+	display: inline;
+	width: 1.5rem;
+	cursor: pointer;
+}
+#divAlumnos .icono:hover{
+	background-color: lightblue;
+	border-radius: 0.7rem;
+}
+
+/* Reglas de VistaMenuContexto */
+.vistamenucontexto{
+	display: none;
+	position: absolute;
+	height: auto !important;
+	z-index: 1;
+ 	border-radius: 0.5rem;
+ 	box-shadow: 0.1rem 0.1rem 0.1rem grey;
+	background-color: whitesmoke;
+	padding: 1rem;
+	line-height: 1.5rem;
+}
+.vistamenucontexto a {
+	color: blue;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
