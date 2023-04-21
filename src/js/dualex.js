@@ -6,7 +6,7 @@
 import { Modelo } from './modelos/modelo.js'
 
 // Vistas
-import { VistaLogin } from './vistas/vistalogin/vistalogin.js'
+import { VistaLogin } from './vistas/vistalogin.js'
 import { VistaDialogo } from './vistas/vistadialogo/vistadialogo.js'
 import { VistaMensaje } from './vistas/vistamensaje/vistamensaje.js'
 import { VistaMenu } from './vistas/vistamenu/vistamenu.js'
@@ -51,13 +51,7 @@ class DualEx {
     this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
     this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
     this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
-
-    // Activación de la caché
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('./js/servicios/cache.js')
-        .then(() => { console.log('Service Worker Caché Registrado.') })
-    }
+    this.vistaLogin.mostrar()
   }
 
   /**

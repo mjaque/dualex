@@ -47,3 +47,27 @@ legend{
 	float: right;
 	background-color: red;
 }
+
+/* Reglas de VistaLogin */
+#divLogin{
+	width: 40%;
+	margin: 5rem auto;
+	padding: 2rem;
+	border-radius: 0.5rem;
+	box-shadow: 0.5rem 0.5rem 2rem grey;
+}
+#divLogin input{
+	margin: 0.3rem;
+}
+#divLogin p{
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+}
+#divLogin p.error{
+	display: none;
+	color: red;
+	font-weight: bold;
+}
+#divGoogleLogin{
+	margin: 0.5rem;
+}
